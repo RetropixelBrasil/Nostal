@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Nostal™ — Criar comunidade</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets\Nostal_icon.png">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+
+<body>
+
+<div class="top-strip"></div>
+
+
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div>
+
+            <a href="index.html">
+
+                <img
+                    src="assets\Nostal_horizontal.png"
+                    alt="Nostal™"
+                    class="logo-image">
+
+            </a>
+
+            <div class="tagline">
+                A sua vida. Os seus amigos. A sua nostalgia.
+            </div>
+
+        </div>
+
+
+        <div class="header-links">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="posts.html">
+                Posts
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="usuarios.html">
+                Usuários
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="comunidades.html">
+                Comunidades
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="perfil.html">
+                Meu perfil
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     BANNER
+     ========================================== -->
+
+<div class="ticker">
+
+    <marquee
+        class="banner-marquee"
+        scrollamount="5"
+        direction="left"
+        behavior="scroll">
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="Ícones retrô">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="">
+
+    </marquee>
+
+</div>
+
+
+<!-- ==========================================
+     CONTEÚDO
+     ========================================== -->
+
+<main class="page">
+
+
+    <section
+        class="column"
+        style="grid-column: 1 / 3;">
+
+
+        <!-- ==================================
+             CRIAR COMUNIDADE
+             ================================== -->
+
+        <div class="box">
+
+            <div class="box-title">
+                🌎 Criar uma comunidade
+            </div>
+
+
+            <div class="box-content">
+
+
+                <h1>
+                    Crie seu próprio espaço!
+                </h1>
+
+
+                <p>
+                    Reúna pessoas que compartilham seus interesses,
+                    hobbies e paixões em uma comunidade da Nostal™.
+                </p>
+
+
+                <form id="createCommunityForm">
+
+
+                    <!-- NOME -->
+
+                    <label for="communityName">
+                        🏷️ Nome da comunidade
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="communityName"
+                        name="communityName"
+                        maxlength="80"
+                        placeholder="Ex.: Fãs de videogames antigos"
+                        required>
+
+
+                    <div class="settings-help">
+                        Escolha um nome fácil de encontrar e reconhecer.
+                    </div>
+
+
+                    <!-- DESCRIÇÃO -->
+
+                    <label for="communityDescription">
+                        📝 Descrição
+                    </label>
+
+
+                    <textarea
+                        id="communityDescription"
+                        name="communityDescription"
+                        rows="6"
+                        maxlength="1000"
+                        placeholder="Sobre o que é sua comunidade?"
+                        required></textarea>
+
+
+                    <div class="settings-help">
+                        Explique aos visitantes qual é o objetivo
+                        da comunidade.
+                    </div>
+
+
+                    <!-- IMAGEM -->
+
+                    <label for="communityAvatar">
+                        🖼️ Imagem da comunidade
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="communityAvatar"
+                        name="communityAvatar"
+                        accept="image/jpeg,image/png,image/gif,image/webp">
+
+
+                    <div class="settings-help">
+                        Você poderá adicionar uma imagem para
+                        representar sua comunidade.
+                    </div>
+
+
+                    <!-- BOTÕES -->
+
+                    <div class="post-tools">
+
+
+                        <button
+                            type="submit"
+                            class="login-button">
+
+                            🌎 CRIAR COMUNIDADE
+
+                        </button>
+
+
+                        <a
+                            href="comunidades.html"
+                            class="signup-button">
+
+                            CANCELAR
+
+                        </a>
+
+
+                    </div>
+
+
+                    <!-- MENSAGEM -->
+
+                    <div
+                        id="communityMessage"
+                        class="form-message"
+                        hidden>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================
+             INFORMAÇÕES
+             ================================== -->
+
+        <div class="box">
+
+            <div class="box-title">
+                ℹ️ Sobre comunidades
+            </div>
+
+
+            <div class="box-content">
+
+                <p>
+                    As comunidades são espaços criados pelos
+                    próprios usuários da Nostal™.
+                </p>
+
+
+                <p>
+                    Você será responsável pela comunidade que criar,
+                    incluindo sua descrição e conteúdo publicado nela.
+                </p>
+
+
+                <p>
+                    Certifique-se de respeitar os
+                    <a href="termos.html">
+                        Termos de Uso
+                    </a>
+                    da Nostal™.
+                </p>
+
+
+                <p>
+                    Depois de criar sua comunidade, você poderá
+                    convidar seus amigos e receber novos membros.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- ==========================================
+         COLUNA DIREITA
+         ========================================== -->
+
+    <aside class="column">
+
+
+        <!-- SELOS -->
+
+        <div class="box">
+
+            <div class="box-title">
+                💻 Selos
+            </div>
+
+
+            <div class="badges">
+
+
+                <!-- RetroNet NOW! -->
+
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="#">
+
+                    <img
+                        src="assets\RetroNet_NOW_88x31.gif"
+                        alt="RetroNet NOW!">
+
+                </a>
+
+
+                <!-- Bloco de Notas -->
+
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="#">
+
+                    <img
+                        src="assets\built_with_microsoft_notepad.gif"
+                        alt="Bloco de Notas">
+
+                </a>
+
+
+                <!-- GuiDev10 -->
+
+                <a
+                    href="https://guilhermealbuquerque9.github.io/GuiDev10/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        src="https://guilhermealbuquerque9.github.io/GuiDev10/assets/GuiDev10.gif"
+                        alt="GuiDev10">
+
+                </a>
+
+
+                <!-- Retropixel -->
+
+                <a
+                    href="http://www.retropixel.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        src="assets\Retropixel_88x31.gif"
+                        alt="Retropixel">
+
+                </a>
+
+
+                <div class="badge-text">
+                    🌐 Uma pequena viagem à Web 2.0
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- RETROPIXEL -->
+
+        <div class="box">
+
+            <div class="box-title">
+                📢 Um projeto Retropixel
+            </div>
+
+
+            <div class="box-content retropixel-project">
+
+
+                <a
+                    href="http://www.retropixel.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img
+                        src="assets\Retropixel_logo.png"
+                        alt="Retropixel™">
+
+                </a>
+
+
+                <p>
+
+                    <a
+                        href="http://www.retropixel.com.br"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        Um projeto da Retropixel
+
+                    </a>
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+    </aside>
+
+
+</main>
+
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="footer">
+
+    <div>
+
+        <a href="sobre.html">
+            Sobre
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="termos.html">
+            Termos
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="privacidade.html">
+            Privacidade
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="index.html">
+            Início
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a
+            href="http://www.retropixel.com.br"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            Retropixel™
+
+        </a>
+
+    </div>
+
+
+    <div class="footer-secondary">
+
+        © Retropixel™, 2025-2026.
+        Todos os direitos reservados.
+
+    </div>
+
+
+    <div class="footer-secondary">
+
+        Feito com HTML, CSS, JavaScript e muita nostalgia. 💚
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+
+<script
+    src="js/criarcomunidade.js">
+</script>
+
+<script 
+    src="theme.js">
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nostal™ — Recuperar senha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="assets\Nostal_icon.png">
+</head>
+
+<body>
+
+<div class="top-strip"></div>
+
+<header class="header">
+    <div class="header-inner">
+
+        <div>
+            <a href="index.html">
+                <img src="assets/Nostal_horizontal.png"
+                     alt="Nostal™"
+                     class="logo-image">
+            </a>
+
+            <div class="tagline">
+                A sua vida. Os seus amigos. A sua nostalgia.
+            </div>
+        </div>
+
+        <div class="header-links">
+            <a href="index.html">Voltar para o início</a>
+        </div>
+
+    </div>
+</header>
+
+<div class="ticker">
+    <marquee class="banner-marquee"
+             scrollamount="5"
+             direction="left"
+             behavior="scroll">
+
+        <img src="assets/icons_banner_spacehey.png"
+             alt="Ícones retrô">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img src="assets/icons_banner_spacehey.png"
+             alt="">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img src="assets/icons_banner_spacehey.png"
+             alt="">
+
+    </marquee>
+</div>
+
+<main class="signup-page">
+
+    <section class="signup-main">
+
+        <div class="box create-account-box">
+
+            <div class="login-title">
+                🔑 Recuperar senha
+            </div>
+
+            <div class="create-account-content">
+
+                <div class="welcome">
+
+                    <h1>Esqueceu sua senha?</h1>
+
+                    <p>
+                        Não se preocupe! Nós podemos ajudar.
+                    </p>
+
+                    <p>
+                        Digite o e-mail da sua conta para que possamos enviar
+                        um e-mail para você redefinir sua senha. Se o e-mail
+                        não aparecer na sua inbox, tente checar a caixa de spam
+                        e marque como "Não é spam".
+                    </p>
+
+                </div>
+
+                <form id="resetPasswordForm">
+
+                    <label for="email">
+                        📧 E-mail da sua conta
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="seuemail@exemplo.com"
+                        required
+                    >
+
+                    <div class="field-help">
+                        Enviaremos um link para redefinir sua senha.
+                    </div>
+
+                    <div
+                        id="resetMessage"
+                        class="form-message"
+                        hidden>
+                    </div>
+
+                    <br>
+
+                    <button
+                        type="submit"
+                        class="login-button">
+
+                        ENVIAR LINK DE RECUPERAÇÃO
+
+                    </button>
+
+                </form>
+
+                <div class="existing-account">
+
+                    Lembrou da senha?
+
+                    <a href="index.html">
+                        Voltar para o login.
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <aside class="signup-sidebar">
+
+        <div class="box">
+
+                <div class="box-title">
+                    💻 Selos
+                </div>
+
+                <div class="badges">
+
+                    <!-- Selo RetroNet NOW! -->
+                    <a target="_blank" rel="noopener noreferrer" href="#">
+                        <img src="assets\RetroNet_NOW_88x31.gif" alt="RetroNet NOW!">
+                    </a>
+
+
+                    <!-- Selo Bloco de Notas -->
+                    <a target="_blank" rel="noopener noreferrer" href="#">
+                        <img alt="Valid XHTML 1.0" src="assets\built_with_microsoft_notepad.gif">
+                    </a>
+
+
+                    <!-- Selo GuiDev10 -->
+                    <a href="https://guilhermealbuquerque9.github.io/GuiDev10/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://guilhermealbuquerque9.github.io/GuiDev10/assets/GuiDev10.gif" alt="GuiDev10">
+                    </a>
+
+                    <!-- Selo Retropixel -->
+                    <a href="http://www.retropixel.com.br" target="_blank" rel="noopener noreferrer">
+                        <img src="assets\Retropixel_88x31.gif" alt="Retropixel">
+                    </a>
+
+                    <div class="badge-text">
+                        🌐 Uma pequena viagem à Web 2.0
+                    </div>
+
+                </div>
+
+            </div>
+
+        <div class="box">
+
+            <div class="box-title">
+                📢 Um projeto Retropixel
+            </div>
+
+            <div class="box-content retropixel-project">
+
+                <a href="http://www.retropixel.com.br">
+
+                    <img
+                        src="assets/Retropixel_logo.png"
+                        alt="Retropixel™">
+
+                </a>
+
+                <p>
+                    Um projeto da Retropixel
+                </p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</main>
+
+<footer class="footer">
+
+    <div>
+        <a href="sobre.html">Sobre a Nostal™</a>
+        &nbsp;|&nbsp;
+        <a href="termos.html">Termos</a>
+        &nbsp;|&nbsp;
+        <a href="privacidade.html">Privacidade</a>
+        &nbsp;|&nbsp;
+        <a href="index.html">Login</a>
+    </div>
+
+    <div class="footer-secondary">
+        © Retropixel™, 2025-2026. Todos os direitos reservados.
+    </div>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/esquecisenha.js"></script>
+<script src="theme.js"></script>
+
+</body>
+</html>

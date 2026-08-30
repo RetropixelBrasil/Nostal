@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Nostal™ — Configurações</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="assets\Nostal_icon.png">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+
+<body data-theme="classic">
+
+<div class="top-strip"></div>
+
+
+<!-- ==========================================
+     CABEÇALHO
+     ========================================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div>
+
+            <a href="index.html">
+
+                <img
+                    src="assets\Nostal_horizontal.png"
+                    alt="Nostal™"
+                    class="logo-image">
+
+            </a>
+
+            <div class="tagline">
+                A sua vida. Os seus amigos. A sua nostalgia.
+            </div>
+
+        </div>
+
+
+        <div class="header-links">
+
+            <a href="perfil.html">
+                Meu perfil
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="index.html">
+                Página inicial
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     BANNER
+     ========================================== -->
+
+<div class="ticker">
+
+    <marquee
+        class="banner-marquee"
+        scrollamount="5"
+        direction="left"
+        behavior="scroll">
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="Ícones retrô">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="">
+
+    </marquee>
+
+</div>
+
+
+<!-- ==========================================
+     CONFIGURAÇÕES
+     ========================================== -->
+
+<main class="settings-page">
+
+
+    <!-- ======================================
+         CABEÇALHO
+         ====================================== -->
+
+    <div class="settings-header">
+
+        <h1>
+            ⚙️ Configurações da Nostal™
+        </h1>
+
+        <p>
+            Personalize seu perfil, sua conta e sua
+            experiência na Nostal™.
+        </p>
+
+    </div>
+
+
+    <form id="settingsForm">
+
+
+        <!-- ==================================
+             PERFIL
+             ================================== -->
+
+        <section class="settings-section">
+
+            <div class="settings-section-title">
+                👤 Informações do perfil
+            </div>
+
+
+            <div class="settings-section-content">
+
+
+                <label for="displayName">
+                    Nome de exibição
+                </label>
+
+
+                <input
+                    type="text"
+                    id="displayName"
+                    name="displayName"
+                    maxlength="80"
+                    placeholder="Como você quer ser chamado?"
+                    required>
+
+
+                <label for="username">
+                    Nome de usuário
+                </label>
+
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    maxlength="30"
+                    placeholder="seu_usuario"
+                    required>
+
+
+                <p class="settings-help">
+                    Seu nome de usuário será usado no endereço
+                    e nos links do seu perfil.
+                </p>
+
+
+                <label for="bio">
+                    Biografia
+                </label>
+
+
+                <textarea
+                    id="bio"
+                    name="bio"
+                    maxlength="500"
+                    rows="5"
+                    placeholder="Conte um pouco sobre você..."></textarea>
+
+
+                <div class="settings-counter">
+                    Máximo de 500 caracteres.
+                </div>
+
+
+                <label for="status">
+                    Status personalizado
+                </label>
+
+
+                <input
+                    type="text"
+                    id="status"
+                    name="status"
+                    maxlength="100"
+                    placeholder="O que você está fazendo?">
+
+
+                <div class="settings-help">
+                    Seu status aparecerá no seu perfil e em
+                    partes da Nostal™.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             FOTO DE PERFIL
+             ================================== -->
+
+        <section class="settings-section">
+
+            <div class="settings-section-title">
+                📷 Foto de perfil
+            </div>
+
+
+            <div class="settings-section-content">
+
+
+                <div class="avatar-settings">
+
+                    <div
+                        id="avatarPreview"
+                        class="avatar-preview">
+
+                        👤
+
+                    </div>
+
+
+                    <div class="avatar-settings-info">
+
+                        <strong>
+                            Escolha sua foto de perfil
+                        </strong>
+
+
+                        <p>
+                            Escolha uma imagem para representar
+                            você na Nostal™.
+                        </p>
+
+
+                        <input
+                            type="file"
+                            id="avatarFile"
+                            name="avatarFile"
+                            accept="image/jpeg,image/png,image/webp">
+
+
+                        <div class="settings-help">
+                            Formatos aceitos: JPG, PNG e WebP.
+                            Tamanho máximo: 10 MB.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             PERSONALIZAÇÃO
+             ================================== -->
+
+        <section class="settings-section">
+
+            <div class="settings-section-title">
+                🎨 Personalização
+            </div>
+
+
+            <div class="settings-section-content">
+
+
+                <p>
+                    Escolha o visual que mais combina com você.
+                    A alteração será aplicada à Nostal™.
+                </p>
+
+
+                <label for="profileTheme">
+                    Tema da Nostal™
+                </label>
+
+
+                <select
+                    id="profileTheme"
+                    name="profileTheme">
+
+                    <option value="classic">
+                        🟢 Classic
+                    </option>
+
+                    <option value="frutiger-aero">
+                        🌿 Frutiger Aero
+                    </option>
+
+                    <option value="dark">
+                        🌑 Dark
+                    </option>
+
+                    <option value="rainbow">
+                        🌈 Rainbow
+                    </option>
+
+                </select>
+
+
+                <div class="settings-help">
+                    O tema escolhido será salvo na sua conta
+                    e aplicado quando você entrar novamente.
+                </div>
+
+
+                <!-- PREVIEW DOS TEMAS -->
+
+                <div class="theme-preview-area">
+
+                    <div
+                        class="theme-preview-card"
+                        data-preview-theme="classic">
+
+                        <div class="theme-preview-title">
+                            🟢 Classic
+                        </div>
+
+                        <div class="theme-preview-text">
+                            O visual clássico da Nostal™.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="theme-preview-card"
+                        data-preview-theme="frutiger-aero">
+
+                        <div class="theme-preview-title">
+                            🌿 Frutiger Aero
+                        </div>
+
+                        <div class="theme-preview-text">
+                            Natureza, vidro, brilho e nostalgia.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="theme-preview-card"
+                        data-preview-theme="dark">
+
+                        <div class="theme-preview-title">
+                            🌑 Dark
+                        </div>
+
+                        <div class="theme-preview-text">
+                            A Nostal™ em um visual noturno.
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="theme-preview-card"
+                        data-preview-theme="rainbow">
+
+                        <div class="theme-preview-title">
+                            🌈 Rainbow
+                        </div>
+
+                        <div class="theme-preview-text">
+                            Cores vibrantes para deixar tudo
+                            mais divertido.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             CONTA
+             ================================== -->
+
+        <section class="settings-section">
+
+            <div class="settings-section-title">
+                🔐 Conta e segurança
+            </div>
+
+
+            <div class="settings-section-content">
+
+
+                <label for="accountEmail">
+                    📧 E-mail da conta
+                </label>
+
+
+                <input
+                    type="email"
+                    id="accountEmail"
+                    name="accountEmail"
+                    readonly>
+
+
+                <div class="settings-help">
+                    O e-mail da sua conta é gerenciado pelo
+                    sistema de autenticação da Nostal™.
+                </div>
+
+
+                <hr>
+
+
+                <h3>
+                    🔑 Senha
+                </h3>
+
+
+                <p>
+                    Quer alterar sua senha?
+                </p>
+
+
+                <a
+                    href="esquecisenha.html"
+                    class="signup-button">
+
+                    🔑 Redefinir minha senha
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             SALVAR
+             ================================== -->
+
+        <section class="settings-section">
+
+            <div class="settings-section-title">
+                💾 Salvar alterações
+            </div>
+
+
+            <div class="settings-section-content">
+
+
+                <p>
+                    Quando terminar de editar seu perfil,
+                    clique no botão abaixo para salvar.
+                </p>
+
+
+                <button
+                    type="submit"
+                    class="login-button">
+
+                    💾 SALVAR ALTERAÇÕES
+
+                </button>
+
+
+                <div
+                    id="settingsMessage"
+                    class="form-message"
+                    hidden>
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </form>
+
+
+    <!-- ======================================
+         ZONA DE PERIGO
+         ====================================== -->
+
+    <section
+        class="settings-section danger-section">
+
+        <div class="settings-section-title">
+            🗑️ Zona de perigo
+        </div>
+
+
+        <div class="settings-section-content">
+
+            <h3>
+                Excluir minha conta
+            </h3>
+
+
+            <p>
+                A exclusão da conta é uma ação permanente.
+                Seus dados, perfil e conteúdo associado
+                poderão ser removidos de acordo com os
+                Termos e a Política de Privacidade da Nostal™.
+            </p>
+
+
+            <button
+                type="button"
+                id="deleteAccountButton"
+                class="delete-account-button">
+
+                🗑️ EXCLUIR MINHA CONTA
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================
+     RODAPÉ
+     ========================================== -->
+
+<footer class="footer">
+
+    <div>
+
+        <a href="sobre.html">
+            Sobre
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="termos.html">
+            Termos
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="privacidade.html">
+            Privacidade
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a href="index.html">
+            Início
+        </a>
+
+        &nbsp;|&nbsp;
+
+        <a
+            href="http://www.retropixel.com.br"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            Retropixel™
+
+        </a>
+
+    </div>
+
+
+    <div class="footer-secondary">
+
+        © Retropixel™, 2025-2026.
+        Todos os direitos reservados.
+
+    </div>
+
+
+    <div class="footer-secondary">
+
+        Feito com HTML, CSS, JavaScript e muita nostalgia. 💚
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
+<script
+    src="js/configuracoes.js">
+</script>
+
+<script 
+    src="theme.js">
+</script>
+
+
+</body>
+
+</html>

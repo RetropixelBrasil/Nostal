@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nostal™ — Usuários</title>
+
+    <link rel="icon" type="image/png" href="assets\Nostal_icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="top-strip"></div>
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div>
+
+            <a href="index.html">
+
+                <img
+                    src="assets\Nostal_horizontal.png"
+                    alt="Nostal™"
+                    class="logo-image">
+
+            </a>
+
+            <div class="tagline">
+                A sua vida. Os seus amigos. A sua nostalgia.
+            </div>
+
+        </div>
+
+        <div class="header-links">
+
+            <a href="index.html">
+                Início
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="posts.html">
+                Posts
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="usuarios.html">
+                Usuários
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="comunidades.html">
+                Comunidades
+            </a>
+
+            &nbsp;|&nbsp;
+
+            <a href="perfil.html">
+                Meu perfil
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<div class="ticker">
+
+    <marquee
+        class="banner-marquee"
+        scrollamount="5"
+        direction="left"
+        behavior="scroll">
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="Ícones retrô">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <img
+            src="assets\icons_banner_spacehey.png"
+            alt="">
+
+    </marquee>
+
+</div>
+
+
+<main class="page">
+
+<section class="column" style="grid-column: 1 / 3;">
+
+    <div class="box">
+
+        <div class="box-title">
+            👥 Encontrar usuários
+        </div>
+
+        <div class="box-content">
+
+            <form id="userSearchForm">
+
+                <label for="userSearch">
+                    🔎 Procurar alguém
+                </label>
+
+                <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="Nome ou nome de usuário...">
+
+                <br>
+
+                <button
+                    type="submit"
+                    class="login-button">
+
+                    PROCURAR
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="box">
+
+        <div class="box-title">
+            👤 Usuários da Nostal™
+        </div>
+
+        <div
+            id="usersList"
+            class="box-content">
+
+            <div class="posts-loading">
+                Carregando usuários...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<aside class="column">
+
+    <div class="box">
+
+        <div class="box-title">
+            👥 Seus amigos
+        </div>
+
+        <div
+            id="friendsList"
+            class="box-content">
+
+            <div class="online-loading">
+                Carregando...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SELOS -->
+
+    <div class="box">
+
+        <div class="box-title">
+            💻 Selos
+        </div>
+
+        <div class="badges">
+
+            <!-- Selo RetroNet NOW! -->
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="#">
+
+                <img
+                    src="assets\RetroNet_NOW_88x31.gif"
+                    alt="RetroNet NOW!">
+
+            </a>
+
+
+            <!-- Selo Bloco de Notas -->
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="#">
+
+                <img
+                    alt="Valid XHTML 1.0"
+                    src="assets\built_with_microsoft_notepad.gif">
+
+            </a>
+
+
+            <!-- Selo GuiDev10 -->
+            <a
+                href="https://guilhermealbuquerque9.github.io/GuiDev10/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <img
+                    src="https://guilhermealbuquerque9.github.io/GuiDev10/assets/GuiDev10.gif"
+                    alt="GuiDev10">
+
+            </a>
+
+
+            <!-- Selo Retropixel -->
+            <a
+                href="http://www.retropixel.com.br"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <img
+                    src="assets\Retropixel_88x31.gif"
+                    alt="Retropixel">
+
+            </a>
+
+
+            <div class="badge-text">
+                🌐 Uma pequena viagem à Web 2.0
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RETROPIXEL -->
+
+    <div class="box">
+
+        <div class="box-title">
+            📢 Um projeto Retropixel
+        </div>
+
+        <div class="box-content retropixel-project">
+
+            <a
+                href="http://www.retropixel.com.br"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                <img
+                    src="assets\Retropixel_logo.png"
+                    alt="Retropixel™">
+
+            </a>
+
+            <p>
+
+                <a
+                    href="http://www.retropixel.com.br"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                    Um projeto da Retropixel
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</aside>
+
+</main>
+
+
+<footer class="footer">
+
+    <div>
+
+        <a href="sobre.html">Sobre</a>
+
+        &nbsp;|&nbsp;
+
+        <a href="termos.html">Termos</a>
+
+        &nbsp;|&nbsp;
+
+        <a href="privacidade.html">Privacidade</a>
+
+        &nbsp;|&nbsp;
+
+        <a href="index.html">Início</a>
+
+    </div>
+
+    <div class="footer-secondary">
+        © Retropixel™, 2025-2026. Todos os direitos reservados.
+    </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/usuarios.js"></script>
+<script src="theme.js"></script>
+
+</body>
+</html>
