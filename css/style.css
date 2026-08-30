@@ -1,0 +1,1589 @@
+/* ==================================================
+           NOSTAL™ — CSS STYLESHEET
+================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    to bottom,
+                    #dff5d8 0px,
+                    #f4fff1 120px,
+                    #ffffff 300px
+                );
+            color: #333;
+            font-size: 13px;
+        }
+
+        a {
+            color: #197a1c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== TOPO ===== */
+
+        .top-strip {
+            height: 7px;
+            background: linear-gradient(
+                to right,
+                #176b18,
+                #43a047,
+                #8bc34a,
+                #43a047,
+                #176b18
+            );
+        }
+
+        .header {
+            background: linear-gradient(
+                to bottom,
+                #5fbf50 0%,
+                #39a93c 45%,
+                #218b28 100%
+            );
+            border-bottom: 1px solid #126619;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .header-inner {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: auto;
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-image {
+            display: block;
+            max-width: 220px;
+            max-height: 65px;
+            width: auto;
+            height: auto;
+        }
+
+        .tagline {
+            color: #eaffea;
+            font-size: 12px;
+            margin-top: 4px;
+            text-shadow: 1px 1px #126619;
+        }
+
+        .header-links {
+            color: white;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .header-links a {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ===== MARQUEE ===== */
+
+        .ticker {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 8px auto;
+            background: #ffffcc;
+            border: 1px solid #d1d16a;
+            padding: 5px;
+            color: #555;
+            font-size: 12px;
+            box-shadow: inset 0 1px white;
+            overflow: hidden;
+        }
+
+        .banner-marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 3px 0;
+        }
+
+        .banner-marquee img {
+            height: 42px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* ===== LAYOUT ===== */
+
+        .page {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 0 auto 30px;
+            display: grid;
+            grid-template-columns: 190px 1fr 205px;
+            gap: 10px;
+        }
+
+        .column {
+            min-width: 0;
+        }
+
+        /* ===== BOXES ===== */
+
+        .box {
+            background: white;
+            border: 1px solid #b7b7b7;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.15),
+                inset 0 1px 0 white;
+            overflow: hidden;
+        }
+
+/* A caixa da criação de posts precisa permitir que o menu de emojis
+   ultrapasse seus limites sem ser cortado. */
+.box:has(.emoji-picker) {
+            overflow: visible;
+        }
+
+        .box-title {
+            background: linear-gradient(
+                to bottom,
+                #edfbe9,
+                #c8eec1
+            );
+            border-bottom: 1px solid #a9d6a2;
+            color: #246c24;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 8px 9px;
+            text-shadow: 1px 1px white;
+        }
+
+        .box-content {
+            padding: 10px;
+        }
+
+        /* ===== LOGIN ===== */
+
+        .login-box {
+            border: 1px solid #7aad73;
+        }
+
+        .login-title {
+            background: linear-gradient(
+                to bottom,
+                #72c965,
+                #39a83b
+            );
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 9px 10px;
+            text-shadow: 1px 1px #276d25;
+        }
+
+        .login-content {
+            padding: 18px;
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ffffff,
+                    #f5fff3
+                );
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .welcome h1 {
+            color: #247927;
+            font-size: 24px;
+            margin: 0 0 4px;
+        }
+
+        .welcome p {
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            margin: 10px 0 4px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            height: 33px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 6px 8px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background: white;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4cae4c;
+            box-shadow: 0 0 4px rgba(76,174,76,0.5);
+        }
+
+        .remember {
+            margin: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .remember input {
+            vertical-align: middle;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 36px;
+            border: 1px solid #176b1b;
+            border-radius: 4px;
+            background: linear-gradient(
+                to bottom,
+                #72cf67,
+                #299c30
+            );
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px #176b1b;
+            cursor: pointer;
+            box-shadow:
+                inset 0 1px rgba(255,255,255,0.5),
+                0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .login-button:hover {
+            background: linear-gradient(
+                to bottom,
+                #82da76,
+                #35a83b
+            );
+        }
+
+        .login-button:active {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+            transform: translateY(1px);
+        }
+
+        .forgot {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        /* ===== CRIAR CONTA ===== */
+
+        .signup-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fffef0,
+                    #ffffd6
+                );
+            border-color: #d7d38a;
+        }
+
+        .signup-box h2 {
+            margin: 0 0 5px;
+            color: #6c6a20;
+            font-size: 17px;
+        }
+
+        .signup-box p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .signup-button {
+            display: block;
+            text-align: center;
+            background: linear-gradient(
+                to bottom,
+                #ffcf4b,
+                #e6a900
+            );
+            border: 1px solid #b98200;
+            border-radius: 4px;
+            color: #604600;
+            padding: 7px;
+            font-weight: bold;
+            text-shadow: 1px 1px #fff3bb;
+            box-shadow: inset 0 1px rgba(255,255,255,0.7);
+        }
+
+        .signup-button:hover {
+            text-decoration: none;
+            background: linear-gradient(
+                to bottom,
+                #ffd963,
+                #edb31b
+            );
+        }
+
+        /* ===== COLUNA ESQUERDA ===== */
+
+        .mini-profile {
+            text-align: center;
+        }
+
+        .avatar-placeholder {
+            width: 90px;
+            height: 90px;
+            margin: auto;
+            border: 1px solid #999;
+            background:
+                linear-gradient(
+                    135deg,
+                    #dcefd7,
+                    #a8d69e
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+        .guest-title {
+            color: #237227;
+            font-weight: bold;
+            margin-top: 7px;
+            font-size: 12px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 6px 7px;
+            border-bottom: 1px solid #e4e4e4;
+            font-size: 12px;
+        }
+
+        .menu a:hover {
+            background: #edf9e9;
+            text-decoration: none;
+        }
+
+        /* ===== CENTRO ===== */
+
+        .hero {
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(255,255,255,0.8),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #f4fff0,
+                    #ffffff
+                );
+            border: 1px solid #a8d29f;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            margin: 0;
+            color: #277a29;
+            font-size: 25px;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 45px 1fr;
+            gap: 8px;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px dotted #bbb;
+        }
+
+        .feature:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .feature strong {
+            color: #277a29;
+            font-size: 13px;
+        }
+
+        .feature p {
+            margin: 3px 0 0;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* ===== POSTS ===== */
+
+        .retro-post {
+            padding: 10px;
+            background: #fafafa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .retro-post:last-child {
+            border-bottom: none;
+        }
+
+        .post-user {
+            font-weight: bold;
+            color: #287c2c;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .post-text {
+            margin: 7px 0;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+
+        .post-actions {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .post-actions a {
+            margin-right: 8px;
+        }
+
+        .posts-loading {
+            padding: 18px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* ===== DIREITA ===== */
+
+        .online-user {
+            padding: 6px 2px;
+            border-bottom: 1px dotted #ccc;
+            font-size: 12px;
+        }
+
+        .online-user:last-child {
+            border-bottom: none;
+        }
+
+        .online {
+            color: #299b30;
+            font-size: 9px;
+            margin-right: 4px;
+        }
+
+        .offline {
+            color: #aaa;
+            font-size: 9px;
+            margin-right: 4px;
+        }
+
+        .online-loading {
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: #111;
+            color: #49ff49;
+            padding: 6px;
+            border: 2px inset #777;
+            margin-top: 5px;
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* ===== RETRO BADGES ===== */
+
+        .badges {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .badges img {
+            width: 88px;
+            height: 31px;
+            object-fit: contain;
+            margin: 3px;
+            vertical-align: middle;
+            image-rendering: auto;
+        }
+
+        .badge-text {
+            font-size: 11px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        /* ===== RETRO MARQUEE ===== */
+
+        .image-marquee {
+            width: 100%;
+            overflow: hidden;
+            background: #f7fff4;
+            border-top: 1px dotted #b6d6ae;
+            border-bottom: 1px dotted #b6d6ae;
+            padding: 5px 0;
+        }
+
+        .image-marquee img {
+            height: 38px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* ===== RETRO PROJECT ===== */
+
+        .retropixel-project {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .retropixel-project img {
+            width: 105px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 7px;
+        }
+
+        .retropixel-project p {
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* ===== RODAPÉ ===== */
+
+        .footer {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 20px auto;
+            border-top: 1px solid #bbb;
+            padding: 12px 0;
+            text-align: center;
+            color: #888;
+            font-size: 11px;
+        }
+
+        .footer a {
+            color: #438346;
+        }
+
+        .footer-secondary {
+            margin-top: 6px;
+            font-size: 11px;
+        }
+
+        /* ===== RESPONSIVO ===== */
+
+        @media (max-width: 800px) {
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .header-inner {
+                height: auto;
+                padding: 12px 0;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .header-links {
+                text-align: center;
+            }
+
+            .logo-image {
+                margin: auto;
+            }
+        }
+
+/* ==================================================
+   NOSTAL™ — CRIAR CONTA
+   ================================================== */
+
+.signup-page {
+    width: 960px;
+    max-width: calc(100% - 20px);
+    margin: 0 auto 30px;
+
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 10px;
+}
+
+.signup-main,
+.signup-sidebar {
+    min-width: 0;
+}
+
+.create-account-box {
+    border-color: #7aad73;
+}
+
+.create-account-content {
+    padding: 20px 25px;
+
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #f5fff3
+    );
+}
+
+.create-account-content input[type="text"],
+.create-account-content input[type="email"],
+.create-account-content input[type="password"] {
+    width: 100%;
+    height: 35px;
+
+    border: 1px solid #aaa;
+    border-radius: 3px;
+
+    padding: 6px 8px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+
+    background: white;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.create-account-content input:focus {
+    outline: none;
+
+    border-color: #4cae4c;
+
+    box-shadow:
+        0 0 4px rgba(76,174,76,0.5);
+}
+
+.field-help {
+    margin-top: 4px;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.username-field {
+    display: flex;
+    width: 100%;
+}
+
+.username-prefix {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 35px;
+
+    border: 1px solid #aaa;
+    border-right: 0;
+
+    border-radius: 3px 0 0 3px;
+
+    background: linear-gradient(
+        to bottom,
+        #f5f5f5,
+        #dddddd
+    );
+
+    color: #287c2c;
+
+    font-weight: bold;
+    font-size: 15px;
+
+    text-shadow: 1px 1px white;
+}
+
+.username-field input {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+.signup-agreement {
+    margin: 17px 0;
+
+    padding: 10px;
+
+    border: 1px solid #d6d6a3;
+    border-radius: 3px;
+
+    background: #ffffe5;
+
+    color: #555;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.signup-agreement label {
+    display: block;
+    margin: 0;
+
+    font-weight: normal;
+}
+
+.signup-agreement input {
+    vertical-align: middle;
+}
+
+.existing-account {
+    margin-top: 15px;
+
+    padding-top: 12px;
+
+    border-top: 1px dotted #aaa;
+
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+.form-message {
+    margin-bottom: 15px;
+
+    padding: 9px;
+
+    border-radius: 3px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.form-message.error {
+    border: 1px solid #d28d8d;
+
+    background: #ffecec;
+
+    color: #9c2020;
+}
+
+.form-message.success {
+    border: 1px solid #8cc486;
+
+    background: #edffe9;
+
+    color: #247327;
+}
+
+
+/* ===== USUÁRIOS CADASTRADOS ===== */
+
+.registered-users {
+    text-align: center;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+.registered-users-number {
+    margin: 6px 0;
+
+    color: #258329;
+
+    font-size: 31px;
+    font-weight: bold;
+
+    letter-spacing: -1px;
+
+    text-shadow: 1px 1px white;
+}
+
+.registered-users strong {
+    color: #357737;
+}
+
+.registered-users p {
+    margin: 8px 0 0;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 800px) {
+
+    .signup-page {
+        grid-template-columns: 1fr;
+    }
+
+    .create-account-content {
+        padding: 16px;
+    }
+
+}
+
+.friend-accept {
+    background: #3aa655;
+    color: white;
+    border: 1px solid #277a3d;
+}
+
+.friend-reject {
+    background: #d9534f;
+    color: white;
+    border: 1px solid #a83b38;
+}
+
+.friend-cancel {
+    background: #f0c419;
+    color: #222;
+    border: 1px solid #b89500;
+}
+
+.friend-add {
+    background: #3aa655;
+    color: white;
+    border: 1px solid #277a3d;
+}
+
+/* ==================================================
+   NOSTAL™ — POSTS 2.0
+   ================================================== */
+
+
+/* ===== ÁREA DE MÍDIA ===== */
+
+.post-media-section {
+    margin-top: 12px;
+    padding: 10px;
+
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #f4fff1
+        );
+}
+
+.post-media-section strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #287c2c;
+    font-size: 12px;
+}
+
+
+.post-media-section input[type="url"] {
+    width: 100%;
+
+    height: 32px;
+
+    padding: 6px 8px;
+
+    border: 1px solid #aaa;
+    border-radius: 3px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+
+    background: white;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+.post-media-section input[type="file"] {
+    width: 100%;
+
+    margin-top: 5px;
+
+    font-size: 12px;
+}
+
+
+.media-or {
+    display: block;
+
+    margin: 5px 0;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 11px;
+    font-style: italic;
+}
+
+
+/* ===== FERRAMENTAS DO POST ===== */
+
+.post-tools {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    margin-top: 10px;
+}
+
+
+.post-tools .signup-button {
+    width: auto;
+
+    display: inline-block;
+
+    cursor: pointer;
+
+    padding: 7px 12px;
+}
+
+
+/* ===== SELETOR DE EMOJIS ===== */
+
+.emoji-picker {
+    position: relative;
+
+    display: inline-block;
+
+    z-index: 10000;
+
+    overflow: visible;
+}
+
+.emoji-menu {
+    position: absolute;
+
+    left: 0;
+
+    /*
+     * Abre para cima do botão.
+     */
+    bottom: 100%;
+
+    top: auto;
+
+    z-index: 9999;
+
+    width: 280px;
+    max-height: 190px;
+
+    margin-bottom: 4px;
+
+    padding: 7px;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border: 1px solid #999;
+    border-radius: 4px;
+
+    box-shadow:
+        2px 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.emoji-option {
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+
+    border: 1px solid transparent;
+
+    background: transparent;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    border-radius: 3px;
+}
+
+
+.emoji-option:hover {
+    background: #e9f8e6;
+
+    border-color: #9acb94;
+}
+
+
+/* ===== POSTS ===== */
+
+.post {
+    padding: 12px;
+
+    background: white;
+
+    border-bottom: 1px solid #d9d9d9;
+}
+
+
+.post:last-child {
+    border-bottom: none;
+}
+
+
+.post-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 9px;
+}
+
+
+.post-avatar {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #aaa;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dcefd7,
+            #a8d69e
+        );
+
+    font-size: 22px;
+}
+
+
+.post-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.post-header strong {
+    color: #287c2c;
+
+    font-size: 13px;
+}
+
+
+.post-username {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #888;
+
+    font-size: 11px;
+}
+
+
+.post-content {
+    margin: 8px 0;
+
+    color: #333;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.post-content p {
+    margin: 0 0 8px;
+}
+
+
+/* ===== IMAGENS DOS POSTS ===== */
+
+.post-image {
+    display: block;
+
+    max-width: 100%;
+    max-height: 600px;
+
+    margin: 8px auto;
+
+    border: 1px solid #bbb;
+
+    background: #f5f5f5;
+
+    object-fit: contain;
+}
+
+
+/* ===== DATA ===== */
+
+.post-date {
+    margin-top: 5px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+
+/* ===== BOTÕES DO POST ===== */
+
+.post-actions {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 9px;
+
+    padding-top: 7px;
+
+    border-top: 1px dotted #ccc;
+}
+
+
+.post-actions button {
+    padding: 5px 8px;
+
+    border: 1px solid #c5c5c5;
+    border-radius: 3px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffffff,
+            #eeeeee
+        );
+
+    color: #555;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.post-actions button:hover {
+    background:
+        linear-gradient(
+            to bottom,
+            #f4fff1,
+            #dff4d9
+        );
+
+    border-color: #8dbd87;
+
+    color: #287c2c;
+}
+
+
+.post-actions button:active {
+    transform: translateY(1px);
+}
+
+
+/* ===== COMENTÁRIOS ===== */
+
+.comments {
+    margin-top: 8px;
+
+    padding: 8px;
+
+    border-top: 1px solid #ddd;
+
+    background: #f7f7f7;
+
+    font-size: 12px;
+}
+
+
+.comment {
+    padding: 7px;
+
+    margin-bottom: 5px;
+
+    border: 1px solid #ddd;
+    border-radius: 3px;
+
+    background: white;
+}
+
+
+.comment:last-of-type {
+    margin-bottom: 8px;
+}
+
+
+.comment strong {
+    margin-right: 5px;
+
+    color: #287c2c;
+}
+
+
+.comment span {
+    color: #444;
+}
+
+
+.comment small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #999;
+
+    font-size: 10px;
+}
+
+
+/* ===== FORMULÁRIO DE COMENTÁRIO ===== */
+
+.comment-form {
+    display: flex;
+
+    gap: 5px;
+
+    margin-top: 8px;
+}
+
+
+.comment-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 30px;
+
+    padding: 5px 7px;
+
+    border: 1px solid #aaa;
+    border-radius: 3px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+
+    background: white;
+}
+
+
+.comment-form button {
+    height: 30px;
+
+    padding: 0 9px;
+
+    border: 1px solid #176b1b;
+    border-radius: 3px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #72cf67,
+            #299c30
+        );
+
+    color: white;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    text-shadow: 1px 1px #176b1b;
+}
+
+
+.comment-form button:hover {
+    background:
+        linear-gradient(
+            to bottom,
+            #82da76,
+            #35a83b
+        );
+}
+
+
+/* ===== ÁREA DE CARREGAMENTO ===== */
+
+.posts-loading {
+    padding: 18px;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 12px;
+}
+
+
+/* ===== RESPONSIVO ===== */
+
+@media (max-width: 800px) {
+
+    .post-media-section {
+        padding: 8px;
+    }
+
+
+    .post-tools {
+        flex-wrap: wrap;
+    }
+
+
+    .emoji-menu {
+        width: 250px;
+    }
+
+
+    .comment-form {
+        flex-direction: column;
+    }
+
+
+    .comment-form button {
+        width: 100%;
+    }
+
+}
+
+/* ==================================================
+   NOSTAL™ — CONFIGURAÇÕES
+   ================================================== */
+
+.settings-page {
+
+    width: 960px;
+
+    max-width: calc(100% - 20px);
+
+    margin: 0 auto 30px;
+
+}
+
+
+.settings-header {
+
+    padding: 18px;
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f4fff0,
+            #ffffff
+        );
+
+    border: 1px solid #a8d29f;
+
+    border-radius: 5px;
+
+}
+
+
+.settings-header h1 {
+
+    margin: 0;
+
+    color: #277a29;
+
+    font-size: 22px;
+
+}
+
+
+.settings-header p {
+
+    margin: 6px 0 0;
+
+    color: #777;
+
+    font-size: 12px;
+
+}
+
+
+.settings-section {
+
+    margin-bottom: 10px;
+
+    background: white;
+
+    border: 1px solid #b7b7b7;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,0.15);
+
+}
+
+
+.settings-section-title {
+
+    padding: 9px 11px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #edfbe9,
+            #c8eec1
+        );
+
+    border-bottom: 1px solid #a9d6a2;
+
+    color: #246c24;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    text-shadow: 1px 1px white;
+
+}
+
+
+.settings-section-content {
+
+    padding: 16px;
+
+}
+
+
+.danger-section {
+
+    border-color: #d49a9a;
+
+}
+
+
+.danger-section .settings-section-title {
+
+    background:
+        linear-gradient(
+            to bottom,
+            #fff0f0,
+            #ffdede
+        );
+
+    border-bottom-color: #d9aaaa;
+
+    color: #a32626;
+
+}
+
+
+/* ==================================================
+   NOSTAL™ — CORREÇÃO DO LAYOUT DE CRIAR CONTA
+   ================================================== */
+
+/*
+ * Somente a página que contém .create-account-box
+ * recebe este layout de duas colunas:
+ *
+ *   COLUNA PRINCIPAL (grande) | LATERAL (pequena)
+ */
+
+.page:has(.create-account-box) {
+    grid-template-columns: 1fr 220px;
+    gap: 10px;
+}
+
+.page:has(.create-account-box) > .column:first-child {
+    min-width: 0;
+}
+
+.page:has(.create-account-box) > .column:last-child {
+    min-width: 0;
+}
+
+.page:has(.create-account-box) .create-account-box {
+    width: 100%;
+}
+
+.page:has(.create-account-box) > .column:last-child .box {
+    width: 100%;
+}
+
+/* Em telas pequenas, as colunas ficam empilhadas. */
+
+@media (max-width: 800px) {
+
+    .page:has(.create-account-box) {
+        grid-template-columns: 1fr;
+    }
+
+}
+
