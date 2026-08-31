@@ -42,17 +42,33 @@ function escapeHTML(value) {
 async function initProfile() {
 
     const {
-        data
+        data,
+        error
     } =
         await supabaseClient.auth.getUser();
 
 
-    if (!data.user) {
+    if (
+        error ||
+        !data.user
+    ) {
 
-        window.location.href =
-            "index.html";
+        const goLogin =
+            confirm(
+                "Você não está logado. Clique em OK para voltar a página inicial e fazer login ou clique em CANCELAR para continuar offline."
+            );
+
+
+        if (goLogin) {
+
+            window.location.href =
+                "index.html";
+
+        }
+
 
         return;
+
     }
 
 
@@ -61,11 +77,12 @@ async function initProfile() {
 
 
     /*
-     * Se houver ?user=UUID,
-     * carregamos aquele usuário.
+     * O padrão oficial do Nostal™ é:
      *
-     * Caso contrário,
-     * carregamos o próprio usuário.
+     * perfil.html?id=UUID
+     *
+     * Mantemos ?user=UUID apenas por
+     * compatibilidade com links antigos.
      */
 
     const params =
@@ -75,6 +92,7 @@ async function initProfile() {
 
 
     profileUserId =
+        params.get("id") ||
         params.get("user") ||
         currentUser.id;
 
@@ -110,13 +128,19 @@ async function loadProfile(
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            "Erro ao carregar perfil:",
+            error
+        );
+
 
         alert(
             "Perfil não encontrado."
         );
 
+
         return;
+
     }
 
 
@@ -156,21 +180,37 @@ async function loadProfile(
         );
 
 
+    /* ==========================================
+       NOME
+       ========================================== */
+
     if (name) {
 
         name.textContent =
-            profile.display_name;
+            profile.display_name ||
+            profile.username ||
+            "Usuário";
 
     }
 
+
+    /* ==========================================
+       USUÁRIO
+       ========================================== */
 
     if (username) {
 
         username.textContent =
-            "@" + profile.username;
+            profile.username
+                ? "@" + profile.username
+                : "";
 
     }
 
+
+    /* ==========================================
+       BIO
+       ========================================== */
 
     if (bio) {
 
@@ -181,18 +221,27 @@ async function loadProfile(
     }
 
 
+    /* ==========================================
+       STATUS
+       ========================================== */
+
     if (status) {
 
-    status.textContent =
-        profile.status ||
-        "Nenhum status definido.";
+        status.textContent =
+            profile.status ||
+            "Nenhum status definido.";
 
-    status.classList.remove(
-        "loading"
-    );
 
-}
+        status.classList.remove(
+            "loading"
+        );
 
+    }
+
+
+    /* ==========================================
+       AVATAR
+       ========================================== */
 
     if (avatar) {
 
@@ -200,7 +249,9 @@ async function loadProfile(
             profile.avatar_url
                 ? `
                     <img
-                        src="${escapeHTML(profile.avatar_url)}"
+                        src="${escapeHTML(
+                            profile.avatar_url
+                        )}"
                         alt="Foto de perfil">
                   `
                 : "👤";
@@ -208,41 +259,45 @@ async function loadProfile(
     }
 
 
+    /* ==========================================
+       CAPA
+       ========================================== */
+
     if (cover) {
 
-    const placeholder =
-        document.getElementById(
-            "profileCoverPlaceholder"
-        );
+        const placeholder =
+            document.getElementById(
+                "profileCoverPlaceholder"
+            );
 
 
-    if (profile.cover_url) {
+        if (profile.cover_url) {
 
-        cover.style.backgroundImage =
-            `url("${escapeHTML(profile.cover_url)}")`;
+            cover.style.backgroundImage =
+                `url("${escapeHTML(
+                    profile.cover_url
+                )}")`;
+
+        }
+
+
+        /*
+         * Remove "Carregando capa..."
+         * depois que o perfil foi carregado.
+         */
+
+        if (placeholder) {
+
+            placeholder.remove();
+
+        }
 
     }
 
 
-    /*
-     * A capa terminou de carregar.
-     * O placeholder deve desaparecer
-     * independentemente de existir uma capa.
-     */
-
-    if (placeholder) {
-
-        placeholder.remove();
-
-    }
-
-}
-
-
-    /*
-     * Só mostramos configurações
-     * no próprio perfil.
-     */
+    /* ==========================================
+       CONFIGURAÇÕES
+       ========================================== */
 
     const settings =
         document.getElementById(
@@ -253,10 +308,15 @@ async function loadProfile(
     if (settings) {
 
         settings.hidden =
-            profileUserId !== currentUser.id;
+            profileUserId !==
+            currentUser.id;
 
     }
 
+
+    /* ==========================================
+       POSTS
+       ========================================== */
 
     await loadProfilePosts(
         userId
@@ -309,21 +369,28 @@ async function loadProfilePosts(
 
     if (error) {
 
-        console.error(error);
+        console.error(
+            error
+        );
+
 
         container.innerHTML =
             "<p>Não foi possível carregar as publicações.</p>";
 
+
         return;
+
     }
 
 
-    if (!posts.length) {
+    if (!posts || !posts.length) {
 
         container.innerHTML =
             "<p>Este usuário ainda não publicou nada.</p>";
 
+
         return;
+
     }
 
 
@@ -355,7 +422,9 @@ async function loadProfilePosts(
                                 ? `
                                     <img
                                         class="post-image"
-                                        src="${escapeHTML(post.image_url)}"
+                                        src="${escapeHTML(
+                                            post.image_url
+                                        )}"
                                         alt="">
                                   `
                                 : ""
@@ -367,7 +436,9 @@ async function loadProfilePosts(
                                 ? `
                                     <img
                                         class="post-image"
-                                        src="${escapeHTML(post.gif_url)}"
+                                        src="${escapeHTML(
+                                            post.gif_url
+                                        )}"
                                         alt="">
                                   `
                                 : ""
@@ -400,6 +471,10 @@ document
         }
     );
 
+
+/* =========================================================
+   INICIALIZAÇÃO DO DOCUMENTO
+   ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
