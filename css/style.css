@@ -1587,3 +1587,64 @@
 
 }
 
+
+/* ==================================================
+   NOSTAL™ — BOTÕES DE AÇÃO DAS COMUNIDADES
+   ================================================== */
+
+.community-danger-button {
+    display: inline-block;
+    width: auto;
+
+    padding: 7px 12px;
+
+    border: 1px solid #9e2020;
+    border-radius: 4px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #f56b6b,
+            #c52d2d
+        );
+
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    text-shadow: 1px 1px #8b1b1b;
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,0.5),
+        0 1px 2px rgba(0,0,0,0.2);
+}
+
+.community-danger-button:hover {
+    background:
+        linear-gradient(
+            to bottom,
+            #ff7d7d,
+            #d63838
+        );
+
+    color: white;
+    text-decoration: none;
+}
+
+.community-danger-button:active {
+    box-shadow:
+        inset 0 2px 4px rgba(0,0,0,0.25);
+
+    transform: translateY(1px);
+}
+
+.community-danger-button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
