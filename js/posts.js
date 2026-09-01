@@ -565,6 +565,16 @@ async function loadPosts() {
     }
 
 
+    /*
+     * Primeiro carregamos os posts normalmente.
+     *
+     * "hidden" continua sendo respeitado caso
+     * exista uma ocultação GLOBAL/moderação.
+     *
+     * A preferência individual do usuário fica
+     * armazenada separadamente em "post_hidden".
+     */
+
     const {
         data: posts,
         error
@@ -605,7 +615,7 @@ async function loadPosts() {
     }
 
 
-    if (!posts.length) {
+    if (!posts || !posts.length) {
 
         container.innerHTML =
             "<p>Ainda não há publicações. Seja o primeiro a postar! 🎉</p>";
@@ -616,10 +626,82 @@ async function loadPosts() {
     }
 
 
+    /*
+     * Carregar as preferências individuais
+     * de ocultação do usuário atual.
+     */
+
+    const {
+        data: hiddenPosts,
+        error: hiddenError
+    } =
+        await supabaseClient
+            .from("post_hidden")
+            .select(
+                "post_id"
+            )
+            .eq(
+                "user_id",
+                currentUser.id
+            );
+
+
+    if (hiddenError) {
+
+        console.error(
+            "Erro ao carregar posts ocultados:",
+            hiddenError
+        );
+
+
+        container.innerHTML =
+            "<p>Não foi possível carregar suas preferências de publicações.</p>";
+
+
+        return;
+
+    }
+
+
+    const hiddenPostIds =
+        new Set(
+            (hiddenPosts || [])
+                .map(
+                    item =>
+                        item.post_id
+                )
+        );
+
+
+    /*
+     * Remover somente os posts que ESTE usuário
+     * escolheu ocultar.
+     */
+
+    const visiblePosts =
+        posts.filter(
+            post =>
+                !hiddenPostIds.has(
+                    post.id
+                )
+        );
+
+
+    if (!visiblePosts.length) {
+
+        container.innerHTML =
+            "<p>Não há publicações para mostrar.</p>";
+
+
+        return;
+
+    }
+
+
     const userIds =
         [
             ...new Set(
-                posts.map(
+                visiblePosts.map(
                     post =>
                         post.user_id
                 )
@@ -654,7 +736,7 @@ async function loadPosts() {
 
 
     container.innerHTML =
-        posts
+        visiblePosts
             .map(
                 post =>
                     createPostHTML(
@@ -668,7 +750,7 @@ async function loadPosts() {
 
 
     await loadPostInteractions(
-        posts
+        visiblePosts
     );
 
 }
@@ -853,20 +935,32 @@ function createPostHTML(
                 </button>
 
 
+                <!--
+                    OCULTAR É INDIVIDUAL.
+
+                    Este botão aparece para TODOS os posts,
+                    independentemente de quem os publicou.
+                -->
+
+                <button
+                    data-action="hide"
+                    data-post-id="${escapeHTML(
+                        post.id
+                    )}">
+
+                    👁️ Ocultar
+
+                </button>
+
+
+                <!--
+                    EXCLUIR continua sendo somente
+                    para o autor da publicação.
+                -->
+
                 ${
                     isOwner
                         ? `
-
-                            <button
-                                data-action="hide"
-                                data-post-id="${escapeHTML(
-                                    post.id
-                                )}">
-
-                                👁️ Ocultar
-
-                            </button>
-
 
                             <button
                                 data-action="delete"
@@ -915,6 +1009,13 @@ async function loadPostInteractions(
         );
 
 
+    if (!postIds.length) {
+
+        return;
+
+    }
+
+
     const {
         data: likes
     } =
@@ -959,26 +1060,42 @@ async function loadPostInteractions(
             }
 
 
-            element.querySelector(
-                ".like-count"
-            ).textContent =
-                likes?.filter(
-                    like =>
-                        like.post_id ===
-                        post.id
-                ).length ||
-                0;
+            const likeCount =
+                element.querySelector(
+                    ".like-count"
+                );
 
 
-            element.querySelector(
-                ".dislike-count"
-            ).textContent =
-                dislikes?.filter(
-                    dislike =>
-                        dislike.post_id ===
-                        post.id
-                ).length ||
-                0;
+            const dislikeCount =
+                element.querySelector(
+                    ".dislike-count"
+                );
+
+
+            if (likeCount) {
+
+                likeCount.textContent =
+                    likes?.filter(
+                        like =>
+                            like.post_id ===
+                            post.id
+                    ).length ||
+                    0;
+
+            }
+
+
+            if (dislikeCount) {
+
+                dislikeCount.textContent =
+                    dislikes?.filter(
+                        dislike =>
+                            dislike.post_id ===
+                            post.id
+                    ).length ||
+                    0;
+
+            }
 
         }
     );
@@ -1636,7 +1753,7 @@ async function toggleDislike(
 
 
 /* =========================================================
-   OCULTAR POST
+   OCULTAR POST — INDIVIDUAL
    ========================================================= */
 
 async function hidePost(
@@ -1654,42 +1771,62 @@ async function hidePost(
     }
 
 
+    /*
+     * NÃO alteramos posts.hidden.
+     *
+     * Criamos apenas uma preferência para
+     * o usuário atualmente conectado.
+     */
+
     const {
         error
     } =
         await supabaseClient
-            .from("posts")
-            .update({
-                hidden: true
-            })
-            .eq(
-                "id",
-                postId
-            )
-            .eq(
-                "user_id",
-                currentUser.id
-            );
+            .from("post_hidden")
+            .insert({
+
+                post_id:
+                    postId,
+
+                user_id:
+                    currentUser.id
+
+            });
 
 
     if (error) {
 
-        console.error(
-            error
-        );
+        /*
+         * Código 23505 = registro já existente.
+         *
+         * Nesse caso o post já estava ocultado
+         * para este usuário, portanto não precisamos
+         * fazer nada.
+         */
+
+        if (
+            error.code !==
+            "23505"
+        ) {
+
+            console.error(
+                error
+            );
 
 
-        alert(
-            "Não foi possível ocultar a publicação."
-        );
+            alert(
+                "Não foi possível ocultar a publicação."
+            );
 
 
-        return;
+            return;
+
+        }
 
     }
 
 
-    loadPosts();
+    await loadPosts();
 
 }
 
@@ -1746,7 +1883,7 @@ async function deletePost(
     }
 
 
-    loadPosts();
+    await loadPosts();
 
 }
 
@@ -1799,6 +1936,11 @@ function setupPostButtons() {
         );
 
 
+    /*
+     * Ocultar está disponível para qualquer
+     * usuário conectado.
+     */
+
     document
         .querySelectorAll(
             "[data-action='hide']"
@@ -1812,6 +1954,10 @@ function setupPostButtons() {
                         )
         );
 
+
+    /*
+     * Excluir continua limitado ao autor.
+     */
 
     document
         .querySelectorAll(
@@ -1835,9 +1981,13 @@ function setupPostButtons() {
 
 async function loadFriends() {
 
+    /*
+     * O posts.html utiliza #postFriends.
+     */
+
     const container =
         document.getElementById(
-            "friendsList"
+            "postFriends"
         );
 
 
