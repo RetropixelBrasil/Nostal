@@ -474,7 +474,7 @@ async function renderCommunityActions() {
             <button
                 type="button"
                 id="leaveCommunityButton"
-                class="community-leave-button">
+                class="community-danger-button">
 
                 ❌ Sair da comunidade
 
