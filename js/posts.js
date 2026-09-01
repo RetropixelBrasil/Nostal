@@ -14,8 +14,10 @@ const supabaseClient =
         SUPABASE_KEY
     );
 
+
 const STORAGE_BUCKET =
     "nostal-media";
+
 
 let currentUser = null;
 
@@ -97,7 +99,9 @@ async function loadCurrentUser() {
 async function uploadFile(file) {
 
     if (!file) {
+
         return null;
+
     }
 
 
@@ -171,7 +175,9 @@ async function uploadFile(file) {
 
 
     if (error) {
+
         throw error;
+
     }
 
 
@@ -348,7 +354,9 @@ document
 
 
                 if (error) {
+
                     throw error;
+
                 }
 
 
@@ -474,7 +482,9 @@ if (
 
 
             if (!button) {
+
                 return;
+
             }
 
 
@@ -549,7 +559,9 @@ async function loadPosts() {
 
 
     if (!container) {
+
         return;
+
     }
 
 
@@ -807,6 +819,7 @@ function createPostHTML(
                     )}">
 
                     👍
+
                     <span class="like-count">
                         0
                     </span>
@@ -821,6 +834,7 @@ function createPostHTML(
                     )}">
 
                     👎
+
                     <span class="dislike-count">
                         0
                     </span>
@@ -939,7 +953,9 @@ async function loadPostInteractions(
 
 
             if (!element) {
+
                 return;
+
             }
 
 
@@ -988,7 +1004,9 @@ async function toggleComments(
 
 
     if (!container) {
+
         return;
+
     }
 
 
@@ -1033,7 +1051,9 @@ async function loadComments(
 
 
     if (!container) {
+
         return;
+
     }
 
 
@@ -1275,7 +1295,9 @@ function setupCommentForms() {
 
 
                         if (!content) {
+
                             return;
+
                         }
 
 
@@ -1289,6 +1311,7 @@ function setupCommentForms() {
 
                             button.disabled =
                                 true;
+
 
                             button.textContent =
                                 "ENVIANDO...";
@@ -1331,6 +1354,7 @@ function setupCommentForms() {
 
                                 button.disabled =
                                     false;
+
 
                                 button.textContent =
                                     "COMENTAR";
@@ -1380,7 +1404,9 @@ function setupCommentDeleteButtons() {
 
 
                         if (!confirmed) {
+
                             return;
+
                         }
 
 
@@ -1622,7 +1648,9 @@ async function hidePost(
             "Ocultar esta publicação?"
         )
     ) {
+
         return;
+
     }
 
 
@@ -1679,7 +1707,9 @@ async function deletePost(
             "Tem certeza de que deseja excluir esta publicação?"
         )
     ) {
+
         return;
+
     }
 
 
@@ -1800,23 +1830,324 @@ function setupPostButtons() {
 
 
 /* =========================================================
-   INICIALIZAÇÃO
+   AMIGOS
    ========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async function() {
+async function loadFriends() {
 
-        if (
-            await loadCurrentUser()
-        ) {
+    const container =
+        document.getElementById(
+            "friendsList"
+        );
 
-            await loadPosts();
 
-        }
+    if (!container) {
+
+        return;
 
     }
-);
+
+
+    container.innerHTML = `
+
+        <div class="online-loading">
+            👥 Carregando amigos...
+        </div>
+
+    `;
+
+
+    /*
+     * Procuramos todas as amizades aceitas
+     * nas quais o usuário atual esteja
+     * como solicitante OU destinatário.
+     */
+
+    const {
+        data: friendships,
+        error: friendsError
+    } =
+        await supabaseClient
+            .from("friends")
+            .select(`
+                id,
+                requester_id,
+                receiver_id,
+                status,
+                created_at
+            `)
+            .eq(
+                "status",
+                "accepted"
+            )
+            .or(
+                `requester_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
+            );
+
+
+    if (friendsError) {
+
+        console.error(
+            "Erro ao carregar amizades:",
+            friendsError
+        );
+
+
+        container.innerHTML = `
+
+            <p>
+                ❌ Não foi possível carregar os amigos.
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !friendships ||
+        !friendships.length
+    ) {
+
+        container.innerHTML = `
+
+            <p>
+                👥 Você ainda não possui amigos.
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Descobrir o ID do outro usuário
+     * em cada amizade.
+     */
+
+    const friendIds =
+        friendships
+            .map(
+                friendship => {
+
+                    if (
+                        friendship.requester_id ===
+                        currentUser.id
+                    ) {
+
+                        return friendship.receiver_id;
+
+                    }
+
+
+                    return friendship.requester_id;
+
+                }
+            )
+            .filter(Boolean);
+
+
+    const uniqueFriendIds =
+        [
+            ...new Set(
+                friendIds
+            )
+        ];
+
+
+    if (!uniqueFriendIds.length) {
+
+        container.innerHTML = `
+
+            <p>
+                👥 Você ainda não possui amigos.
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Carregar os perfis dos amigos.
+     */
+
+    const {
+        data: profiles,
+        error: profilesError
+    } =
+        await supabaseClient
+            .from("profiles")
+            .select(`
+                id,
+                username,
+                display_name,
+                avatar_url
+            `)
+            .in(
+                "id",
+                uniqueFriendIds
+            );
+
+
+    if (profilesError) {
+
+        console.error(
+            "Erro ao carregar perfis dos amigos:",
+            profilesError
+        );
+
+
+        container.innerHTML = `
+
+            <p>
+                ❌ Não foi possível carregar os amigos.
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !profiles ||
+        !profiles.length
+    ) {
+
+        container.innerHTML = `
+
+            <p>
+                👥 Não foi possível encontrar os perfis dos seus amigos.
+            </p>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Organizar alfabeticamente.
+     */
+
+    profiles.sort(
+        function(a, b) {
+
+            const nameA =
+                (
+                    a.display_name ||
+                    a.username ||
+                    "Usuário"
+                ).toLowerCase();
+
+
+            const nameB =
+                (
+                    b.display_name ||
+                    b.username ||
+                    "Usuário"
+                ).toLowerCase();
+
+
+            return nameA.localeCompare(
+                nameB,
+                "pt-BR"
+            );
+
+        }
+    );
+
+
+    /*
+     * Garantimos uma classe própria
+     * para que a lista não seja tratada
+     * como a grade de usuários.
+     */
+
+    container.className =
+        "box-content friends-list";
+
+
+    container.innerHTML =
+        profiles
+            .map(
+                profile => {
+
+                    const displayName =
+                        profile.display_name ||
+                        profile.username ||
+                        "Usuário";
+
+
+                    const avatar =
+                        profile.avatar_url
+                            ? `
+                                <img
+                                    src="${escapeHTML(
+                                        profile.avatar_url
+                                    )}"
+                                    alt="${escapeHTML(
+                                        displayName
+                                    )}"
+                                    class="user-avatar">
+                              `
+                            : `
+                                <div
+                                    class="user-avatar-placeholder">
+
+                                    👤
+
+                                </div>
+                              `;
+
+
+                    return `
+
+                        <div
+                            class="user-item">
+
+                            ${avatar}
+
+
+                            <div
+                                class="user-item-info">
+
+                                <a
+                                    href="perfil.html?id=${encodeURIComponent(
+                                        profile.id
+                                    )}">
+
+                                    ${escapeHTML(
+                                        displayName
+                                    )}
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
 
 
 /* =========================================================
@@ -1881,3 +2212,25 @@ if (
     );
 
 }
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+        if (
+            await loadCurrentUser()
+        ) {
+
+            await loadPosts();
+
+            await loadFriends();
+
+        }
+
+    }
+);
