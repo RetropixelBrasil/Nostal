@@ -975,17 +975,16 @@ input:focus {
    LISTA DE AMIGOS — ESTILO CONTATOS
    ================================================== */
 
-.friends-list {
+#friendsList {
     display: block;
 
     width: 100%;
 
     padding: 0;
-
     margin: 0;
 }
 
-.friends-list .user-item {
+#friendsList .user-item {
     width: 100%;
 
     min-height: 0;
@@ -996,7 +995,7 @@ input:focus {
 
     gap: 8px;
 
-    padding: 7px 5px;
+    padding: 7px 8px;
 
     background: white;
 
@@ -1007,11 +1006,11 @@ input:focus {
     overflow: hidden;
 }
 
-.friends-list .user-item:last-child {
+#friendsList .user-item:last-child {
     border-bottom: none;
 }
 
-.friends-list .user-item:hover {
+#friendsList .user-item:hover {
     background:
         linear-gradient(
             to bottom,
@@ -1023,8 +1022,9 @@ input:focus {
 
 /* Foto pequena */
 
-.friends-list .user-avatar,
-.friends-list .user-avatar-placeholder {
+#friendsList .user-avatar,
+#friendsList .user-avatar-placeholder {
+
     width: 36px;
     height: 36px;
 
@@ -1051,20 +1051,26 @@ input:focus {
     font-size: 17px;
 }
 
-.friends-list .user-avatar {
+#friendsList .user-avatar {
     object-fit: cover;
 }
 
 
-/* Somente nome */
+/* Informações */
 
-.friends-list .user-item-info {
+#friendsList .user-item-info {
     min-width: 0;
 
     flex: 1;
+
+    overflow: hidden;
 }
 
-.friends-list .user-item-info a {
+
+/* Somente o nome */
+
+#friendsList .user-item-info a {
+
     display: block;
 
     color: #287c2c;
@@ -1080,16 +1086,17 @@ input:focus {
     text-overflow: ellipsis;
 }
 
-.friends-list .user-item-info a:hover {
+#friendsList .user-item-info a:hover {
+
     color: #176b18;
 
     text-decoration: underline;
 }
 
 
-/* Esconde username e status */
+/* Esconde @username e status */
 
-.friends-list .user-item-info p {
+#friendsList .user-item-info p {
     display: none;
 }
 
