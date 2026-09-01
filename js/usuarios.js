@@ -242,7 +242,7 @@ function renderUsers(
 
 
     usersList.className =
-        "users-list";
+        "users-list users-directory-list";
 
 
     usersList.innerHTML =
@@ -774,11 +774,10 @@ async function loadFriends() {
                             : ""
                     }
 
-
                     ${
                         profile.status
                             ? `
-                                <p>
+                                <p class="user-status">
                                     ${escapeHTML(
                                         profile.status
                                     )}
