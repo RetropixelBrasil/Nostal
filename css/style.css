@@ -1,1280 +1,668 @@
 /* ==================================================
-   NOSTAL™ — CSS STYLESHEET
-   ================================================== */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        linear-gradient(
-            to bottom,
-            #dff5d8 0px,
-            #f4fff1 120px,
-            #ffffff 300px
-        );
-    color: #333;
-    font-size: 13px;
-}
-
-a {
-    color: #197a1c;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-
-/* ==================================================
-   TOPO
-   ================================================== */
-
-.top-strip {
-    height: 7px;
-
-    background:
-        linear-gradient(
-            to right,
-            #176b18,
-            #43a047,
-            #8bc34a,
-            #43a047,
-            #176b18
-        );
-}
-
-.header {
-    background:
-        linear-gradient(
-            to bottom,
-            #5fbf50 0%,
-            #39a93c 45%,
-            #218b28 100%
-        );
-
-    border-bottom: 1px solid #126619;
-
-    box-shadow:
-        0 2px 5px rgba(0,0,0,0.25);
-}
-
-.header-inner {
-    width: 960px;
-    max-width: calc(100% - 20px);
-
-    margin: auto;
-
-    min-height: 82px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo-image {
-    display: block;
-
-    max-width: 220px;
-    max-height: 65px;
-
-    width: auto;
-    height: auto;
-}
-
-.tagline {
-    color: #eaffea;
-
-    font-size: 12px;
-
-    margin-top: 4px;
-
-    text-shadow:
-        1px 1px #126619;
-}
-
-.header-links {
-    color: white;
-
-    text-align: right;
-
-    font-size: 12px;
-}
-
-.header-links a {
-    color: white;
-
-    font-weight: bold;
-}
-
-
-/* ==================================================
-   MARQUEE
-   ================================================== */
-
-.ticker {
-    width: 960px;
-    max-width: calc(100% - 20px);
-
-    margin: 8px auto;
-
-    background: #ffffcc;
-
-    border: 1px solid #d1d16a;
-
-    padding: 5px;
-
-    color: #555;
-
-    font-size: 12px;
-
-    box-shadow:
-        inset 0 1px white;
-
-    overflow: hidden;
-}
-
-.banner-marquee {
-    width: 100%;
-
-    overflow: hidden;
-
-    white-space: nowrap;
-
-    padding: 3px 0;
-}
-
-.banner-marquee img {
-    height: 42px;
-
-    width: auto;
-
-    vertical-align: middle;
-}
-
-
-/* ==================================================
-   LAYOUT
-   ================================================== */
-
-.page {
-    width: 960px;
-
-    max-width: calc(100% - 20px);
-
-    margin: 0 auto 30px;
-
-    display: grid;
-
-    grid-template-columns:
-        190px
-        1fr
-        205px;
-
-    gap: 10px;
-}
-
-.column {
-    min-width: 0;
-}
-
-
-/* ==================================================
-   BOXES
-   ================================================== */
-
-.box {
-    background: white;
-
-    border: 1px solid #b7b7b7;
-
-    border-radius: 5px;
-
-    margin-bottom: 10px;
-
-    box-shadow:
-        0 1px 3px rgba(0,0,0,0.15),
-        inset 0 1px 0 white;
-
-    overflow: hidden;
-}
-
+           NOSTAL™ — CSS STYLESHEET
+================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                linear-gradient(
+                    to bottom,
+                    #dff5d8 0px,
+                    #f4fff1 120px,
+                    #ffffff 300px
+                );
+            color: #333;
+            font-size: 13px;
+        }
+
+        a {
+            color: #197a1c;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== TOPO ===== */
+
+        .top-strip {
+            height: 7px;
+            background: linear-gradient(
+                to right,
+                #176b18,
+                #43a047,
+                #8bc34a,
+                #43a047,
+                #176b18
+            );
+        }
+
+        .header {
+            background: linear-gradient(
+                to bottom,
+                #5fbf50 0%,
+                #39a93c 45%,
+                #218b28 100%
+            );
+            border-bottom: 1px solid #126619;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .header-inner {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: auto;
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-image {
+            display: block;
+            max-width: 220px;
+            max-height: 65px;
+            width: auto;
+            height: auto;
+        }
+
+        .tagline {
+            color: #eaffea;
+            font-size: 12px;
+            margin-top: 4px;
+            text-shadow: 1px 1px #126619;
+        }
+
+        .header-links {
+            color: white;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .header-links a {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* ===== MARQUEE ===== */
+
+        .ticker {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 8px auto;
+            background: #ffffcc;
+            border: 1px solid #d1d16a;
+            padding: 5px;
+            color: #555;
+            font-size: 12px;
+            box-shadow: inset 0 1px white;
+            overflow: hidden;
+        }
+
+        .banner-marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 3px 0;
+        }
+
+        .banner-marquee img {
+            height: 42px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* ===== LAYOUT ===== */
+
+        .page {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 0 auto 30px;
+            display: grid;
+            grid-template-columns: 190px 1fr 205px;
+            gap: 10px;
+        }
+
+        .column {
+            min-width: 0;
+        }
+
+        /* ===== BOXES ===== */
+
+        .box {
+            background: white;
+            border: 1px solid #b7b7b7;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow:
+                0 1px 3px rgba(0,0,0,0.15),
+                inset 0 1px 0 white;
+            overflow: hidden;
+        }
+
+/* A caixa da criação de posts precisa permitir que o menu de emojis
+   ultrapasse seus limites sem ser cortado. */
 .box:has(.emoji-picker) {
-    overflow: visible;
-}
+            overflow: visible;
+        }
 
-.box-title {
-    background:
-        linear-gradient(
-            to bottom,
-            #edfbe9,
-            #c8eec1
-        );
+        .box-title {
+            background: linear-gradient(
+                to bottom,
+                #edfbe9,
+                #c8eec1
+            );
+            border-bottom: 1px solid #a9d6a2;
+            color: #246c24;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 8px 9px;
+            text-shadow: 1px 1px white;
+        }
 
-    border-bottom: 1px solid #a9d6a2;
+        .box-content {
+            padding: 10px;
+        }
 
-    color: #246c24;
+        /* ===== LOGIN ===== */
 
-    font-size: 13px;
+        .login-box {
+            border: 1px solid #7aad73;
+        }
 
-    font-weight: bold;
+        .login-title {
+            background: linear-gradient(
+                to bottom,
+                #72c965,
+                #39a83b
+            );
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 9px 10px;
+            text-shadow: 1px 1px #276d25;
+        }
 
-    padding: 8px 9px;
+        .login-content {
+            padding: 18px;
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ffffff,
+                    #f5fff3
+                );
+        }
 
-    text-shadow:
-        1px 1px white;
-}
+        .welcome {
+            text-align: center;
+            margin-bottom: 18px;
+        }
 
-.box-content {
-    padding: 10px;
-}
+        .welcome h1 {
+            color: #247927;
+            font-size: 24px;
+            margin: 0 0 4px;
+        }
 
+        .welcome p {
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            margin: 10px 0 4px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            height: 33px;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 6px 8px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            background: white;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4cae4c;
+            box-shadow: 0 0 4px rgba(76,174,76,0.5);
+        }
+
+        .remember {
+            margin: 10px 0;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .remember input {
+            vertical-align: middle;
+        }
+
+        .login-button {
+            width: 100%;
+            height: 36px;
+            border: 1px solid #176b1b;
+            border-radius: 4px;
+            background: linear-gradient(
+                to bottom,
+                #72cf67,
+                #299c30
+            );
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px #176b1b;
+            cursor: pointer;
+            box-shadow:
+                inset 0 1px rgba(255,255,255,0.5),
+                0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .login-button:hover {
+            background: linear-gradient(
+                to bottom,
+                #82da76,
+                #35a83b
+            );
+        }
+
+        .login-button:active {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
+            transform: translateY(1px);
+        }
+
+        .forgot {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+        }
+
+        /* ===== CRIAR CONTA ===== */
+
+        .signup-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fffef0,
+                    #ffffd6
+                );
+            border-color: #d7d38a;
+        }
+
+        .signup-box h2 {
+            margin: 0 0 5px;
+            color: #6c6a20;
+            font-size: 17px;
+        }
+
+        .signup-box p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .signup-button {
+            display: block;
+            text-align: center;
+            background: linear-gradient(
+                to bottom,
+                #ffcf4b,
+                #e6a900
+            );
+            border: 1px solid #b98200;
+            border-radius: 4px;
+            color: #604600;
+            padding: 7px;
+            font-weight: bold;
+            text-shadow: 1px 1px #fff3bb;
+            box-shadow: inset 0 1px rgba(255,255,255,0.7);
+        }
+
+        .signup-button:hover {
+            text-decoration: none;
+            background: linear-gradient(
+                to bottom,
+                #ffd963,
+                #edb31b
+            );
+        }
+
+        /* ===== COLUNA ESQUERDA ===== */
+
+        .mini-profile {
+            text-align: center;
+        }
+
+        .avatar-placeholder {
+            width: 90px;
+            height: 90px;
+            margin: auto;
+            border: 1px solid #999;
+            background:
+                linear-gradient(
+                    135deg,
+                    #dcefd7,
+                    #a8d69e
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            box-shadow: inset 0 0 0 4px white;
+        }
+
+        .guest-title {
+            color: #237227;
+            font-weight: bold;
+            margin-top: 7px;
+            font-size: 12px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 6px 7px;
+            border-bottom: 1px solid #e4e4e4;
+            font-size: 12px;
+        }
+
+        .menu a:hover {
+            background: #edf9e9;
+            text-decoration: none;
+        }
+
+        /* ===== CENTRO ===== */
+
+        .hero {
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(255,255,255,0.8),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    to bottom,
+                    #f4fff0,
+                    #ffffff
+                );
+            border: 1px solid #a8d29f;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            margin: 0;
+            color: #277a29;
+            font-size: 25px;
+        }
+
+        .hero p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 45px 1fr;
+            gap: 8px;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px dotted #bbb;
+        }
+
+        .feature:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .feature strong {
+            color: #277a29;
+            font-size: 13px;
+        }
+
+        .feature p {
+            margin: 3px 0 0;
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* ===== POSTS ===== */
+
+        .retro-post {
+            padding: 10px;
+            background: #fafafa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .retro-post:last-child {
+            border-bottom: none;
+        }
+
+        .post-user {
+            font-weight: bold;
+            color: #287c2c;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 11px;
+        }
+
+        .post-text {
+            margin: 7px 0;
+            line-height: 1.4;
+            font-size: 12px;
+        }
+
+        .post-actions {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .post-actions a {
+            margin-right: 8px;
+        }
+
+        .posts-loading {
+            padding: 18px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* ===== DIREITA ===== */
+
+        .online-user {
+            padding: 6px 2px;
+            border-bottom: 1px dotted #ccc;
+            font-size: 12px;
+        }
+
+        .online-user:last-child {
+            border-bottom: none;
+        }
+
+        .online {
+            color: #299b30;
+            font-size: 9px;
+            margin-right: 4px;
+        }
+
+        .offline {
+            color: #aaa;
+            font-size: 9px;
+            margin-right: 4px;
+        }
+
+        .online-loading {
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .counter {
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 17px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background: #111;
+            color: #49ff49;
+            padding: 6px;
+            border: 2px inset #777;
+            margin-top: 5px;
+        }
+
+        .counter-label {
+            font-size: 12px;
+            color: #777;
+        }
+
+        /* ===== RETRO BADGES ===== */
+
+        .badges {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .badges img {
+            width: 88px;
+            height: 31px;
+            object-fit: contain;
+            margin: 3px;
+            vertical-align: middle;
+            image-rendering: auto;
+        }
+
+        .badge-text {
+            font-size: 11px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        /* ===== RETRO MARQUEE ===== */
+
+        .image-marquee {
+            width: 100%;
+            overflow: hidden;
+            background: #f7fff4;
+            border-top: 1px dotted #b6d6ae;
+            border-bottom: 1px dotted #b6d6ae;
+            padding: 5px 0;
+        }
+
+        .image-marquee img {
+            height: 38px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* ===== RETRO PROJECT ===== */
+
+        .retropixel-project {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .retropixel-project img {
+            width: 105px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 7px;
+        }
+
+        .retropixel-project p {
+            margin: 0;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* ===== RODAPÉ ===== */
+
+        .footer {
+            width: 960px;
+            max-width: calc(100% - 20px);
+            margin: 20px auto;
+            border-top: 1px solid #bbb;
+            padding: 12px 0;
+            text-align: center;
+            color: #888;
+            font-size: 11px;
+        }
+
+        .footer a {
+            color: #438346;
+        }
+
+        .footer-secondary {
+            margin-top: 6px;
+            font-size: 11px;
+        }
+
+        /* ===== RESPONSIVO ===== */
+
+        @media (max-width: 800px) {
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .header-inner {
+                height: auto;
+                padding: 12px 0;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .header-links {
+                text-align: center;
+            }
+
+            .logo-image {
+                margin: auto;
+            }
+        }
 
 /* ==================================================
-   LOGIN
-   ================================================== */
-
-.login-box {
-    border: 1px solid #7aad73;
-}
-
-.login-title {
-    background:
-        linear-gradient(
-            to bottom,
-            #72c965,
-            #39a83b
-        );
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    padding: 9px 10px;
-
-    text-shadow:
-        1px 1px #276d25;
-}
-
-.login-content {
-    padding: 18px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #f5fff3
-        );
-}
-
-.welcome {
-    text-align: center;
-
-    margin-bottom: 18px;
-}
-
-.welcome h1 {
-    color: #247927;
-
-    font-size: 24px;
-
-    margin: 0 0 4px;
-}
-
-.welcome p {
-    margin: 0;
-
-    color: #777;
-
-    font-size: 12px;
-}
-
-label {
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    color: #555;
-
-    margin: 10px 0 4px;
-}
-
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-
-    height: 33px;
-
-    border: 1px solid #aaa;
-
-    border-radius: 3px;
-
-    padding: 6px 8px;
-
-    font-family:
-        Arial,
-        sans-serif;
-
-    font-size: 13px;
-
-    background: white;
-
-    box-shadow:
-        inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-input:focus {
-    outline: none;
-
-    border-color: #4cae4c;
-
-    box-shadow:
-        0 0 4px rgba(76,174,76,0.5);
-}
-
-.remember {
-    margin: 10px 0;
-
-    font-size: 12px;
-
-    color: #666;
-}
-
-.remember input {
-    vertical-align: middle;
-}
-
-.login-button {
-    width: 100%;
-
-    height: 36px;
-
-    border: 1px solid #176b1b;
-
-    border-radius: 4px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #72cf67,
-            #299c30
-        );
-
-    color: white;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    text-shadow:
-        1px 1px #176b1b;
-
-    cursor: pointer;
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,0.5),
-        0 1px 2px rgba(0,0,0,0.2);
-}
-
-.login-button:hover {
-    background:
-        linear-gradient(
-            to bottom,
-            #82da76,
-            #35a83b
-        );
-}
-
-.login-button:active {
-    box-shadow:
-        inset 0 2px 4px rgba(0,0,0,0.25);
-
-    transform: translateY(1px);
-}
-
-.forgot {
-    text-align: center;
-
-    margin-top: 12px;
-
-    font-size: 12px;
-}
-
-
-/* ==================================================
-   CRIAR CONTA
-   ================================================== */
-
-.signup-box {
-    background:
-        linear-gradient(
-            135deg,
-            #fffef0,
-            #ffffd6
-        );
-
-    border-color: #d7d38a;
-}
-
-.signup-box h2 {
-    margin: 0 0 5px;
-
-    color: #6c6a20;
-
-    font-size: 17px;
-}
-
-.signup-box p {
-    font-size: 12px;
-
-    color: #666;
-
-    line-height: 1.4;
-}
-
-.signup-button {
-    display: block;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffcf4b,
-            #e6a900
-        );
-
-    border: 1px solid #b98200;
-
-    border-radius: 4px;
-
-    color: #604600;
-
-    padding: 7px;
-
-    font-weight: bold;
-
-    text-shadow:
-        1px 1px #fff3bb;
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,0.7);
-}
-
-.signup-button:hover {
-    text-decoration: none;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #ffd963,
-            #edb31b
-        );
-}
-
-
-/* ==================================================
-   COLUNA ESQUERDA
-   ================================================== */
-
-.mini-profile {
-    text-align: center;
-}
-
-.avatar-placeholder {
-    width: 90px;
-    height: 90px;
-
-    margin: auto;
-
-    border: 1px solid #999;
-
-    background:
-        linear-gradient(
-            135deg,
-            #dcefd7,
-            #a8d69e
-        );
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 42px;
-
-    box-shadow:
-        inset 0 0 0 4px white;
-}
-
-.guest-title {
-    color: #237227;
-
-    font-weight: bold;
-
-    margin-top: 7px;
-
-    font-size: 12px;
-}
-
-.menu a {
-    display: block;
-
-    padding: 6px 7px;
-
-    border-bottom: 1px solid #e4e4e4;
-
-    font-size: 12px;
-}
-
-.menu a:hover {
-    background: #edf9e9;
-
-    text-decoration: none;
-}
-
-
-/* ==================================================
-   CENTRO
-   ================================================== */
-
-.hero {
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(255,255,255,0.8),
-            transparent 35%
-        ),
-        linear-gradient(
-            to bottom,
-            #f4fff0,
-            #ffffff
-        );
-
-    border: 1px solid #a8d29f;
-
-    border-radius: 5px;
-
-    padding: 20px;
-
-    text-align: center;
-
-    margin-bottom: 10px;
-}
-
-.hero h2 {
-    margin: 0;
-
-    color: #277a29;
-
-    font-size: 25px;
-}
-
-.hero p {
-    color: #666;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-.feature {
-    display: grid;
-
-    grid-template-columns: 45px 1fr;
-
-    gap: 8px;
-
-    align-items: center;
-
-    padding: 8px;
-
-    border-bottom: 1px dotted #bbb;
-}
-
-.feature:last-child {
-    border-bottom: none;
-}
-
-.feature-icon {
-    font-size: 30px;
-
-    text-align: center;
-}
-
-.feature strong {
-    color: #277a29;
-
-    font-size: 13px;
-}
-
-.feature p {
-    margin: 3px 0 0;
-
-    font-size: 12px;
-
-    color: #777;
-}
-
-
-/* ==================================================
-   POSTS ANTIGOS
-   ================================================== */
-
-.retro-post {
-    padding: 10px;
-
-    background: #fafafa;
-
-    border-bottom: 1px solid #ddd;
-}
-
-.retro-post:last-child {
-    border-bottom: none;
-}
-
-.post-user {
-    font-weight: bold;
-
-    color: #287c2c;
-}
-
-.post-date {
-    color: #999;
-
-    font-size: 11px;
-}
-
-.post-text {
-    margin: 7px 0;
-
-    line-height: 1.4;
-
-    font-size: 12px;
-}
-
-.post-actions {
-    color: #777;
-
-    font-size: 11px;
-}
-
-.post-actions a {
-    margin-right: 8px;
-}
-
-.posts-loading {
-    padding: 18px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 12px;
-}
-
-
-/* ==================================================
-   DIREITA
-   ================================================== */
-
-.online-user {
-    padding: 6px 2px;
-
-    border-bottom: 1px dotted #ccc;
-
-    font-size: 12px;
-}
-
-.online-user:last-child {
-    border-bottom: none;
-}
-
-.online {
-    color: #299b30;
-
-    font-size: 9px;
-
-    margin-right: 4px;
-}
-
-.offline {
-    color: #aaa;
-
-    font-size: 9px;
-
-    margin-right: 4px;
-}
-
-.online-loading {
-    color: #999;
-
-    font-size: 12px;
-
-    text-align: center;
-
-    padding: 5px;
-}
-
-.counter {
-    text-align: center;
-
-    font-family:
-        "Courier New",
-        monospace;
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    background: #111;
-
-    color: #49ff49;
-
-    padding: 6px;
-
-    border: 2px inset #777;
-
-    margin-top: 5px;
-}
-
-.counter-label {
-    font-size: 12px;
-
-    color: #777;
-}
-
-
-/* ==================================================
-   USUÁRIOS / MEMBROS / COMUNIDADES
-   ================================================== */
-
-.users-list {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
-
-    width: 100%;
-
-    padding: 0;
-
-    margin: 0;
-}
-
-.user-item {
-    min-width: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 9px;
-
-    min-height: 72px;
-
-    background: #fff;
-
-    border-right: 1px solid #d8d8d8;
-
-    border-bottom: 1px solid #d8d8d8;
-
-    overflow: hidden;
-}
-
-.user-item:nth-child(2n) {
-    border-right: none;
-}
-
-.user-item:hover {
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #f2faef
-        );
-}
-
-
-/* ==================================================
-   AVATARES
-   ================================================== */
-
-.user-avatar,
-.user-avatar-placeholder {
-    width: 48px;
-    height: 48px;
-
-    flex: 0 0 48px;
-
-    border: 1px solid #aaa;
-
-    border-radius: 3px;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #dcefd7,
-            #a8d69e
-        );
-
-    font-size: 22px;
-}
-
-.user-avatar {
-    object-fit: cover;
-}
-
-.user-avatar-placeholder {
-    color: #555;
-}
-
-
-/* ==================================================
-   INFORMAÇÕES DOS USUÁRIOS
-   ================================================== */
-
-.user-item-info {
-    min-width: 0;
-
-    flex: 1;
-
-    overflow: hidden;
-}
-
-.user-item-info a {
-    display: block;
-
-    color: #287c2c;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.user-item-info a:hover {
-    color: #176b18;
-
-    text-decoration: underline;
-}
-
-.user-item-info p {
-    margin: 2px 0 0;
-
-    color: #777;
-
-    font-size: 11px;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-.user-empty {
-    grid-column: 1 / -1;
-
-    padding: 18px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 12px;
-}
-
-
-/* ==================================================
-   MEMBROS DE COMUNIDADE
-   ================================================== */
-
-.community-members-list {
-    padding: 0;
-}
-
-.community-owner {
-    color: #a06b00 !important;
-
-    font-weight: bold;
-}
-
-
-/* ==================================================
-   COMUNIDADES
-   ================================================== */
-
-.communities-list {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(0, 1fr)
-        );
-}
-
-.community-item {
-    min-width: 0;
-}
-
-.community-avatar,
-.community-avatar-placeholder {
-    width: 48px;
-    height: 48px;
-
-    flex: 0 0 48px;
-
-    object-fit: cover;
-}
-
-.community-avatar-placeholder {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* ==================================================
-   LISTA DE AMIGOS — CONTATOS VERTICAIS
-   ================================================== */
-
-#friendsList {
-    display: block !important;
-
-    width: 100%;
-
-    padding: 0;
-    margin: 0;
-}
-
-#friendsList .user-item {
-    display: flex !important;
-
-    width: 100% !important;
-    min-width: 100% !important;
-
-    min-height: 0;
-
-    flex-direction: row;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding: 7px 8px;
-
-    background: white;
-
-    border: none;
-
-    border-bottom: 1px solid #d9d9d9;
-
-    overflow: hidden;
-
-    float: none;
-}
-
-#friendsList .user-item:last-child {
-    border-bottom: none;
-}
-
-
-/* Foto pequena */
-
-#friendsList .user-avatar,
-#friendsList .user-avatar-placeholder {
-    width: 36px !important;
-    height: 36px !important;
-
-    min-width: 36px;
-
-    flex: 0 0 36px;
-
-    border: 1px solid #aaa;
-
-    border-radius: 3px;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #dcefd7,
-            #a8d69e
-        );
-
-    font-size: 17px;
-}
-
-#friendsList .user-avatar {
-    object-fit: cover;
-}
-
-
-/* Informações */
-
-#friendsList .user-item-info {
-    min-width: 0;
-
-    width: auto;
-
-    flex: 1;
-
-    overflow: hidden;
-}
-
-
-/* Nome */
-
-#friendsList .user-item-info a {
-    display: block;
-
-    color: #287c2c;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-
-/* Esconder @username e status */
-
-#friendsList .user-item-info p {
-    display: none !important;
-}
-
-
-/* ==================================================
-   RETRO BADGES
-   ================================================== */
-
-.badges {
-    text-align: center;
-
-    padding: 5px;
-}
-
-.badges img {
-    width: 88px;
-
-    height: 31px;
-
-    object-fit: contain;
-
-    margin: 3px;
-
-    vertical-align: middle;
-
-    image-rendering: auto;
-}
-
-.badge-text {
-    font-size: 11px;
-
-    color: #777;
-
-    margin-top: 6px;
-}
-
-
-/* ==================================================
-   RETRO MARQUEE
-   ================================================== */
-
-.image-marquee {
-    width: 100%;
-
-    overflow: hidden;
-
-    background: #f7fff4;
-
-    border-top: 1px dotted #b6d6ae;
-
-    border-bottom: 1px dotted #b6d6ae;
-
-    padding: 5px 0;
-}
-
-.image-marquee img {
-    height: 38px;
-
-    width: auto;
-
-    vertical-align: middle;
-}
-
-
-/* ==================================================
-   RETRO PROJECT
-   ================================================== */
-
-.retropixel-project {
-    text-align: center;
-
-    padding: 10px;
-}
-
-.retropixel-project img {
-    width: 105px;
-
-    max-width: 100%;
-
-    height: auto;
-
-    display: block;
-
-    margin: 0 auto 7px;
-}
-
-.retropixel-project p {
-    margin: 0;
-
-    color: #777;
-
-    font-size: 12px;
-}
-
-
-/* ==================================================
-   RODAPÉ
-   ================================================== */
-
-.footer {
-    width: 960px;
-
-    max-width: calc(100% - 20px);
-
-    margin: 20px auto;
-
-    border-top: 1px solid #bbb;
-
-    padding: 12px 0;
-
-    text-align: center;
-
-    color: #888;
-
-    font-size: 11px;
-}
-
-.footer a {
-    color: #438346;
-}
-
-.footer-secondary {
-    margin-top: 6px;
-
-    font-size: 11px;
-}
-
-
-/* ==================================================
-   RESPONSIVO
-   ================================================== */
-
-@media (max-width: 800px) {
-
-    .page {
-        grid-template-columns: 1fr;
-    }
-
-    .header-inner {
-        height: auto;
-
-        padding: 12px 0;
-
-        flex-direction: column;
-
-        gap: 8px;
-
-        text-align: center;
-    }
-
-    .header-links {
-        text-align: center;
-    }
-
-    .logo-image {
-        margin: auto;
-    }
-
-    .users-list,
-    .communities-list {
-        grid-template-columns: 1fr;
-    }
-
-    .user-item {
-        border-right: none;
-    }
-
-}
-
-
-/* ==================================================
-   CRIAR CONTA
+   NOSTAL™ — CRIAR CONTA
    ================================================== */
 
 .signup-page {
     width: 960px;
-
     max-width: calc(100% - 20px);
-
     margin: 0 auto 30px;
 
     display: grid;
-
-    grid-template-columns:
-        1fr
-        220px;
-
+    grid-template-columns: 1fr 220px;
     gap: 10px;
 }
 
@@ -1290,32 +678,25 @@ input:focus {
 .create-account-content {
     padding: 20px 25px;
 
-    background:
-        linear-gradient(
-            to bottom,
-            #ffffff,
-            #f5fff3
-        );
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #f5fff3
+    );
 }
 
 .create-account-content input[type="text"],
 .create-account-content input[type="email"],
 .create-account-content input[type="password"] {
     width: 100%;
-
     height: 35px;
 
     border: 1px solid #aaa;
-
     border-radius: 3px;
 
     padding: 6px 8px;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
 
     background: white;
@@ -1343,7 +724,6 @@ input:focus {
 
 .username-field {
     display: flex;
-
     width: 100%;
 }
 
@@ -1356,31 +736,26 @@ input:focus {
     width: 35px;
 
     border: 1px solid #aaa;
-
     border-right: 0;
 
     border-radius: 3px 0 0 3px;
 
-    background:
-        linear-gradient(
-            to bottom,
-            #f5f5f5,
-            #dddddd
-        );
+    background: linear-gradient(
+        to bottom,
+        #f5f5f5,
+        #dddddd
+    );
 
     color: #287c2c;
 
     font-weight: bold;
-
     font-size: 15px;
 
-    text-shadow:
-        1px 1px white;
+    text-shadow: 1px 1px white;
 }
 
 .username-field input {
-    border-radius:
-        0 3px 3px 0 !important;
+    border-radius: 0 3px 3px 0 !important;
 }
 
 .signup-agreement {
@@ -1389,7 +764,6 @@ input:focus {
     padding: 10px;
 
     border: 1px solid #d6d6a3;
-
     border-radius: 3px;
 
     background: #ffffe5;
@@ -1397,13 +771,11 @@ input:focus {
     color: #555;
 
     font-size: 12px;
-
     line-height: 1.5;
 }
 
 .signup-agreement label {
     display: block;
-
     margin: 0;
 
     font-weight: normal;
@@ -1435,7 +807,6 @@ input:focus {
     border-radius: 3px;
 
     font-size: 12px;
-
     font-weight: bold;
 }
 
@@ -1456,9 +827,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   USUÁRIOS CADASTRADOS
-   ================================================== */
+/* ===== USUÁRIOS CADASTRADOS ===== */
 
 .registered-users {
     text-align: center;
@@ -1474,13 +843,11 @@ input:focus {
     color: #258329;
 
     font-size: 31px;
-
     font-weight: bold;
 
     letter-spacing: -1px;
 
-    text-shadow:
-        1px 1px white;
+    text-shadow: 1px 1px white;
 }
 
 .registered-users strong {
@@ -1496,9 +863,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   RESPONSIVO — CRIAR CONTA
-   ================================================== */
+/* ===== RESPONSIVO ===== */
 
 @media (max-width: 800px) {
 
@@ -1512,55 +877,42 @@ input:focus {
 
 }
 
-
-/* ==================================================
-   BOTÕES DE AMIZADE
-   ================================================== */
-
 .friend-accept {
     background: #3aa655;
-
     color: white;
-
     border: 1px solid #277a3d;
 }
 
 .friend-reject {
     background: #d9534f;
-
     color: white;
-
     border: 1px solid #a83b38;
 }
 
 .friend-cancel {
     background: #f0c419;
-
     color: #222;
-
     border: 1px solid #b89500;
 }
 
 .friend-add {
     background: #3aa655;
-
     color: white;
-
     border: 1px solid #277a3d;
 }
 
-
 /* ==================================================
-   POSTS 2.0
+   NOSTAL™ — POSTS 2.0
    ================================================== */
+
+
+/* ===== ÁREA DE MÍDIA ===== */
 
 .post-media-section {
     margin-top: 12px;
-
     padding: 10px;
 
     border: 1px solid #d5d5d5;
-
     border-radius: 4px;
 
     background:
@@ -1577,9 +929,9 @@ input:focus {
     margin-bottom: 6px;
 
     color: #287c2c;
-
     font-size: 12px;
 }
+
 
 .post-media-section input[type="url"] {
     width: 100%;
@@ -1589,14 +941,9 @@ input:focus {
     padding: 6px 8px;
 
     border: 1px solid #aaa;
-
     border-radius: 3px;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
 
     background: white;
@@ -1605,6 +952,7 @@ input:focus {
         inset 0 1px 2px rgba(0,0,0,0.1);
 }
 
+
 .post-media-section input[type="file"] {
     width: 100%;
 
@@ -1612,6 +960,7 @@ input:focus {
 
     font-size: 12px;
 }
+
 
 .media-or {
     display: block;
@@ -1623,14 +972,11 @@ input:focus {
     color: #999;
 
     font-size: 11px;
-
     font-style: italic;
 }
 
 
-/* ==================================================
-   FERRAMENTAS DO POST
-   ================================================== */
+/* ===== FERRAMENTAS DO POST ===== */
 
 .post-tools {
     display: flex;
@@ -1641,6 +987,7 @@ input:focus {
 
     margin-top: 10px;
 }
+
 
 .post-tools .signup-button {
     width: auto;
@@ -1653,9 +1000,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   SELETOR DE EMOJIS
-   ================================================== */
+/* ===== SELETOR DE EMOJIS ===== */
 
 .emoji-picker {
     position: relative;
@@ -1672,6 +1017,9 @@ input:focus {
 
     left: 0;
 
+    /*
+     * Abre para cima do botão.
+     */
     bottom: 100%;
 
     top: auto;
@@ -1679,7 +1027,6 @@ input:focus {
     z-index: 9999;
 
     width: 280px;
-
     max-height: 190px;
 
     margin-bottom: 4px;
@@ -1691,16 +1038,14 @@ input:focus {
     background: white;
 
     border: 1px solid #999;
-
     border-radius: 4px;
 
     box-shadow:
-        2px 2px 5px rgba(0,0,0,0.25);
+        2px 2px 5px rgba(0, 0, 0, 0.25);
 }
 
 .emoji-option {
     width: 36px;
-
     height: 36px;
 
     padding: 0;
@@ -1716,6 +1061,7 @@ input:focus {
     border-radius: 3px;
 }
 
+
 .emoji-option:hover {
     background: #e9f8e6;
 
@@ -1723,9 +1069,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   POSTS
-   ================================================== */
+/* ===== POSTS ===== */
 
 .post {
     padding: 12px;
@@ -1735,9 +1079,11 @@ input:focus {
     border-bottom: 1px solid #d9d9d9;
 }
 
+
 .post:last-child {
     border-bottom: none;
 }
+
 
 .post-header {
     display: flex;
@@ -1748,6 +1094,7 @@ input:focus {
 
     margin-bottom: 9px;
 }
+
 
 .post-avatar {
     width: 45px;
@@ -1774,6 +1121,7 @@ input:focus {
     font-size: 22px;
 }
 
+
 .post-avatar img {
     width: 100%;
     height: 100%;
@@ -1781,11 +1129,13 @@ input:focus {
     object-fit: cover;
 }
 
+
 .post-header strong {
     color: #287c2c;
 
     font-size: 13px;
 }
+
 
 .post-username {
     display: block;
@@ -1797,6 +1147,7 @@ input:focus {
     font-size: 11px;
 }
 
+
 .post-content {
     margin: 8px 0;
 
@@ -1807,20 +1158,18 @@ input:focus {
     line-height: 1.5;
 }
 
+
 .post-content p {
     margin: 0 0 8px;
 }
 
 
-/* ==================================================
-   IMAGENS DOS POSTS
-   ================================================== */
+/* ===== IMAGENS DOS POSTS ===== */
 
 .post-image {
     display: block;
 
     max-width: 100%;
-
     max-height: 600px;
 
     margin: 8px auto;
@@ -1833,9 +1182,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   DATA
-   ================================================== */
+/* ===== DATA ===== */
 
 .post-date {
     margin-top: 5px;
@@ -1846,9 +1193,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   BOTÕES DO POST
-   ================================================== */
+/* ===== BOTÕES DO POST ===== */
 
 .post-actions {
     display: flex;
@@ -1864,11 +1209,11 @@ input:focus {
     border-top: 1px dotted #ccc;
 }
 
+
 .post-actions button {
     padding: 5px 8px;
 
     border: 1px solid #c5c5c5;
-
     border-radius: 3px;
 
     background:
@@ -1880,15 +1225,13 @@ input:focus {
 
     color: #555;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 
     font-size: 11px;
 
     cursor: pointer;
 }
+
 
 .post-actions button:hover {
     background:
@@ -1903,14 +1246,13 @@ input:focus {
     color: #287c2c;
 }
 
+
 .post-actions button:active {
     transform: translateY(1px);
 }
 
 
-/* ==================================================
-   COMENTÁRIOS
-   ================================================== */
+/* ===== COMENTÁRIOS ===== */
 
 .comments {
     margin-top: 8px;
@@ -1924,21 +1266,23 @@ input:focus {
     font-size: 12px;
 }
 
+
 .comment {
     padding: 7px;
 
     margin-bottom: 5px;
 
     border: 1px solid #ddd;
-
     border-radius: 3px;
 
     background: white;
 }
 
+
 .comment:last-of-type {
     margin-bottom: 8px;
 }
+
 
 .comment strong {
     margin-right: 5px;
@@ -1946,9 +1290,11 @@ input:focus {
     color: #287c2c;
 }
 
+
 .comment span {
     color: #444;
 }
+
 
 .comment small {
     display: block;
@@ -1961,9 +1307,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   FORMULÁRIO DE COMENTÁRIO
-   ================================================== */
+/* ===== FORMULÁRIO DE COMENTÁRIO ===== */
 
 .comment-form {
     display: flex;
@@ -1972,6 +1316,7 @@ input:focus {
 
     margin-top: 8px;
 }
+
 
 .comment-form input {
     flex: 1;
@@ -1983,18 +1328,14 @@ input:focus {
     padding: 5px 7px;
 
     border: 1px solid #aaa;
-
     border-radius: 3px;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
 
     background: white;
 }
+
 
 .comment-form button {
     height: 30px;
@@ -2002,7 +1343,6 @@ input:focus {
     padding: 0 9px;
 
     border: 1px solid #176b1b;
-
     border-radius: 3px;
 
     background:
@@ -2015,14 +1355,13 @@ input:focus {
     color: white;
 
     font-size: 11px;
-
     font-weight: bold;
 
     cursor: pointer;
 
-    text-shadow:
-        1px 1px #176b1b;
+    text-shadow: 1px 1px #176b1b;
 }
+
 
 .comment-form button:hover {
     background:
@@ -2034,9 +1373,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   ÁREA DE CARREGAMENTO
-   ================================================== */
+/* ===== ÁREA DE CARREGAMENTO ===== */
 
 .posts-loading {
     padding: 18px;
@@ -2049,9 +1386,7 @@ input:focus {
 }
 
 
-/* ==================================================
-   RESPONSIVO — POSTS
-   ================================================== */
+/* ===== RESPONSIVO ===== */
 
 @media (max-width: 800px) {
 
@@ -2059,17 +1394,21 @@ input:focus {
         padding: 8px;
     }
 
+
     .post-tools {
         flex-wrap: wrap;
     }
+
 
     .emoji-menu {
         width: 250px;
     }
 
+
     .comment-form {
         flex-direction: column;
     }
+
 
     .comment-form button {
         width: 100%;
@@ -2077,20 +1416,23 @@ input:focus {
 
 }
 
-
 /* ==================================================
-   CONFIGURAÇÕES
+   NOSTAL™ — CONFIGURAÇÕES
    ================================================== */
 
 .settings-page {
+
     width: 960px;
 
     max-width: calc(100% - 20px);
 
     margin: 0 auto 30px;
+
 }
 
+
 .settings-header {
+
     padding: 18px;
 
     margin-bottom: 10px;
@@ -2105,25 +1447,34 @@ input:focus {
     border: 1px solid #a8d29f;
 
     border-radius: 5px;
+
 }
 
+
 .settings-header h1 {
+
     margin: 0;
 
     color: #277a29;
 
     font-size: 22px;
+
 }
 
+
 .settings-header p {
+
     margin: 6px 0 0;
 
     color: #777;
 
     font-size: 12px;
+
 }
 
+
 .settings-section {
+
     margin-bottom: 10px;
 
     background: white;
@@ -2136,9 +1487,12 @@ input:focus {
 
     box-shadow:
         0 1px 3px rgba(0,0,0,0.15);
+
 }
 
+
 .settings-section-title {
+
     padding: 9px 11px;
 
     background:
@@ -2156,19 +1510,27 @@ input:focus {
 
     font-weight: bold;
 
-    text-shadow:
-        1px 1px white;
+    text-shadow: 1px 1px white;
+
 }
+
 
 .settings-section-content {
+
     padding: 16px;
+
 }
+
 
 .danger-section {
+
     border-color: #d49a9a;
+
 }
 
+
 .danger-section .settings-section-title {
+
     background:
         linear-gradient(
             to bottom,
@@ -2179,115 +1541,178 @@ input:focus {
     border-bottom-color: #d9aaaa;
 
     color: #a32626;
-}
 
+}
 
 /* ==================================================
-   CORREÇÃO DO LAYOUT DE CRIAR CONTA
+   NOSTAL™ — LISTAS DE USUÁRIOS E AMIGOS
    ================================================== */
 
-.page:has(.create-account-box) {
-    grid-template-columns:
-        1fr
-        220px;
-
-    gap: 10px;
+/* Lista principal de usuários: grade lado a lado. */
+.users-directory-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
 }
 
-.page:has(.create-account-box) > .column:first-child {
+.users-directory-list .user-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 10px;
+    border-right: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    background: #ffffff;
+}
+
+.users-directory-list .user-item:hover {
+    background: #f4fff1;
+}
+
+.users-directory-list .user-avatar,
+.users-directory-list .user-avatar-placeholder {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #b8b8b8;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.users-directory-list .user-item-info {
     min-width: 0;
 }
 
-.page:has(.create-account-box) > .column:last-child {
+.users-directory-list .user-item-info a {
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+/* Lista de amigos: separada da grade principal e empilhada. */
+.friends-sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.friends-sidebar-list .user-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 8px 2px;
+    border-bottom: 1px solid #dedede;
+    background: #ffffff;
+}
+
+.friends-sidebar-list .user-item:last-child {
+    border-bottom: 0;
+}
+
+.friends-sidebar-list .user-item:hover {
+    background: #f4fff1;
+}
+
+.friends-sidebar-list .user-avatar,
+.friends-sidebar-list .user-avatar-placeholder {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #b8b8b8;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.friends-sidebar-list .user-item-info {
     min-width: 0;
 }
 
-.page:has(.create-account-box) .create-account-box {
-    width: 100%;
+.friends-sidebar-list .user-item-info a {
+    font-weight: bold;
+    overflow-wrap: anywhere;
 }
 
-.page:has(.create-account-box) > .column:last-child .box {
+/* Menus de foto/GIF das comunidades seguem a mesma aparência
+   da área de mídia usada nos posts. */
+.post-media-menu {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #d5d5d5;
+    border-radius: 4px;
+    background: linear-gradient(
+        to bottom,
+        #ffffff,
+        #f4fff1
+    );
+}
+
+.post-media-menu label {
+    display: block;
+    margin: 6px 0 4px;
+    color: #287c2c;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.post-media-menu input[type="url"] {
     width: 100%;
+    height: 32px;
+    padding: 6px 8px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background: white;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.post-media-menu input[type="file"] {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.media-upload-separator {
+    margin: 6px 0;
+    text-align: center;
+    color: #999;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.community-cancel-button {
+    margin-top: 8px;
+    padding: 6px 10px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, #ffffff, #e8e8e8);
+    cursor: pointer;
+}
+
+.community-cancel-button:hover {
+    background: linear-gradient(to bottom, #ffffff, #dcdcdc);
 }
 
 @media (max-width: 800px) {
+    .users-directory-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
 
-    .page:has(.create-account-box) {
+@media (max-width: 520px) {
+    .users-directory-list {
         grid-template-columns: 1fr;
     }
-
-}
-
-
-/* ==================================================
-   BOTÕES DE AÇÃO DAS COMUNIDADES
-   ================================================== */
-
-.community-danger-button {
-    display: inline-block;
-
-    width: auto;
-
-    padding: 7px 12px;
-
-    border: 1px solid #9e2020;
-
-    border-radius: 4px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #f56b6b,
-            #c52d2d
-        );
-
-    color: white;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    text-shadow:
-        1px 1px #8b1b1b;
-
-    box-shadow:
-        inset 0 1px rgba(255,255,255,0.5),
-        0 1px 2px rgba(0,0,0,0.2);
-}
-
-.community-danger-button:hover {
-    background:
-        linear-gradient(
-            to bottom,
-            #ff7d7d,
-            #d63838
-        );
-
-    color: white;
-
-    text-decoration: none;
-}
-
-.community-danger-button:active {
-    box-shadow:
-        inset 0 2px 4px rgba(0,0,0,0.25);
-
-    transform: translateY(1px);
-}
-
-.community-danger-button:disabled {
-    opacity: 0.6;
-
-    cursor: default;
 }
