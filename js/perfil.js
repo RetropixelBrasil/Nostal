@@ -81,8 +81,8 @@ async function initProfile() {
      *
      * perfil.html?id=UUID
      *
-     * Mantemos ?user=UUID apenas por
-     * compatibilidade com links antigos.
+     * ?user=UUID continua funcionando
+     * para compatibilidade com links antigos.
      */
 
     const params =
@@ -180,9 +180,9 @@ async function loadProfile(
         );
 
 
-    /* ==========================================
+    /* =====================================================
        NOME
-       ========================================== */
+       ===================================================== */
 
     if (name) {
 
@@ -194,9 +194,9 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        USUÁRIO
-       ========================================== */
+       ===================================================== */
 
     if (username) {
 
@@ -208,9 +208,9 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        BIO
-       ========================================== */
+       ===================================================== */
 
     if (bio) {
 
@@ -221,16 +221,15 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        STATUS
-       ========================================== */
+       ===================================================== */
 
     if (status) {
 
         status.textContent =
             profile.status ||
             "Nenhum status definido.";
-
 
         status.classList.remove(
             "loading"
@@ -239,9 +238,9 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        AVATAR
-       ========================================== */
+       ===================================================== */
 
     if (avatar) {
 
@@ -259,9 +258,9 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        CAPA
-       ========================================== */
+       ===================================================== */
 
     if (cover) {
 
@@ -281,11 +280,6 @@ async function loadProfile(
         }
 
 
-        /*
-         * Remove "Carregando capa..."
-         * depois que o perfil foi carregado.
-         */
-
         if (placeholder) {
 
             placeholder.remove();
@@ -295,9 +289,9 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        CONFIGURAÇÕES
-       ========================================== */
+       ===================================================== */
 
     const settings =
         document.getElementById(
@@ -314,12 +308,351 @@ async function loadProfile(
     }
 
 
-    /* ==========================================
+    /* =====================================================
        POSTS
-       ========================================== */
+       ===================================================== */
 
     await loadProfilePosts(
         userId
+    );
+
+
+    /* =====================================================
+       AMIGOS
+       ===================================================== */
+
+    await loadFriends(
+        userId
+    );
+
+}
+
+
+/* =========================================================
+   AMIGOS
+   ========================================================= */
+
+async function loadFriends(
+    userId
+) {
+
+    const container =
+        document.getElementById(
+            "profileFriends"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML = `
+
+        <div class="online-loading">
+            👥 Carregando amigos...
+        </div>
+
+    `;
+
+
+    /*
+     * Procuramos amizades aceitas onde o usuário
+     * esteja em qualquer um dos dois lados.
+     */
+
+    const {
+        data: friendships,
+        error: friendsError
+    } =
+        await supabaseClient
+            .from("friends")
+            .select(`
+                id,
+                requester_id,
+                receiver_id,
+                status,
+                created_at
+            `)
+            .eq(
+                "status",
+                "accepted"
+            )
+            .or(
+                `requester_id.eq.${userId},receiver_id.eq.${userId}`
+            );
+
+
+    if (friendsError) {
+
+        console.error(
+            "Erro ao carregar amizades:",
+            friendsError
+        );
+
+
+        container.innerHTML = `
+            <p>
+                ❌ Não foi possível carregar os amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !friendships ||
+        !friendships.length
+    ) {
+
+        container.innerHTML = `
+            <p>
+                👥 Este usuário ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Descobrir quem é o outro usuário em cada amizade.
+     */
+
+    const friendIds =
+        friendships
+            .map(
+                friendship => {
+
+                    if (
+                        friendship.requester_id ===
+                        userId
+                    ) {
+
+                        return friendship.receiver_id;
+
+                    }
+
+
+                    return friendship.requester_id;
+
+                }
+            )
+            .filter(Boolean);
+
+
+    const uniqueFriendIds =
+        [...new Set(friendIds)];
+
+
+    if (!uniqueFriendIds.length) {
+
+        container.innerHTML = `
+            <p>
+                👥 Este usuário ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       CARREGAR PERFIS DOS AMIGOS
+       ===================================================== */
+
+    const {
+        data: profiles,
+        error: profilesError
+    } =
+        await supabaseClient
+            .from("profiles")
+            .select(`
+                id,
+                username,
+                display_name,
+                avatar_url,
+                status
+            `)
+            .in(
+                "id",
+                uniqueFriendIds
+            );
+
+
+    if (profilesError) {
+
+        console.error(
+            "Erro ao carregar perfis dos amigos:",
+            profilesError
+        );
+
+
+        container.innerHTML = `
+            <p>
+                ❌ Não foi possível carregar os amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !profiles ||
+        !profiles.length
+    ) {
+
+        container.innerHTML = `
+            <p>
+                👥 Este usuário ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    /*
+     * Ordenar alfabeticamente.
+     */
+
+    profiles.sort(
+        function(a, b) {
+
+            const nameA =
+                (
+                    a.display_name ||
+                    a.username ||
+                    ""
+                ).toLowerCase();
+
+
+            const nameB =
+                (
+                    b.display_name ||
+                    b.username ||
+                    ""
+                ).toLowerCase();
+
+
+            return nameA.localeCompare(
+                nameB
+            );
+
+        }
+    );
+
+
+    container.innerHTML =
+        `<div class="users-list profile-friends-list"></div>`;
+
+
+    const list =
+        container.querySelector(
+            ".profile-friends-list"
+        );
+
+
+    profiles.forEach(
+        function(profile) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "user-item";
+
+
+            const displayName =
+                profile.display_name ||
+                profile.username ||
+                "Usuário";
+
+
+            const username =
+                profile.username
+                    ? "@" +
+                      profile.username
+                    : "";
+
+
+            const avatar =
+                profile.avatar_url
+                    ? `
+                        <img
+                            src="${escapeHTML(
+                                profile.avatar_url
+                            )}"
+                            alt="${escapeHTML(
+                                displayName
+                            )}"
+                            class="user-avatar">
+                      `
+                    : `
+                        <div
+                            class="user-avatar-placeholder">
+
+                            👤
+
+                        </div>
+                      `;
+
+
+            item.innerHTML = `
+
+                ${avatar}
+
+                <div class="user-item-info">
+
+                    <a
+                        href="perfil.html?id=${encodeURIComponent(
+                            profile.id
+                        )}">
+
+                        ${escapeHTML(
+                            displayName
+                        )}
+
+                    </a>
+
+
+                    ${
+                        username
+                            ? `
+                                <p>
+                                    ${escapeHTML(
+                                        username
+                                    )}
+                                </p>
+                              `
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                item
+            );
+
+        }
     );
 
 }
@@ -383,7 +716,10 @@ async function loadProfilePosts(
     }
 
 
-    if (!posts || !posts.length) {
+    if (
+        !posts ||
+        !posts.length
+    ) {
 
         container.innerHTML =
             "<p>Este usuário ainda não publicou nada.</p>";
