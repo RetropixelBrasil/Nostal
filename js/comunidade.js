@@ -474,7 +474,7 @@ async function renderCommunityActions() {
             <button
                 type="button"
                 id="leaveCommunityButton"
-                class="community-danger-button">
+                class="community-leave-button">
 
                 ❌ Sair da comunidade
 
@@ -829,6 +829,11 @@ async function renderCommunityMembers() {
 
     communityMembers.innerHTML =
         "";
+
+    communityMembers.classList.add(
+        "users-list",
+        "community-members-list"
+    );
 
 
     data.forEach(
@@ -1895,6 +1900,62 @@ async function loadCommunityPosts() {
     }
 
 
+    /* =====================================================
+       OCULTAÇÕES INDIVIDUAIS
+       ===================================================== */
+
+    const {
+        data: hiddenPosts,
+        error: hiddenError
+    } =
+        await supabaseClient
+            .from("post_hidden")
+            .select("post_id")
+            .eq("user_id", currentUser.id);
+
+
+    if (hiddenError) {
+
+        console.error(
+            "Erro ao carregar posts ocultados:",
+            hiddenError
+        );
+
+        communityPosts.innerHTML =
+            "<p>❌ Não foi possível carregar suas preferências de publicações.</p>";
+
+        return;
+
+    }
+
+
+    const hiddenPostIds =
+        new Set(
+            (hiddenPosts || []).map(
+                item => item.post_id
+            )
+        );
+
+
+    const visiblePosts =
+        posts.filter(
+            post => !hiddenPostIds.has(post.id)
+        );
+
+
+    if (!visiblePosts.length) {
+
+        communityPosts.innerHTML = `
+            <div class="posts-loading">
+                📰 Não há publicações para mostrar.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
     const userIds =
         [
             ...new Set(
@@ -1936,7 +1997,7 @@ async function loadCommunityPosts() {
 
 
     const postIds =
-        posts.map(
+        visiblePosts.map(
             post =>
                 post.id
         );
@@ -2052,7 +2113,7 @@ async function loadCommunityPosts() {
         "";
 
 
-    posts.forEach(
+    visiblePosts.forEach(
         post => {
 
             const profile =
@@ -2261,6 +2322,15 @@ async function loadCommunityPosts() {
                     </button>
 
 
+                    <button
+                        type="button"
+                        data-action="hide">
+
+                        👁️ Ocultar
+
+                    </button>
+
+
                     ${
                         post.user_id ===
                         currentUser.id
@@ -2382,6 +2452,22 @@ function setupCommunityPostActions(
                     );
 
                 }
+
+            }
+        );
+
+
+    article
+        .querySelector(
+            '[data-action="hide"]'
+        )
+        ?.addEventListener(
+            "click",
+            function() {
+
+                hideCommunityPost(
+                    post.id
+                );
 
             }
         );
@@ -3052,6 +3138,54 @@ function setupCommunityCommentDeleteButtons() {
 
             }
         );
+
+}
+
+
+/* =========================================================
+   OCULTAR POST — INDIVIDUAL
+   ========================================================= */
+
+async function hideCommunityPost(postId) {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    if (!confirm("Ocultar esta publicação?")) {
+        return;
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("post_hidden")
+            .insert({
+                post_id: postId,
+                user_id: currentUser.id
+            });
+
+
+    if (error && error.code !== "23505") {
+
+        console.error(
+            "Erro ao ocultar publicação:",
+            error
+        );
+
+        alert(
+            "Não foi possível ocultar a publicação."
+        );
+
+        return;
+
+    }
+
+
+    await loadCommunityPosts();
 
 }
 
