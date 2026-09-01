@@ -42,6 +42,7 @@ a:hover {
 
 .top-strip {
     height: 7px;
+
     background:
         linear-gradient(
             to right,
@@ -61,44 +62,59 @@ a:hover {
             #39a93c 45%,
             #218b28 100%
         );
+
     border-bottom: 1px solid #126619;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+
+    box-shadow:
+        0 2px 5px rgba(0,0,0,0.25);
 }
 
 .header-inner {
     width: 960px;
     max-width: calc(100% - 20px);
+
     margin: auto;
+
     min-height: 82px;
 
     display: flex;
+
     align-items: center;
     justify-content: space-between;
 }
 
 .logo-image {
     display: block;
+
     max-width: 220px;
     max-height: 65px;
+
     width: auto;
     height: auto;
 }
 
 .tagline {
     color: #eaffea;
+
     font-size: 12px;
+
     margin-top: 4px;
-    text-shadow: 1px 1px #126619;
+
+    text-shadow:
+        1px 1px #126619;
 }
 
 .header-links {
     color: white;
+
     text-align: right;
+
     font-size: 12px;
 }
 
 .header-links a {
     color: white;
+
     font-weight: bold;
 }
 
@@ -110,29 +126,40 @@ a:hover {
 .ticker {
     width: 960px;
     max-width: calc(100% - 20px);
+
     margin: 8px auto;
 
     background: #ffffcc;
+
     border: 1px solid #d1d16a;
+
     padding: 5px;
 
     color: #555;
+
     font-size: 12px;
 
-    box-shadow: inset 0 1px white;
+    box-shadow:
+        inset 0 1px white;
+
     overflow: hidden;
 }
 
 .banner-marquee {
     width: 100%;
+
     overflow: hidden;
+
     white-space: nowrap;
+
     padding: 3px 0;
 }
 
 .banner-marquee img {
     height: 42px;
+
     width: auto;
+
     vertical-align: middle;
 }
 
@@ -143,11 +170,18 @@ a:hover {
 
 .page {
     width: 960px;
+
     max-width: calc(100% - 20px);
+
     margin: 0 auto 30px;
 
     display: grid;
-    grid-template-columns: 190px 1fr 205px;
+
+    grid-template-columns:
+        190px
+        1fr
+        205px;
+
     gap: 10px;
 }
 
@@ -162,8 +196,11 @@ a:hover {
 
 .box {
     background: white;
+
     border: 1px solid #b7b7b7;
+
     border-radius: 5px;
+
     margin-bottom: 10px;
 
     box-shadow:
@@ -172,11 +209,6 @@ a:hover {
 
     overflow: hidden;
 }
-
-/*
- * Permite que o menu de emojis ultrapasse
- * os limites da caixa.
- */
 
 .box:has(.emoji-picker) {
     overflow: visible;
@@ -193,11 +225,15 @@ a:hover {
     border-bottom: 1px solid #a9d6a2;
 
     color: #246c24;
+
     font-size: 13px;
+
     font-weight: bold;
 
     padding: 8px 9px;
-    text-shadow: 1px 1px white;
+
+    text-shadow:
+        1px 1px white;
 }
 
 .box-content {
@@ -222,11 +258,15 @@ a:hover {
         );
 
     color: white;
+
     font-size: 16px;
+
     font-weight: bold;
 
     padding: 9px 10px;
-    text-shadow: 1px 1px #276d25;
+
+    text-shadow:
+        1px 1px #276d25;
 }
 
 .login-content {
@@ -242,40 +282,54 @@ a:hover {
 
 .welcome {
     text-align: center;
+
     margin-bottom: 18px;
 }
 
 .welcome h1 {
     color: #247927;
+
     font-size: 24px;
+
     margin: 0 0 4px;
 }
 
 .welcome p {
     margin: 0;
+
     color: #777;
+
     font-size: 12px;
 }
 
 label {
     display: block;
+
     font-size: 12px;
+
     font-weight: bold;
+
     color: #555;
+
     margin: 10px 0 4px;
 }
 
 input[type="email"],
 input[type="password"] {
     width: 100%;
+
     height: 33px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
     padding: 6px 8px;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
+
     font-size: 13px;
 
     background: white;
@@ -286,6 +340,7 @@ input[type="password"] {
 
 input:focus {
     outline: none;
+
     border-color: #4cae4c;
 
     box-shadow:
@@ -294,7 +349,9 @@ input:focus {
 
 .remember {
     margin: 10px 0;
+
     font-size: 12px;
+
     color: #666;
 }
 
@@ -304,9 +361,11 @@ input:focus {
 
 .login-button {
     width: 100%;
+
     height: 36px;
 
     border: 1px solid #176b1b;
+
     border-radius: 4px;
 
     background:
@@ -317,10 +376,13 @@ input:focus {
         );
 
     color: white;
+
     font-weight: bold;
+
     font-size: 14px;
 
-    text-shadow: 1px 1px #176b1b;
+    text-shadow:
+        1px 1px #176b1b;
 
     cursor: pointer;
 
@@ -347,7 +409,9 @@ input:focus {
 
 .forgot {
     text-align: center;
+
     margin-top: 12px;
+
     font-size: 12px;
 }
 
@@ -369,18 +433,23 @@ input:focus {
 
 .signup-box h2 {
     margin: 0 0 5px;
+
     color: #6c6a20;
+
     font-size: 17px;
 }
 
 .signup-box p {
     font-size: 12px;
+
     color: #666;
+
     line-height: 1.4;
 }
 
 .signup-button {
     display: block;
+
     text-align: center;
 
     background:
@@ -391,6 +460,7 @@ input:focus {
         );
 
     border: 1px solid #b98200;
+
     border-radius: 4px;
 
     color: #604600;
@@ -398,7 +468,9 @@ input:focus {
     padding: 7px;
 
     font-weight: bold;
-    text-shadow: 1px 1px #fff3bb;
+
+    text-shadow:
+        1px 1px #fff3bb;
 
     box-shadow:
         inset 0 1px rgba(255,255,255,0.7);
@@ -440,6 +512,7 @@ input:focus {
         );
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -451,8 +524,11 @@ input:focus {
 
 .guest-title {
     color: #237227;
+
     font-weight: bold;
+
     margin-top: 7px;
+
     font-size: 12px;
 }
 
@@ -468,6 +544,7 @@ input:focus {
 
 .menu a:hover {
     background: #edf9e9;
+
     text-decoration: none;
 }
 
@@ -490,9 +567,11 @@ input:focus {
         );
 
     border: 1px solid #a8d29f;
+
     border-radius: 5px;
 
     padding: 20px;
+
     text-align: center;
 
     margin-bottom: 10px;
@@ -500,20 +579,27 @@ input:focus {
 
 .hero h2 {
     margin: 0;
+
     color: #277a29;
+
     font-size: 25px;
 }
 
 .hero p {
     color: #666;
+
     font-size: 13px;
+
     line-height: 1.5;
 }
 
 .feature {
     display: grid;
+
     grid-template-columns: 45px 1fr;
+
     gap: 8px;
+
     align-items: center;
 
     padding: 8px;
@@ -527,17 +613,21 @@ input:focus {
 
 .feature-icon {
     font-size: 30px;
+
     text-align: center;
 }
 
 .feature strong {
     color: #277a29;
+
     font-size: 13px;
 }
 
 .feature p {
     margin: 3px 0 0;
+
     font-size: 12px;
+
     color: #777;
 }
 
@@ -548,7 +638,9 @@ input:focus {
 
 .retro-post {
     padding: 10px;
+
     background: #fafafa;
+
     border-bottom: 1px solid #ddd;
 }
 
@@ -558,22 +650,27 @@ input:focus {
 
 .post-user {
     font-weight: bold;
+
     color: #287c2c;
 }
 
 .post-date {
     color: #999;
+
     font-size: 11px;
 }
 
 .post-text {
     margin: 7px 0;
+
     line-height: 1.4;
+
     font-size: 12px;
 }
 
 .post-actions {
     color: #777;
+
     font-size: 11px;
 }
 
@@ -583,8 +680,11 @@ input:focus {
 
 .posts-loading {
     padding: 18px;
+
     text-align: center;
+
     color: #999;
+
     font-size: 12px;
 }
 
@@ -595,7 +695,9 @@ input:focus {
 
 .online-user {
     padding: 6px 2px;
+
     border-bottom: 1px dotted #ccc;
+
     font-size: 12px;
 }
 
@@ -605,34 +707,49 @@ input:focus {
 
 .online {
     color: #299b30;
+
     font-size: 9px;
+
     margin-right: 4px;
 }
 
 .offline {
     color: #aaa;
+
     font-size: 9px;
+
     margin-right: 4px;
 }
 
 .online-loading {
     color: #999;
+
     font-size: 12px;
+
     text-align: center;
+
     padding: 5px;
 }
 
 .counter {
     text-align: center;
-    font-family: "Courier New", monospace;
+
+    font-family:
+        "Courier New",
+        monospace;
+
     font-size: 17px;
+
     font-weight: bold;
+
     letter-spacing: 2px;
 
     background: #111;
+
     color: #49ff49;
 
     padding: 6px;
+
     border: 2px inset #777;
 
     margin-top: 5px;
@@ -640,26 +757,23 @@ input:focus {
 
 .counter-label {
     font-size: 12px;
+
     color: #777;
 }
 
 
 /* ==================================================
-   USUÁRIOS / MEMBROS / AMIGOS
+   USUÁRIOS / MEMBROS / COMUNIDADES
    ================================================== */
-
-/*
- * As três listas usam o mesmo componente visual.
- *
- * Cada item ocupa metade da linha em telas grandes,
- * criando divisórias verticais e horizontais.
- */
 
 .users-list {
     display: grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
 
     width: 100%;
 
@@ -667,9 +781,6 @@ input:focus {
 
     margin: 0;
 }
-
-
-/* Cada usuário */
 
 .user-item {
     min-width: 0;
@@ -687,26 +798,15 @@ input:focus {
     background: #fff;
 
     border-right: 1px solid #d8d8d8;
+
     border-bottom: 1px solid #d8d8d8;
 
     overflow: hidden;
 }
 
-
-/*
- * Remove a divisória direita do último item
- * de cada linha.
- */
-
 .user-item:nth-child(2n) {
     border-right: none;
 }
-
-
-/*
- * Mantém uma pequena aparência de lista
- * antiga/Web 2.0.
- */
 
 .user-item:hover {
     background:
@@ -718,7 +818,9 @@ input:focus {
 }
 
 
-/* Avatar */
+/* ==================================================
+   AVATARES
+   ================================================== */
 
 .user-avatar,
 .user-avatar-placeholder {
@@ -728,11 +830,13 @@ input:focus {
     flex: 0 0 48px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
     overflow: hidden;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -755,7 +859,9 @@ input:focus {
 }
 
 
-/* Informações */
+/* ==================================================
+   INFORMAÇÕES DOS USUÁRIOS
+   ================================================== */
 
 .user-item-info {
     min-width: 0;
@@ -771,15 +877,19 @@ input:focus {
     color: #287c2c;
 
     font-size: 13px;
+
     font-weight: bold;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
 .user-item-info a:hover {
     color: #176b18;
+
     text-decoration: underline;
 }
 
@@ -791,7 +901,9 @@ input:focus {
     font-size: 11px;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
@@ -808,22 +920,56 @@ input:focus {
 }
 
 
-/*
- * Membros de comunidade usam exatamente
- * o mesmo visual da lista de usuários.
- */
+/* ==================================================
+   MEMBROS DE COMUNIDADE
+   ================================================== */
 
 .community-members-list {
     padding: 0;
 }
 
+.community-owner {
+    color: #a06b00 !important;
 
-/*
- * Lista de amigos.
- *
- * Caso o JavaScript utilize .friends-list,
- * ela também recebe o mesmo layout.
- */
+    font-weight: bold;
+}
+
+
+/* ==================================================
+   COMUNIDADES
+   ================================================== */
+
+.communities-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+}
+
+.community-item {
+    min-width: 0;
+}
+
+.community-avatar,
+.community-avatar-placeholder {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    object-fit: cover;
+}
+
+.community-avatar-placeholder {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* ==================================================
    LISTA DE AMIGOS — ESTILO CONTATOS
@@ -835,11 +981,13 @@ input:focus {
     width: 100%;
 
     padding: 0;
+
     margin: 0;
 }
 
 .friends-list .user-item {
     width: 100%;
+
     min-height: 0;
 
     display: flex;
@@ -853,6 +1001,7 @@ input:focus {
     background: white;
 
     border: none;
+
     border-bottom: 1px solid #d9d9d9;
 
     overflow: hidden;
@@ -872,7 +1021,7 @@ input:focus {
 }
 
 
-/* Foto pequena do amigo */
+/* Foto pequena */
 
 .friends-list .user-avatar,
 .friends-list .user-avatar-placeholder {
@@ -882,11 +1031,13 @@ input:focus {
     flex: 0 0 36px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
     overflow: hidden;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -905,10 +1056,11 @@ input:focus {
 }
 
 
-/* Somente o nome */
+/* Somente nome */
 
 .friends-list .user-item-info {
     min-width: 0;
+
     flex: 1;
 }
 
@@ -918,31 +1070,27 @@ input:focus {
     color: #287c2c;
 
     font-size: 12px;
+
     font-weight: bold;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
 .friends-list .user-item-info a:hover {
     color: #176b18;
+
     text-decoration: underline;
 }
 
 
-/* Esconde username/status caso o JS ainda os gere */
+/* Esconde username e status */
 
 .friends-list .user-item-info p {
     display: none;
-}
-
-
-/* Selo especial do criador da comunidade */
-
-.community-owner {
-    color: #a06b00 !important;
-    font-weight: bold;
 }
 
 
@@ -952,12 +1100,15 @@ input:focus {
 
 .badges {
     text-align: center;
+
     padding: 5px;
 }
 
 .badges img {
     width: 88px;
+
     height: 31px;
+
     object-fit: contain;
 
     margin: 3px;
@@ -969,7 +1120,9 @@ input:focus {
 
 .badge-text {
     font-size: 11px;
+
     color: #777;
+
     margin-top: 6px;
 }
 
@@ -980,11 +1133,13 @@ input:focus {
 
 .image-marquee {
     width: 100%;
+
     overflow: hidden;
 
     background: #f7fff4;
 
     border-top: 1px dotted #b6d6ae;
+
     border-bottom: 1px dotted #b6d6ae;
 
     padding: 5px 0;
@@ -992,7 +1147,9 @@ input:focus {
 
 .image-marquee img {
     height: 38px;
+
     width: auto;
+
     vertical-align: middle;
 }
 
@@ -1003,12 +1160,15 @@ input:focus {
 
 .retropixel-project {
     text-align: center;
+
     padding: 10px;
 }
 
 .retropixel-project img {
     width: 105px;
+
     max-width: 100%;
+
     height: auto;
 
     display: block;
@@ -1018,7 +1178,9 @@ input:focus {
 
 .retropixel-project p {
     margin: 0;
+
     color: #777;
+
     font-size: 12px;
 }
 
@@ -1029,6 +1191,7 @@ input:focus {
 
 .footer {
     width: 960px;
+
     max-width: calc(100% - 20px);
 
     margin: 20px auto;
@@ -1040,6 +1203,7 @@ input:focus {
     text-align: center;
 
     color: #888;
+
     font-size: 11px;
 }
 
@@ -1049,6 +1213,7 @@ input:focus {
 
 .footer-secondary {
     margin-top: 6px;
+
     font-size: 11px;
 }
 
@@ -1065,6 +1230,7 @@ input:focus {
 
     .header-inner {
         height: auto;
+
         padding: 12px 0;
 
         flex-direction: column;
@@ -1083,6 +1249,9 @@ input:focus {
     }
 
     .users-list,
+    .communities-list {
+        grid-template-columns: 1fr;
+    }
 
     .user-item {
         border-right: none;
@@ -1097,13 +1266,16 @@ input:focus {
 
 .signup-page {
     width: 960px;
+
     max-width: calc(100% - 20px);
 
     margin: 0 auto 30px;
 
     display: grid;
 
-    grid-template-columns: 1fr 220px;
+    grid-template-columns:
+        1fr
+        220px;
 
     gap: 10px;
 }
@@ -1132,14 +1304,20 @@ input:focus {
 .create-account-content input[type="email"],
 .create-account-content input[type="password"] {
     width: 100%;
+
     height: 35px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
     padding: 6px 8px;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size: 13px;
 
     background: white;
@@ -1167,6 +1345,7 @@ input:focus {
 
 .username-field {
     display: flex;
+
     width: 100%;
 }
 
@@ -1179,6 +1358,7 @@ input:focus {
     width: 35px;
 
     border: 1px solid #aaa;
+
     border-right: 0;
 
     border-radius: 3px 0 0 3px;
@@ -1193,13 +1373,16 @@ input:focus {
     color: #287c2c;
 
     font-weight: bold;
+
     font-size: 15px;
 
-    text-shadow: 1px 1px white;
+    text-shadow:
+        1px 1px white;
 }
 
 .username-field input {
-    border-radius: 0 3px 3px 0 !important;
+    border-radius:
+        0 3px 3px 0 !important;
 }
 
 .signup-agreement {
@@ -1208,6 +1391,7 @@ input:focus {
     padding: 10px;
 
     border: 1px solid #d6d6a3;
+
     border-radius: 3px;
 
     background: #ffffe5;
@@ -1215,12 +1399,15 @@ input:focus {
     color: #555;
 
     font-size: 12px;
+
     line-height: 1.5;
 }
 
 .signup-agreement label {
     display: block;
+
     margin: 0;
+
     font-weight: normal;
 }
 
@@ -1250,18 +1437,23 @@ input:focus {
     border-radius: 3px;
 
     font-size: 12px;
+
     font-weight: bold;
 }
 
 .form-message.error {
     border: 1px solid #d28d8d;
+
     background: #ffecec;
+
     color: #9c2020;
 }
 
 .form-message.success {
     border: 1px solid #8cc486;
+
     background: #edffe9;
+
     color: #247327;
 }
 
@@ -1284,11 +1476,13 @@ input:focus {
     color: #258329;
 
     font-size: 31px;
+
     font-weight: bold;
 
     letter-spacing: -1px;
 
-    text-shadow: 1px 1px white;
+    text-shadow:
+        1px 1px white;
 }
 
 .registered-users strong {
@@ -1327,25 +1521,33 @@ input:focus {
 
 .friend-accept {
     background: #3aa655;
+
     color: white;
+
     border: 1px solid #277a3d;
 }
 
 .friend-reject {
     background: #d9534f;
+
     color: white;
+
     border: 1px solid #a83b38;
 }
 
 .friend-cancel {
     background: #f0c419;
+
     color: #222;
+
     border: 1px solid #b89500;
 }
 
 .friend-add {
     background: #3aa655;
+
     color: white;
+
     border: 1px solid #277a3d;
 }
 
@@ -1356,9 +1558,11 @@ input:focus {
 
 .post-media-section {
     margin-top: 12px;
+
     padding: 10px;
 
     border: 1px solid #d5d5d5;
+
     border-radius: 4px;
 
     background:
@@ -1375,6 +1579,7 @@ input:focus {
     margin-bottom: 6px;
 
     color: #287c2c;
+
     font-size: 12px;
 }
 
@@ -1386,9 +1591,14 @@ input:focus {
     padding: 6px 8px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size: 12px;
 
     background: white;
@@ -1399,7 +1609,9 @@ input:focus {
 
 .post-media-section input[type="file"] {
     width: 100%;
+
     margin-top: 5px;
+
     font-size: 12px;
 }
 
@@ -1413,6 +1625,7 @@ input:focus {
     color: #999;
 
     font-size: 11px;
+
     font-style: italic;
 }
 
@@ -1433,6 +1646,7 @@ input:focus {
 
 .post-tools .signup-button {
     width: auto;
+
     display: inline-block;
 
     cursor: pointer;
@@ -1461,14 +1675,17 @@ input:focus {
     left: 0;
 
     bottom: 100%;
+
     top: auto;
 
     z-index: 9999;
 
     width: 280px;
+
     max-height: 190px;
 
     margin-bottom: 4px;
+
     padding: 7px;
 
     overflow-y: auto;
@@ -1476,6 +1693,7 @@ input:focus {
     background: white;
 
     border: 1px solid #999;
+
     border-radius: 4px;
 
     box-shadow:
@@ -1484,6 +1702,7 @@ input:focus {
 
 .emoji-option {
     width: 36px;
+
     height: 36px;
 
     padding: 0;
@@ -1501,6 +1720,7 @@ input:focus {
 
 .emoji-option:hover {
     background: #e9f8e6;
+
     border-color: #9acb94;
 }
 
@@ -1559,11 +1779,13 @@ input:focus {
 .post-avatar img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
 .post-header strong {
     color: #287c2c;
+
     font-size: 13px;
 }
 
@@ -1600,6 +1822,7 @@ input:focus {
     display: block;
 
     max-width: 100%;
+
     max-height: 600px;
 
     margin: 8px auto;
@@ -1647,6 +1870,7 @@ input:focus {
     padding: 5px 8px;
 
     border: 1px solid #c5c5c5;
+
     border-radius: 3px;
 
     background:
@@ -1658,7 +1882,10 @@ input:focus {
 
     color: #555;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     font-size: 11px;
 
@@ -1705,6 +1932,7 @@ input:focus {
     margin-bottom: 5px;
 
     border: 1px solid #ddd;
+
     border-radius: 3px;
 
     background: white;
@@ -1757,9 +1985,14 @@ input:focus {
     padding: 5px 7px;
 
     border: 1px solid #aaa;
+
     border-radius: 3px;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size: 12px;
 
     background: white;
@@ -1771,6 +2004,7 @@ input:focus {
     padding: 0 9px;
 
     border: 1px solid #176b1b;
+
     border-radius: 3px;
 
     background:
@@ -1783,11 +2017,13 @@ input:focus {
     color: white;
 
     font-size: 11px;
+
     font-weight: bold;
 
     cursor: pointer;
 
-    text-shadow: 1px 1px #176b1b;
+    text-shadow:
+        1px 1px #176b1b;
 }
 
 .comment-form button:hover {
@@ -1919,9 +2155,11 @@ input:focus {
     color: #246c24;
 
     font-size: 14px;
+
     font-weight: bold;
 
-    text-shadow: 1px 1px white;
+    text-shadow:
+        1px 1px white;
 }
 
 .settings-section-content {
@@ -1951,7 +2189,10 @@ input:focus {
    ================================================== */
 
 .page:has(.create-account-box) {
-    grid-template-columns: 1fr 220px;
+    grid-template-columns:
+        1fr
+        220px;
+
     gap: 10px;
 }
 
@@ -1992,6 +2233,7 @@ input:focus {
     padding: 7px 12px;
 
     border: 1px solid #9e2020;
+
     border-radius: 4px;
 
     background:
@@ -2003,16 +2245,23 @@ input:focus {
 
     color: white;
 
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size: 12px;
+
     font-weight: bold;
 
     text-align: center;
+
     text-decoration: none;
 
     cursor: pointer;
 
-    text-shadow: 1px 1px #8b1b1b;
+    text-shadow:
+        1px 1px #8b1b1b;
 
     box-shadow:
         inset 0 1px rgba(255,255,255,0.5),
@@ -2028,6 +2277,7 @@ input:focus {
         );
 
     color: white;
+
     text-decoration: none;
 }
 
@@ -2040,5 +2290,6 @@ input:focus {
 
 .community-danger-button:disabled {
     opacity: 0.6;
+
     cursor: default;
 }
