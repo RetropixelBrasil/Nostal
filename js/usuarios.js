@@ -47,10 +47,12 @@ const usersList =
         "usersList"
     );
 
+
 const searchForm =
     document.getElementById(
         "userSearchForm"
     );
+
 
 const searchInput =
     document.getElementById(
@@ -68,8 +70,11 @@ function escapeHTML(value) {
         value === null ||
         value === undefined
     ) {
+
         return "";
+
     }
+
 
     return String(value)
         .replaceAll("&", "&amp;")
@@ -77,6 +82,7 @@ function escapeHTML(value) {
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
 }
 
 
@@ -100,13 +106,20 @@ async function getCurrentUser() {
             error
         );
 
+
         return null;
+
     }
 
 
     return data.user || null;
+
 }
 
+
+/* =========================================================
+   VERIFICAR LOGIN
+   ========================================================= */
 
 async function checkLogin() {
 
@@ -126,14 +139,17 @@ async function checkLogin() {
 
             window.location.href =
                 "index.html";
+
         }
 
 
         return false;
+
     }
 
 
     return true;
+
 }
 
 
@@ -195,7 +211,9 @@ async function loadUsers() {
 
         `;
 
+
         return;
+
     }
 
 
@@ -227,7 +245,8 @@ function renderUsers(
         "users-list";
 
 
-    usersList.innerHTML = "";
+    usersList.innerHTML =
+        "";
 
 
     if (!users.length) {
@@ -242,7 +261,9 @@ function renderUsers(
 
         `;
 
+
         return;
+
     }
 
 
@@ -285,8 +306,11 @@ function renderUsers(
                             class="user-avatar">
                       `
                     : `
-                        <div class="user-avatar-placeholder">
+                        <div
+                            class="user-avatar-placeholder">
+
                             👤
+
                         </div>
                       `;
 
@@ -369,7 +393,9 @@ function searchUsers(
             allUsers
         );
 
+
         return;
+
     }
 
 
@@ -439,6 +465,331 @@ if (searchForm) {
 
 
 /* =========================================================
+   CARREGAR AMIGOS
+   ========================================================= */
+
+async function loadFriends() {
+
+    const container =
+        document.getElementById(
+            "friendsList"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML = `
+
+        <div class="online-loading">
+            👥 Carregando amigos...
+        </div>
+
+    `;
+
+
+    if (!currentUser) {
+
+        container.innerHTML = `
+            <p>
+                👥 Faça login para ver seus amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    const {
+        data: friendships,
+        error: friendsError
+    } =
+        await supabaseClient
+            .from("friends")
+            .select(`
+                id,
+                requester_id,
+                receiver_id,
+                status,
+                created_at
+            `)
+            .eq(
+                "status",
+                "accepted"
+            )
+            .or(
+                `requester_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
+            );
+
+
+    if (friendsError) {
+
+        console.error(
+            "Erro ao carregar amizades:",
+            friendsError
+        );
+
+
+        container.innerHTML = `
+            <p>
+                ❌ Não foi possível carregar seus amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !friendships ||
+        !friendships.length
+    ) {
+
+        container.innerHTML = `
+            <p>
+                👥 Você ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    const friendIds =
+        friendships
+            .map(
+                function(friendship) {
+
+                    if (
+                        friendship.requester_id ===
+                        currentUser.id
+                    ) {
+
+                        return friendship.receiver_id;
+
+                    }
+
+
+                    return friendship.requester_id;
+
+                }
+            )
+            .filter(Boolean);
+
+
+    const uniqueFriendIds =
+        [...new Set(friendIds)];
+
+
+    if (!uniqueFriendIds.length) {
+
+        container.innerHTML = `
+            <p>
+                👥 Você ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    const {
+        data: profiles,
+        error: profilesError
+    } =
+        await supabaseClient
+            .from("profiles")
+            .select(`
+                id,
+                username,
+                display_name,
+                avatar_url,
+                status
+            `)
+            .in(
+                "id",
+                uniqueFriendIds
+            );
+
+
+    if (profilesError) {
+
+        console.error(
+            "Erro ao carregar perfis dos amigos:",
+            profilesError
+        );
+
+
+        container.innerHTML = `
+            <p>
+                ❌ Não foi possível carregar seus amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    if (
+        !profiles ||
+        !profiles.length
+    ) {
+
+        container.innerHTML = `
+            <p>
+                👥 Você ainda não possui amigos.
+            </p>
+        `;
+
+
+        return;
+
+    }
+
+
+    profiles.sort(
+        function(a, b) {
+
+            const nameA =
+                (
+                    a.display_name ||
+                    a.username ||
+                    ""
+                ).toLowerCase();
+
+
+            const nameB =
+                (
+                    b.display_name ||
+                    b.username ||
+                    ""
+                ).toLowerCase();
+
+
+            return nameA.localeCompare(
+                nameB
+            );
+
+        }
+    );
+
+
+    container.innerHTML =
+        `<div class="users-list friends-sidebar-list"></div>`;
+
+
+    const list =
+        container.querySelector(
+            ".friends-sidebar-list"
+        );
+
+
+    profiles.forEach(
+        function(profile) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "user-item";
+
+
+            const displayName =
+                profile.display_name ||
+                profile.username ||
+                "Usuário";
+
+
+            const username =
+                profile.username
+                    ? "@" +
+                      profile.username
+                    : "";
+
+
+            const avatar =
+                profile.avatar_url
+                    ? `
+                        <img
+                            src="${escapeHTML(
+                                profile.avatar_url
+                            )}"
+                            alt="${escapeHTML(
+                                displayName
+                            )}"
+                            class="user-avatar">
+                      `
+                    : `
+                        <div
+                            class="user-avatar-placeholder">
+
+                            👤
+
+                        </div>
+                      `;
+
+
+            item.innerHTML = `
+
+                ${avatar}
+
+                <div class="user-item-info">
+
+                    <a
+                        href="perfil.html?id=${encodeURIComponent(
+                            profile.id
+                        )}">
+
+                        ${escapeHTML(
+                            displayName
+                        )}
+
+                    </a>
+
+
+                    ${
+                        username
+                            ? `
+                                <p>
+                                    ${escapeHTML(
+                                        username
+                                    )}
+                                </p>
+                              `
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
    INICIALIZAÇÃO
    ========================================================= */
 
@@ -456,6 +807,8 @@ document.addEventListener(
 
 
         await loadUsers();
+
+        await loadFriends();
 
     }
 );
