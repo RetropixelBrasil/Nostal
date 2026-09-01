@@ -774,6 +774,19 @@ async function loadFriends() {
                             : ""
                     }
 
+
+                    ${
+                        profile.status
+                            ? `
+                                <p>
+                                    ${escapeHTML(
+                                        profile.status
+                                    )}
+                                </p>
+                              `
+                            : ""
+                    }
+
                 </div>
 
             `;
