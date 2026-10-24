@@ -2982,3 +2982,206 @@ body[data-theme="rainbow"] .profile-information h1 {
         font-size: 20px;
     }
 }
+
+
+/* =========================================================
+   NOSTAL™ — TEMA DARK: CAMPOS, PAINÉIS E UPLOADS
+   Correções adicionais para caixas que permaneciam brancas.
+   ========================================================= */
+
+body[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+/* Campos de texto, seletores, uploads e controles nativos */
+body[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
+body[data-theme="dark"] textarea,
+body[data-theme="dark"] select,
+body[data-theme="dark"] .form-control,
+body[data-theme="dark"] .input-group-text {
+    background: #1c222b !important;
+    color: #edf1f7 !important;
+    border-color: #4b5665 !important;
+}
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder {
+    color: #aab5c4 !important;
+    opacity: 1;
+}
+body[data-theme="dark"] input[type="file"] {
+    background: #1c222b !important;
+    color: #edf1f7 !important;
+    border: 1px solid #4b5665 !important;
+}
+body[data-theme="dark"] input[type="file"]::file-selector-button {
+    background: linear-gradient(#465263, #303947) !important;
+    color: #fff !important;
+    border: 1px solid #596779 !important;
+    margin-right: 8px;
+}
+body[data-theme="dark"] input[type="file"]::-webkit-file-upload-button {
+    background: linear-gradient(#465263, #303947) !important;
+    color: #fff !important;
+    border: 1px solid #596779 !important;
+}
+
+/* Painéis de upload de foto/GIF e formulário de comentários */
+body[data-theme="dark"] .post-media-menu,
+body[data-theme="dark"] .post-media-section,
+body[data-theme="dark"] .post-media-menu > div,
+body[data-theme="dark"] .post-media-section > div,
+body[data-theme="dark"] .comment-form,
+body[data-theme="dark"] .comment-box,
+body[data-theme="dark"] .comment-form-container,
+body[data-theme="dark"] .add-comment,
+body[data-theme="dark"] .media-upload,
+body[data-theme="dark"] .media-upload-box,
+body[data-theme="dark"] .upload-section,
+body[data-theme="dark"] .upload-box {
+    background: #252b35 !important;
+    color: #e4e8ef !important;
+    border-color: #414a57 !important;
+}
+body[data-theme="dark"] .post-media-menu label,
+body[data-theme="dark"] .post-media-section label,
+body[data-theme="dark"] .comment-form label,
+body[data-theme="dark"] .comment-box label,
+body[data-theme="dark"] .media-or {
+    color: #cbd4df !important;
+}
+
+/* Caixas de boas-vindas, termos e outros painéis claros */
+body[data-theme="dark"] .welcome-box,
+body[data-theme="dark"] .welcome-message,
+body[data-theme="dark"] .terms-box,
+body[data-theme="dark"] .terms-notice,
+body[data-theme="dark"] .privacy-notice,
+body[data-theme="dark"] .notice-box,
+body[data-theme="dark"] .form-notice,
+body[data-theme="dark"] .info-box,
+body[data-theme="dark"] .box,
+body[data-theme="dark"] .panel,
+body[data-theme="dark"] .card {
+    background-color: #252b35;
+    color: #e4e8ef;
+    border-color: #414a57;
+}
+body[data-theme="dark"] .box h1,
+body[data-theme="dark"] .box h2,
+body[data-theme="dark"] .box h3,
+body[data-theme="dark"] .panel h1,
+body[data-theme="dark"] .panel h2,
+body[data-theme="dark"] .panel h3,
+body[data-theme="dark"] .card h1,
+body[data-theme="dark"] .card h2,
+body[data-theme="dark"] .card h3 {
+    color: #a7edbd;
+}
+body[data-theme="dark"] label,
+body[data-theme="dark"] .form-label,
+body[data-theme="dark"] .terms-box a,
+body[data-theme="dark"] .terms-notice a {
+    color: #dce4ee;
+}
+body[data-theme="dark"] input[type="checkbox"],
+body[data-theme="dark"] input[type="radio"] {
+    accent-color: #70d68a;
+}
+
+/* Hover dos links dentro de caixas de navegação e painéis */
+body[data-theme="dark"] .box a:hover,
+body[data-theme="dark"] .panel a:hover,
+body[data-theme="dark"] .card a:hover,
+body[data-theme="dark"] nav a:hover,
+body[data-theme="dark"] .navigation a:hover,
+body[data-theme="dark"] .nav-box a:hover {
+    background-color: #3a4655 !important;
+    color: #ffffff !important;
+}
+
+/* Evita fundos brancos herdados em elementos comuns dentro dos painéis */
+body[data-theme="dark"] .box input,
+body[data-theme="dark"] .box textarea,
+body[data-theme="dark"] .box select,
+body[data-theme="dark"] .panel input,
+body[data-theme="dark"] .panel textarea,
+body[data-theme="dark"] .panel select,
+body[data-theme="dark"] .card input,
+body[data-theme="dark"] .card textarea,
+body[data-theme="dark"] .card select {
+    background-color: #1c222b !important;
+    color: #edf1f7 !important;
+    border-color: #4b5665 !important;
+}
+
+/* Tema Frutiger Aero: controles translúcidos e azul-esverdeados */
+body[data-theme="frutiger-aero"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+body[data-theme="frutiger-aero"] textarea,
+body[data-theme="frutiger-aero"] select {
+    background: linear-gradient(135deg, rgba(255,255,255,.96), rgba(218,250,239,.92));
+    border-color: #9acfc0;
+    color: #174d48;
+}
+body[data-theme="frutiger-aero"] .post-media-menu,
+body[data-theme="frutiger-aero"] .post-media-section,
+body[data-theme="frutiger-aero"] .welcome-box,
+body[data-theme="frutiger-aero"] .terms-box {
+    background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(207,250,235,.9));
+    border-color: #9acfc0;
+}
+
+/* Tema Rainbow: caixas e controles com acentos coloridos */
+body[data-theme="rainbow"] input:not([type="checkbox"]):not([type="radio"]),
+body[data-theme="rainbow"] textarea,
+body[data-theme="rainbow"] select {
+    border-color: #c8a3ec;
+}
+body[data-theme="rainbow"] .post-media-menu,
+body[data-theme="rainbow"] .post-media-section,
+body[data-theme="rainbow"] .welcome-box,
+body[data-theme="rainbow"] .terms-box {
+    border-color: #d7a8ef;
+}
+
+/* =========================================================
+   NOSTAL™ — CORREÇÕES DO TEMA DARK
+   Hero e caixa de concordância
+   ========================================================= */
+
+body[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #202936, #303b49) !important;
+    color: #a7edbd !important;
+    border: 1px solid #465568 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+body[data-theme="dark"] .hero h1,
+body[data-theme="dark"] .hero h2,
+body[data-theme="dark"] .hero p {
+    color: #e8edf4 !important;
+}
+
+body[data-theme="dark"] .signup-agreement {
+    background: #303b49 !important;
+    color: #e8edf4 !important;
+    border: 1px solid #465568 !important;
+}
+
+body[data-theme="dark"] .signup-agreement label,
+body[data-theme="dark"] .signup-agreement span,
+body[data-theme="dark"] .signup-agreement p {
+    color: #e8edf4 !important;
+}
+
+body[data-theme="dark"] .signup-agreement a {
+    color: #75d6a0 !important;
+}
+
+body[data-theme="dark"] .signup-agreement a:hover {
+    color: #a4f2c2 !important;
+    text-decoration: underline;
+}
+
+body[data-theme="dark"] .signup-agreement input[type="checkbox"] {
+    accent-color: #42b875;
+}
