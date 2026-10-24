@@ -2292,97 +2292,211 @@ input:focus {
     cursor: default;
 }
 
-/* ==================================================
-   AVATARES — CORREÇÃO DE EXIBIÇÃO
-   Mantém o visual retrô do Nostal™ e impede que as
-   imagens ultrapassem seus respectivos contêineres.
-   ================================================== */
+/* =========================================================
+   NOSTAL™ — TEMAS GLOBAIS
+   O tema classic mantém o visual original do site.
+   Os demais temas são aplicados por theme.js via data-theme.
+   ========================================================= */
 
-/* Avatar da página de perfil */
-.profile-avatar {
-    width: 100px;
-    height: 100px;
-    min-width: 100px;
-    flex: 0 0 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    box-sizing: border-box;
-    border: 3px solid #fff;
-    border-radius: 4px;
-    background: linear-gradient(135deg, #dcefd7, #a8d69e);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-    color: #555;
-    font-size: 42px;
-    line-height: 1;
+/* FRUTIGER AERO — vidro, natureza e gradientes */
+body[data-theme="frutiger-aero"] {
+    background:
+        radial-gradient(ellipse at 12% 8%, rgba(255,255,255,.95), transparent 30%),
+        radial-gradient(ellipse at 88% 18%, rgba(117,224,255,.38), transparent 34%),
+        linear-gradient(135deg, #c9f4d2 0%, #d8f5ff 48%, #e8ffe5 100%);
+    color: #174d50;
+}
+body[data-theme="frutiger-aero"] a { color: #087e9b; }
+body[data-theme="frutiger-aero"] .top-strip {
+    background: linear-gradient(90deg, #00a7b8, #8de56d, #f8ffb5, #4bc8ed, #00a7b8);
+}
+body[data-theme="frutiger-aero"] .header {
+    background: linear-gradient(180deg, rgba(127,226,255,.96), rgba(30,166,191,.94) 48%, rgba(20,124,153,.98));
+    border-bottom-color: #087b94;
+    box-shadow: 0 3px 12px rgba(0,86,111,.3), inset 0 1px rgba(255,255,255,.9);
+}
+body[data-theme="frutiger-aero"] .tagline { color: #f3ffff; text-shadow: 1px 1px #167b8d; }
+body[data-theme="frutiger-aero"] .ticker {
+    background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(220,255,225,.86));
+    border-color: #8dd5c4; color: #32656a; border-radius: 9px;
+}
+body[data-theme="frutiger-aero"] .box,
+body[data-theme="frutiger-aero"] .settings-section,
+body[data-theme="frutiger-aero"] .settings-header {
+    background: rgba(255,255,255,.78);
+    border-color: rgba(104,190,195,.75);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(22,112,127,.13), inset 0 1px rgba(255,255,255,.98);
+    backdrop-filter: blur(8px);
+}
+body[data-theme="frutiger-aero"] .box-title,
+body[data-theme="frutiger-aero"] .settings-section-title {
+    background: linear-gradient(180deg, rgba(255,255,255,.97), rgba(157,235,225,.9) 48%, rgba(125,216,174,.94));
+    border-bottom-color: #7ccbbd; color: #17666c; text-shadow: 0 1px #fff;
+}
+body[data-theme="frutiger-aero"] .login-content { background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(224,255,238,.92)); }
+body[data-theme="frutiger-aero"] .login-title,
+body[data-theme="frutiger-aero"] .login-button,
+body[data-theme="frutiger-aero"] .signup-button,
+body[data-theme="frutiger-aero"] .post-actions button {
+    background: linear-gradient(180deg, #a6f4ff, #43c4d7 48%, #168da8);
+    border-color: #16859b; color: #fff; text-shadow: 0 1px #176b7d;
+    box-shadow: inset 0 1px rgba(255,255,255,.85), 0 2px 4px rgba(0,87,105,.18);
+}
+body[data-theme="frutiger-aero"] input,
+body[data-theme="frutiger-aero"] textarea,
+body[data-theme="frutiger-aero"] select {
+    background: rgba(255,255,255,.92); color: #174d50; border-color: #8dcfc9;
+}
+body[data-theme="frutiger-aero"] .post { background: rgba(255,255,255,.72); border-color: #b0dfd9; border-radius: 9px; }
+body[data-theme="frutiger-aero"] .settings-header h1,
+body[data-theme="frutiger-aero"] .welcome h1 { color: #087e91; }
+body[data-theme="frutiger-aero"] .footer { background: rgba(205,246,239,.82); color: #285c60; border-color: #8dcfc9; }
+
+/* DARK — modo escuro */
+body[data-theme="dark"] {
+    background: linear-gradient(180deg, #171b22 0, #202631 240px, #15191f 100%);
+    color: #e4e8ef;
+}
+body[data-theme="dark"] a { color: #80d9a0; }
+body[data-theme="dark"] .top-strip { background: linear-gradient(90deg, #162f25, #2c8b55, #83d99b, #2c8b55, #162f25); }
+body[data-theme="dark"] .header {
+    background: linear-gradient(180deg, #354b42, #263a32 55%, #1c2a25);
+    border-bottom-color: #101a16; box-shadow: 0 2px 8px rgba(0,0,0,.6);
+}
+body[data-theme="dark"] .tagline { color: #d5f5df; text-shadow: 1px 1px #15271d; }
+body[data-theme="dark"] .ticker { background: #30313a; border-color: #515563; color: #e4e8ef; box-shadow: inset 0 1px rgba(255,255,255,.06); }
+body[data-theme="dark"] .box,
+body[data-theme="dark"] .settings-section,
+body[data-theme="dark"] .settings-header,
+body[data-theme="dark"] .post,
+body[data-theme="dark"] .login-content,
+body[data-theme="dark"] .create-account-content,
+body[data-theme="dark"] .signup-main {
+    background: #252b35; color: #e4e8ef; border-color: #444d5a;
+    box-shadow: 0 2px 6px rgba(0,0,0,.35), inset 0 1px rgba(255,255,255,.025);
+}
+body[data-theme="dark"] .box-title,
+body[data-theme="dark"] .settings-section-title {
+    background: linear-gradient(180deg, #39483f, #2b3931); border-bottom-color: #4b6857;
+    color: #b6efc6; text-shadow: none;
+}
+body[data-theme="dark"] .login-title,
+body[data-theme="dark"] .login-button,
+body[data-theme="dark"] .signup-button,
+body[data-theme="dark"] .post-actions button {
+    background: linear-gradient(180deg, #4e9d6b, #286744); border-color: #1b5735; color: #fff; text-shadow: none;
+}
+body[data-theme="dark"] label,
+body[data-theme="dark"] .remember,
+body[data-theme="dark"] .welcome p,
+body[data-theme="dark"] .settings-header p,
+body[data-theme="dark"] .settings-header h1,
+body[data-theme="dark"] .settings-section-content,
+body[data-theme="dark"] .box-content,
+body[data-theme="dark"] .post-content,
+body[data-theme="dark"] .post-date,
+body[data-theme="dark"] .comment,
+body[data-theme="dark"] .field-help { color: #d2d8e2; }
+body[data-theme="dark"] input,
+body[data-theme="dark"] textarea,
+body[data-theme="dark"] select {
+    background: #191e26; color: #edf2f8; border-color: #596473; box-shadow: inset 0 1px 3px rgba(0,0,0,.45);
+}
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder { color: #a2adbc; }
+body[data-theme="dark"] input:focus,
+body[data-theme="dark"] textarea:focus,
+body[data-theme="dark"] select:focus { border-color: #79cf98; box-shadow: 0 0 5px rgba(121,207,152,.35); }
+body[data-theme="dark"] .user-item,
+body[data-theme="dark"] .community-item,
+body[data-theme="dark"] .comment,
+body[data-theme="dark"] .post { border-color: #414a57; }
+body[data-theme="dark"] .footer,
+body[data-theme="dark"] .footer-secondary { background: #202630; color: #c9d2df; border-color: #414a57; }
+body[data-theme="dark"] .danger-section .settings-section-title { background: linear-gradient(180deg, #5a3034, #422428); border-bottom-color: #75464a; color: #ffb9b9; }
+
+/* RAINBOW — tema colorido e vibrante */
+body[data-theme="rainbow"] {
+    background: linear-gradient(135deg, #fff0f8 0%, #fff8d8 24%, #e6fff4 50%, #e4f4ff 74%, #f2e8ff 100%);
+    color: #39304d;
+}
+body[data-theme="rainbow"] a { color: #7437b5; }
+body[data-theme="rainbow"] .top-strip { background: linear-gradient(90deg, #ff4f91, #ff9f43, #ffe34d, #4edb8a, #40b9ff, #9a68ff, #ff4f91); }
+body[data-theme="rainbow"] .header {
+    background: linear-gradient(110deg, #ff659c 0%, #ffae54 24%, #f4d94d 43%, #55d99a 63%, #50bdf4 82%, #9a7af5 100%);
+    border-bottom-color: #c36ac0; box-shadow: 0 2px 7px rgba(106,57,139,.25);
+}
+body[data-theme="rainbow"] .tagline { color: #fff; text-shadow: 1px 1px rgba(98,42,116,.7); }
+body[data-theme="rainbow"] .ticker { background: #fff9d9; border-color: #f0b95a; color: #7c4c86; }
+body[data-theme="rainbow"] .box,
+body[data-theme="rainbow"] .settings-section,
+body[data-theme="rainbow"] .settings-header,
+body[data-theme="rainbow"] .post {
+    background: rgba(255,255,255,.91); border-color: #d4a9e8; border-radius: 7px;
+    box-shadow: 0 2px 6px rgba(111,72,153,.14), inset 0 1px #fff;
+}
+body[data-theme="rainbow"] .box-title,
+body[data-theme="rainbow"] .settings-section-title {
+    background: linear-gradient(100deg, #ffd8e8, #fff0bd 36%, #d5f8df 68%, #d9eaff);
+    border-bottom-color: #d6b2e8; color: #673a91; text-shadow: 0 1px #fff;
+}
+body[data-theme="rainbow"] .login-title { background: linear-gradient(100deg, #f65c9a, #ffad56, #9a70ec); color: #fff; }
+body[data-theme="rainbow"] .login-button,
+body[data-theme="rainbow"] .signup-button,
+body[data-theme="rainbow"] .post-actions button {
+    background: linear-gradient(100deg, #f65c9a, #ff9f59 50%, #8d72e9); border-color: #bd69b5; color: #fff; text-shadow: 0 1px rgba(91,42,119,.5);
+}
+body[data-theme="rainbow"] input,
+body[data-theme="rainbow"] textarea,
+body[data-theme="rainbow"] select { background: #fff; color: #39304d; border-color: #c8a3e2; }
+body[data-theme="rainbow"] input:focus,
+body[data-theme="rainbow"] textarea:focus,
+body[data-theme="rainbow"] select:focus { border-color: #9b66df; box-shadow: 0 0 5px rgba(155,102,223,.32); }
+body[data-theme="rainbow"] .welcome h1,
+body[data-theme="rainbow"] .settings-header h1 { color: #a13c9d; }
+body[data-theme="rainbow"] .footer,
+body[data-theme="rainbow"] .footer-secondary { background: linear-gradient(90deg, #ffe1ed, #fff2d3, #ddf9e6, #ddecff); color: #593e71; border-color: #d4a9e8; }
+
+/* Transições discretas ao trocar de tema */
+body[data-theme="frutiger-aero"],
+body[data-theme="dark"],
+body[data-theme="rainbow"],
+body[data-theme="frutiger-aero"] .box,
+body[data-theme="dark"] .box,
+body[data-theme="rainbow"] .box,
+body[data-theme="frutiger-aero"] .header,
+body[data-theme="dark"] .header,
+body[data-theme="rainbow"] .header {
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
 }
 
-.profile-avatar img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
 
-/* Avatares de usuários: a classe é aplicada diretamente à imagem */
-img.user-avatar,
-img.community-avatar {
-    display: block;
-    object-fit: cover;
-    object-position: center;
-}
+/* =========================================================
+   NOSTAL™ — AJUSTES COMPLEMENTARES DE TEMAS E BOTÕES
+   ========================================================= */
 
-/* Imagens dentro dos avatares usados nas publicações */
-.post-avatar img,
-.post-avatar-image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-    object-position: center;
-    flex: 0 0 100%;
-}
-
-/* Evita que imagens de avatar encolham ou estiquem em layouts flexíveis */
-.user-avatar,
-.user-avatar-placeholder,
-.community-avatar,
-.community-avatar-placeholder,
-.post-avatar,
-.profile-avatar {
-    flex-shrink: 0;
-}
-
-
-/* ==================================================
-   PRÉVIA DO AVATAR NAS CONFIGURAÇÕES
-   Mantém a prévia com o mesmo tamanho do avatar em perfil.html.
-   ================================================== */
+/* Molduras dos avatares: mesmo quadrado no perfil e configurações */
+.profile-avatar,
 .avatar-preview {
     width: 100px;
     height: 100px;
     min-width: 100px;
+    min-height: 100px;
     flex: 0 0 100px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     box-sizing: border-box;
-    border: 3px solid #fff;
+    border: 1px solid #8eb783;
     border-radius: 4px;
-    background: linear-gradient(135deg, #dcefd7, #a8d69e);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-    color: #555;
-    font-size: 42px;
-    line-height: 1;
+    background: linear-gradient(135deg, #e5f5df, #b6dca9);
+    box-shadow: inset 0 0 0 4px #fff;
+    font-size: 40px;
 }
 
+.profile-avatar img,
 .avatar-preview img {
     display: block;
     width: 100%;
@@ -2393,6 +2507,478 @@ img.community-avatar {
     object-position: center;
 }
 
-.avatar-settings {
+/* Tema escuro: listas e cartões de usuários, amigos e comunidades */
+body[data-theme="dark"] .user-item,
+body[data-theme="dark"] .community-item,
+body[data-theme="dark"] #friendsList,
+body[data-theme="dark"] .users-list,
+body[data-theme="dark"] .communities-list,
+body[data-theme="dark"] .community-members-list,
+body[data-theme="dark"] .user-empty,
+body[data-theme="dark"] #friendsList .user-item {
+    background: #252b35;
+    color: #e4e8ef;
+    border-color: #414a57;
+}
+
+body[data-theme="dark"] .user-item:hover,
+body[data-theme="dark"] #friendsList .user-item:hover,
+body[data-theme="dark"] .community-item:hover {
+    background: #303946;
+}
+
+body[data-theme="dark"] .user-item-info a,
+body[data-theme="dark"] .user-item-info a:hover,
+body[data-theme="dark"] .community-item a {
+    color: #9be8b1;
+}
+
+body[data-theme="dark"] .user-item-info p,
+body[data-theme="dark"] .user-empty {
+    color: #b9c3d0;
+}
+
+body[data-theme="dark"] .profile-avatar,
+body[data-theme="dark"] .avatar-preview {
+    background: linear-gradient(135deg, #303b35, #1c2822);
+    border-color: #647a69;
+    box-shadow: inset 0 0 0 4px #252b35;
+}
+
+/* Rainbow: botões com o espectro completo */
+body[data-theme="rainbow"] .login-button,
+body[data-theme="rainbow"] .signup-button,
+body[data-theme="rainbow"] .post-actions button {
+    background: linear-gradient(100deg,
+        #ff3d6e 0%,
+        #ff8a35 17%,
+        #ffe34d 34%,
+        #55d96b 51%,
+        #36c8e8 68%,
+        #4778ff 83%,
+        #a84dff 100%);
+    border-color: #a45ac7;
+    color: #fff;
+    text-shadow: 1px 1px rgba(64, 35, 95, .65);
+}
+
+body[data-theme="rainbow"] .login-button:hover,
+body[data-theme="rainbow"] .signup-button:hover,
+body[data-theme="rainbow"] .post-actions button:hover {
+    filter: saturate(1.15) brightness(1.06);
+}
+
+/* Ações perigosas: formato de botão de publicar, mantendo o vermelho */
+.community-danger-button,
+.community-report-button,
+.delete-account-button {
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    min-height: 36px;
+    width: auto;
+    max-width: 100%;
+    padding: 8px 14px;
+    border: 1px solid #a51f28;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #ff7777 0%, #e33c43 48%, #b91f2b 100%);
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px #8b1b1b;
+    box-shadow: inset 0 1px rgba(255,255,255,.55), 0 1px 2px rgba(0,0,0,.2);
+    cursor: pointer;
+}
+
+.community-danger-button:hover,
+.community-report-button:hover,
+.delete-account-button:hover {
+    background: linear-gradient(to bottom, #ff8d8d 0%, #ed4b52 48%, #c92531 100%);
+    color: #fff;
+    text-decoration: none;
+}
+
+.community-danger-button:active,
+.community-report-button:active,
+.delete-account-button:active {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.25);
+    transform: translateY(1px);
+}
+
+.delete-account-button:focus-visible,
+.community-danger-button:focus-visible,
+.community-report-button:focus-visible {
+    outline: 2px solid #7b1118;
+    outline-offset: 2px;
+}
+
+body[data-theme="dark"] .community-danger-button,
+body[data-theme="dark"] .community-report-button,
+body[data-theme="dark"] .delete-account-button {
+    border-color: #a51f28;
+    color: #fff;
+}
+
+/* =========================================================
+   NOSTAL™ — AJUSTES VISUAIS SOLICITADOS (24/10/2026)
+   ========================================================= */
+
+/* Caixas dos avatares: manter o mesmo enquadramento e adaptar ao tema */
+body[data-theme="classic"] .profile-avatar,
+body[data-theme="classic"] .avatar-preview {
+    background: linear-gradient(135deg, #e5f5df, #b6dca9);
+    border-color: #8eb783;
+    box-shadow: inset 0 0 0 4px #fff;
+}
+
+body[data-theme="frutiger-aero"] .profile-avatar,
+body[data-theme="frutiger-aero"] .avatar-preview {
+    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(107,226,224,.78) 48%, rgba(100,214,156,.9));
+    border: 1px solid #63bdc4;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,.78), 0 2px 7px rgba(0,116,145,.2);
+}
+
+body[data-theme="dark"] .profile-avatar,
+body[data-theme="dark"] .avatar-preview {
+    background: linear-gradient(135deg, #303b35, #1c2822);
+    border-color: #647a69;
+    box-shadow: inset 0 0 0 4px #252b35;
+    color: #e4e8ef;
+}
+
+body[data-theme="rainbow"] .profile-avatar,
+body[data-theme="rainbow"] .avatar-preview {
+    background: linear-gradient(135deg, #ffe0ec, #fff0bf 30%, #d9f8df 55%, #d9edff 78%, #eedcff);
+    border: 1px solid #b98ad9;
+    box-shadow: inset 0 0 0 4px rgba(255,255,255,.9), 0 2px 6px rgba(132,76,168,.2);
+}
+
+/* DARK: sobrescrever fundos brancos aplicados diretamente nas listas */
+body[data-theme="dark"] .users-list,
+body[data-theme="dark"] .communities-list,
+body[data-theme="dark"] #friendsList,
+body[data-theme="dark"] .community-members-list,
+body[data-theme="dark"] .users-list > *,
+body[data-theme="dark"] .communities-list > *,
+body[data-theme="dark"] #friendsList > *,
+body[data-theme="dark"] .community-members-list > *,
+body[data-theme="dark"] .user-item,
+body[data-theme="dark"] .community-item,
+body[data-theme="dark"] #friendsList .user-item,
+body[data-theme="dark"] .user-empty {
+    background-color: #252b35 !important;
+    color: #e4e8ef;
+    border-color: #414a57;
+}
+
+body[data-theme="dark"] .user-item:hover,
+body[data-theme="dark"] .community-item:hover,
+body[data-theme="dark"] #friendsList .user-item:hover {
+    background-color: #303946 !important;
+}
+
+body[data-theme="dark"] .user-item-info,
+body[data-theme="dark"] .community-item,
+body[data-theme="dark"] .community-item p,
+body[data-theme="dark"] #friendsList .user-item-info,
+body[data-theme="dark"] #friendsList .user-item-info p {
+    color: #d2d8e2;
+}
+
+body[data-theme="dark"] .user-item-info a,
+body[data-theme="dark"] .community-item a,
+body[data-theme="dark"] #friendsList .user-item-info a {
+    color: #9be8b1;
+}
+
+/* RAINBOW: espectro completo em todos os botões de ação comuns */
+body[data-theme="rainbow"] button.login-button,
+body[data-theme="rainbow"] button.signup-button,
+body[data-theme="rainbow"] .login-button,
+body[data-theme="rainbow"] .signup-button,
+body[data-theme="rainbow"] .post-actions button {
+    background: linear-gradient(90deg,
+        #ff3d6e 0%,
+        #ff8a35 16.6%,
+        #ffe34d 33.2%,
+        #55d96b 49.8%,
+        #36c8e8 66.4%,
+        #4778ff 83%,
+        #a84dff 100%);
+    border: 1px solid #a45ac7;
+    color: #fff;
+    text-shadow: 1px 1px rgba(64,35,95,.65);
+}
+
+body[data-theme="rainbow"] button.login-button:hover,
+body[data-theme="rainbow"] button.signup-button:hover,
+body[data-theme="rainbow"] .login-button:hover,
+body[data-theme="rainbow"] .signup-button:hover,
+body[data-theme="rainbow"] .post-actions button:hover {
+    filter: saturate(1.2) brightness(1.06);
+}
+
+/* Botões de denúncia/exclusão: formato semelhante a PUBLICAR, em vermelho */
+.community-danger-button,
+.community-report-button,
+.delete-account-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 34px;
+    padding: 6px 12px;
+    border: 1px solid #9e2020;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #ff8585 0%, #e34848 52%, #bd2929 100%);
+    color: #fff !important;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px #8b1b1b;
+    box-shadow: inset 0 1px rgba(255,255,255,.55), 0 1px 2px rgba(0,0,0,.2);
+    cursor: pointer;
+    transition: filter .15s ease, transform .15s ease, box-shadow .15s ease;
+}
+
+.community-danger-button:hover,
+.community-report-button:hover,
+.delete-account-button:hover {
+    background: linear-gradient(to bottom, #ff9a9a 0%, #f05252 52%, #cf3030 100%);
+    color: #fff !important;
+    text-decoration: none;
+    filter: saturate(1.08);
+}
+
+.community-danger-button:active,
+.community-report-button:active,
+.delete-account-button:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,.25);
+}
+
+body[data-theme="dark"] .community-danger-button,
+body[data-theme="dark"] .community-report-button,
+body[data-theme="dark"] .delete-account-button {
+    background: linear-gradient(to bottom, #ff8585 0%, #e34848 52%, #bd2929 100%);
+    border-color: #a51f28;
+    color: #fff !important;
+}
+
+
+
+/* =========================================================
+   NOSTAL™ — AJUSTES VISUAIS COMPLEMENTARES
+   ========================================================= */
+
+/* MENU DE MÍDIA, COMENTÁRIOS E LINKS DENTRO DAS CAIXAS — DARK */
+body[data-theme="dark"] .post-media-menu,
+body[data-theme="dark"] .post-media-section,
+body[data-theme="dark"] .comment-form,
+body[data-theme="dark"] .comment-box,
+body[data-theme="dark"] .emoji-picker,
+body[data-theme="dark"] .emoji-menu,
+body[data-theme="dark"] .menu,
+body[data-theme="dark"] .box-content,
+body[data-theme="dark"] .box .menu a,
+body[data-theme="dark"] .box-title + .menu a {
+    background-color: #252b35;
+    color: #e4e8ef;
+    border-color: #414a57;
+}
+
+body[data-theme="dark"] .menu a,
+body[data-theme="dark"] .box-content a,
+body[data-theme="dark"] .box p a,
+body[data-theme="dark"] .recent-posts a {
+    color: #a7edbd;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+body[data-theme="dark"] .menu a:hover,
+body[data-theme="dark"] .box-content a:hover,
+body[data-theme="dark"] .box p a:hover,
+body[data-theme="dark"] .recent-posts a:hover,
+body[data-theme="dark"] .header-links a:hover {
+    background-color: #3a4655;
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+body[data-theme="dark"] .post-media-menu *,
+body[data-theme="dark"] .post-media-section *,
+body[data-theme="dark"] .comment-form *,
+body[data-theme="dark"] .emoji-picker *,
+body[data-theme="dark"] .emoji-menu * {
+    color: inherit;
+}
+
+body[data-theme="dark"] input,
+body[data-theme="dark"] textarea,
+body[data-theme="dark"] select {
+    background-color: #1c222b;
+    color: #edf1f7;
+    border-color: #4b5665;
+}
+
+/* BOTÃO DE SAIR DA COMUNIDADE — AMARELO, NO MESMO FORMATO DOS BOTÕES */
+.community-leave-button,
+.leave-community-button,
+#leaveCommunityBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 34px;
+    padding: 7px 12px;
+    border: 1px solid #b58a16;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #fff18a 0%, #ffd84d 52%, #e8b928 100%);
+    color: #4b3900 !important;
+    font: bold 12px Arial, Helvetica, sans-serif;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px rgba(255,255,255,.45);
+    box-shadow: inset 0 1px rgba(255,255,255,.65), 0 1px 2px rgba(0,0,0,.2);
+    cursor: pointer;
+    transition: filter .15s ease, transform .15s ease;
+}
+.community-leave-button:hover,
+.leave-community-button:hover,
+#leaveCommunityBtn:hover {
+    background: linear-gradient(to bottom, #fff6a8, #ffdf63 52%, #f0c332);
+    color: #352800 !important;
+    filter: saturate(1.08);
+}
+.community-leave-button:active,
+.leave-community-button:active,
+#leaveCommunityBtn:active {
+    transform: translateY(1px);
+}
+
+/* PERFIL — estrutura inspirada na organização da captura, com identidade Nostal */
+.profile-cover {
+    min-height: 12px;
+    background: linear-gradient(135deg, #dff3d8, #b9e3a8);
+    border-bottom: 1px solid #9bc98d;
+    overflow: hidden;
+}
+.profile-cover-placeholder {
+    padding: 4px 12px;
+    color: #356c2d;
+    font-size: 11px;
+}
+.profile-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    background: #fff;
+}
+.profile-avatar {
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 1px solid #b8d6ae;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #e5f5df, #b6dca9);
+    color: #277a29;
+}
+.profile-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-information {
+    flex: 1;
+    min-width: 0;
+    padding-top: 0;
+}
+.profile-information h1 {
+    margin: 0 0 5px;
+    color: #277a29;
+    font-size: 25px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+.profile-username {
+    margin: 0 0 8px;
+    color: #54834c;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+.profile-status-divider {
+    height: 1px;
+    margin: 8px 0;
+    background: #d9e8d4;
+}
+.profile-status {
+    color: #3f5e3a;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+.profile-header + .profile-information,
+.profile-header .profile-information {
+    min-width: 0;
+}
+body[data-theme="dark"] .profile-cover {
+    background: linear-gradient(135deg, #263a2d, #1e2a23);
+    border-color: #405748;
+}
+body[data-theme="dark"] .profile-cover-placeholder {
+    color: #b5edc1;
+}
+body[data-theme="dark"] .profile-header {
+    background: #252b35;
+}
+body[data-theme="dark"] .profile-information h1 {
+    color: #a7edbd;
+}
+body[data-theme="dark"] .profile-username,
+body[data-theme="dark"] .profile-status {
+    color: #d2d8e2;
+}
+body[data-theme="dark"] .profile-status-divider {
+    background: #414a57;
+}
+body[data-theme="frutiger-aero"] .profile-header {
+    background: linear-gradient(135deg, rgba(255,255,255,.94), rgba(207,250,235,.9));
+}
+body[data-theme="rainbow"] .profile-header {
+    background: linear-gradient(135deg, #fff1f7, #fff8d9 35%, #e5ffe8 65%, #e5efff);
+}
+body[data-theme="rainbow"] .profile-information h1 {
+    color: #8a3bc1;
+}
+@media (max-width: 560px) {
+    .profile-header {
+        gap: 12px;
+        padding: 14px;
+    }
+    .profile-avatar {
+        flex-basis: 76px;
+        width: 76px;
+        height: 76px;
+        min-width: 76px;
+    }
+    .profile-information h1 {
+        font-size: 20px;
+    }
 }
