@@ -1026,37 +1026,98 @@ if (avatarFile) {
 }
 
 
+
 /* =========================================================
    EXCLUSÃO DA CONTA
    ========================================================= */
 
 const deleteAccountButton =
-    document.getElementById(
-        "deleteAccountButton"
-    );
-
+    document.getElementById("deleteAccountButton");
 
 if (deleteAccountButton) {
+    deleteAccountButton.addEventListener("click", async function () {
+        if (!currentUser) {
+            alert("Você precisa estar conectado para excluir sua conta.");
+            return;
+        }
 
-    deleteAccountButton.addEventListener(
-        "click",
-        async function() {
+        const confirmation = confirm(
+            "ATENÇÃO!\n\n" +
+            "Esta ação é permanente. Sua conta e seus dados pessoais " +
+            "serão excluídos. Não será possível desfazer.\n\n" +
+            "Deseja continuar?"
+        );
 
-            /*
-             * A exclusão completa de uma conta
-             * requer uma operação administrativa
-             * do Supabase e não deve ser feita
-             * diretamente com a chave pública.
-             */
+        if (!confirmation) return;
+
+        const typedConfirmation = prompt(
+            'Para confirmar, digite EXCLUIR em letras maiúsculas:'
+        );
+
+        if (typedConfirmation !== "EXCLUIR") {
+            alert("Exclusão cancelada.");
+            return;
+        }
+
+        const originalText = this.textContent;
+        this.disabled = true;
+        this.textContent = "⏳ EXCLUINDO CONTA...";
+
+        try {
+            const { data, error } =
+                await supabaseClient.functions.invoke("delete-account", {
+                    method: "POST",
+                });
+
+            if (error) {
+                let message = error.message ||
+                    "Não foi possível excluir sua conta.";
+
+                try {
+                    const details = await error.context?.json();
+                    if (details?.error) message = details.error;
+                } catch {
+                    // Mantém a mensagem padrão se não houver resposta JSON.
+                }
+
+                throw new Error(message);
+            }
+
+            if (!data?.success) {
+                throw new Error(
+                    data?.error || "A exclusão não foi confirmada pelo servidor."
+                );
+            }
+
+            await supabaseClient.auth.signOut();
+
+            try {
+                localStorage.removeItem("nostal-theme");
+            } catch {
+                // A exclusão da conta já foi concluída.
+            }
 
             alert(
-                "A exclusão de contas ainda não está disponível nesta versão da Nostal™."
+                "Sua conta foi excluída. Obrigado por fazer parte da Nostal™."
             );
 
-        }
-    );
+            window.location.replace("index.html");
 
+        } catch (error) {
+            console.error("Erro ao excluir conta:", error);
+
+            alert(
+                "Não foi possível concluir a exclusão.\n\n" +
+                (error.message || "Erro inesperado.") +
+                "\n\nSe o problema persistir, verifique os registros da Edge Function."
+            );
+
+            this.disabled = false;
+            this.textContent = originalText;
+        }
+    });
 }
+
 
 
 /* =========================================================
