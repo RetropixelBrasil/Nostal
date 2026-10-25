@@ -464,6 +464,7 @@ if (searchForm) {
 }
 
 
+
 /* =========================================================
    CARREGAR AMIGOS
    ========================================================= */
@@ -475,330 +476,169 @@ async function loadFriends() {
             "friendsList"
         );
 
-
     if (!container) {
         return;
     }
 
-
     container.innerHTML = `
-
         <div class="online-loading">
             👥 Carregando amigos...
         </div>
-
     `;
 
-
     if (!currentUser) {
-
         container.innerHTML = `
-            <p>
-                👥 Faça login para ver seus amigos.
-            </p>
+            <p>👥 Faça login para ver seus amigos.</p>
         `;
-
-
         return;
-
     }
-
 
     const {
         data: friendships,
         error: friendsError
-    } =
-        await supabaseClient
-            .from("friends")
-            .select(`
-                id,
-                requester_id,
-                receiver_id,
-                status,
-                created_at
-            `)
-            .eq(
-                "status",
-                "accepted"
-            )
-            .or(
-                `requester_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
-            );
-
+    } = await supabaseClient
+        .from("friends")
+        .select(`
+            id,
+            requester_id,
+            receiver_id,
+            status,
+            created_at
+        `)
+        .eq("status", "accepted")
+        .or(
+            `requester_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
+        );
 
     if (friendsError) {
-
         console.error(
             "Erro ao carregar amizades:",
             friendsError
         );
 
-
         container.innerHTML = `
-            <p>
-                ❌ Não foi possível carregar seus amigos.
-            </p>
+            <p>❌ Não foi possível carregar seus amigos.</p>
         `;
-
-
         return;
-
     }
 
-
-    if (
-        !friendships ||
-        !friendships.length
-    ) {
-
+    if (!friendships || !friendships.length) {
         container.innerHTML = `
-            <p>
-                👥 Você ainda não possui amigos.
-            </p>
+            <p>👥 Você ainda não possui amigos.</p>
         `;
-
-
         return;
-
     }
 
+    const friendIds = friendships
+        .map(function(friendship) {
+            return friendship.requester_id === currentUser.id
+                ? friendship.receiver_id
+                : friendship.requester_id;
+        })
+        .filter(Boolean);
 
-    const friendIds =
-        friendships
-            .map(
-                function(friendship) {
-
-                    if (
-                        friendship.requester_id ===
-                        currentUser.id
-                    ) {
-
-                        return friendship.receiver_id;
-
-                    }
-
-
-                    return friendship.requester_id;
-
-                }
-            )
-            .filter(Boolean);
-
-
-    const uniqueFriendIds =
-        [...new Set(friendIds)];
-
+    const uniqueFriendIds = [...new Set(friendIds)];
 
     if (!uniqueFriendIds.length) {
-
         container.innerHTML = `
-            <p>
-                👥 Você ainda não possui amigos.
-            </p>
+            <p>👥 Você ainda não possui amigos.</p>
         `;
-
-
         return;
-
     }
-
 
     const {
         data: profiles,
         error: profilesError
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select(`
-                id,
-                username,
-                display_name,
-                avatar_url,
-                status
-            `)
-            .in(
-                "id",
-                uniqueFriendIds
-            );
-
+    } = await supabaseClient
+        .from("profiles")
+        .select(`
+            id,
+            username,
+            display_name,
+            avatar_url,
+            status
+        `)
+        .in("id", uniqueFriendIds);
 
     if (profilesError) {
-
         console.error(
             "Erro ao carregar perfis dos amigos:",
             profilesError
         );
 
-
         container.innerHTML = `
-            <p>
-                ❌ Não foi possível carregar seus amigos.
-            </p>
+            <p>❌ Não foi possível carregar seus amigos.</p>
         `;
-
-
         return;
-
     }
 
-
-    if (
-        !profiles ||
-        !profiles.length
-    ) {
-
+    if (!profiles || !profiles.length) {
         container.innerHTML = `
-            <p>
-                👥 Você ainda não possui amigos.
-            </p>
+            <p>👥 Você ainda não possui amigos.</p>
         `;
-
-
         return;
-
     }
 
+    profiles.sort(function(a, b) {
+        const nameA = (
+            a.display_name || a.username || ""
+        ).toLowerCase();
 
-    profiles.sort(
-        function(a, b) {
+        const nameB = (
+            b.display_name || b.username || ""
+        ).toLowerCase();
 
-            const nameA =
-                (
-                    a.display_name ||
-                    a.username ||
-                    ""
-                ).toLowerCase();
+        return nameA.localeCompare(nameB);
+    });
 
+    /* Lista vertical, sem a classe users-list que cria a grade. */
+    container.innerHTML = `
+        <div class="friends-sidebar-list friends-list"></div>
+    `;
 
-            const nameB =
-                (
-                    b.display_name ||
-                    b.username ||
-                    ""
-                ).toLowerCase();
-
-
-            return nameA.localeCompare(
-                nameB
-            );
-
-        }
+    const list = container.querySelector(
+        ".friends-sidebar-list"
     );
 
+    profiles.forEach(function(profile) {
 
-    container.innerHTML =
-        `<div class="users-list friends-sidebar-list"></div>`;
+        const item = document.createElement("div");
+        item.className = "user-item";
 
+        const displayName =
+            profile.display_name ||
+            profile.username ||
+            "Usuário";
 
-    const list =
-        container.querySelector(
-            ".friends-sidebar-list"
-        );
-
-
-    profiles.forEach(
-        function(profile) {
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "user-item";
-
-
-            const displayName =
-                profile.display_name ||
-                profile.username ||
-                "Usuário";
-
-
-            const username =
-                profile.username
-                    ? "@" +
-                      profile.username
-                    : "";
-
-
-            const avatar =
-                profile.avatar_url
-                    ? `
-                        <img
-                            src="${escapeHTML(
-                                profile.avatar_url
-                            )}"
-                            alt="${escapeHTML(
-                                displayName
-                            )}"
-                            class="user-avatar">
-                      `
-                    : `
-                        <div
-                            class="user-avatar-placeholder">
-
-                            👤
-
-                        </div>
-                      `;
-
-
-            item.innerHTML = `
-
-                ${avatar}
-
-                <div class="user-item-info">
-
-                    <a
-                        href="perfil.html?id=${encodeURIComponent(
-                            profile.id
-                        )}">
-
-                        ${escapeHTML(
-                            displayName
-                        )}
-
-                    </a>
-
-
-                    ${
-                        username
-                            ? `
-                                <p>
-                                    ${escapeHTML(
-                                        username
-                                    )}
-                                </p>
-                              `
-                            : ""
-                    }
-
-                    ${
-                        profile.status
-                            ? `
-                                <p class="user-status">
-                                    ${escapeHTML(
-                                        profile.status
-                                    )}
-                                </p>
-                              `
-                            : ""
-                    }
-
+        const avatar = profile.avatar_url
+            ? `
+                <img
+                    src="${escapeHTML(profile.avatar_url)}"
+                    alt="${escapeHTML(displayName)}"
+                    class="user-avatar"
+                >
+            `
+            : `
+                <div class="user-avatar-placeholder"
+                     aria-label="Avatar padrão">
+                    👤
                 </div>
-
             `;
 
+        item.innerHTML = `
+            ${avatar}
 
-            list.appendChild(
-                item
-            );
+            <div class="user-item-info">
+                <a href="perfil.html?id=${encodeURIComponent(profile.id)}">
+                    ${escapeHTML(displayName)}
+                </a>
+            </div>
+        `;
 
-        }
-    );
-
+        list.appendChild(item);
+    });
 }
+
 
 
 /* =========================================================
