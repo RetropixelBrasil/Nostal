@@ -3143,45 +3143,243 @@ body[data-theme="rainbow"] .terms-box {
     border-color: #d7a8ef;
 }
 
+
 /* =========================================================
-   NOSTAL™ — CORREÇÕES DO TEMA DARK
-   Hero e caixa de concordância
+   NOSTAL™ — CORREÇÃO DA LISTA DE AMIGOS
+   Uma linha por amigo; foto em moldura + nome sem @username.
    ========================================================= */
+#postFriends.friends-list,
+#friendsList,
+#profileFriends,
+.friends-sidebar-list,
+.friends-list {
+    display: block !important;
+    grid-template-columns: none !important;
+    grid-auto-flow: row !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+#postFriends.friends-list > .user-item,
+#friendsList > .user-item,
+#profileFriends > .user-item,
+.friends-sidebar-list > .user-item,
+.friends-list > .user-item {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 9px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 50px !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 6px 8px !important;
+    border: 0 !important;
+    border-bottom: 1px solid #d9e6d5 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    float: none !important;
+    overflow: hidden !important;
+}
+#postFriends.friends-list > .user-item:last-child,
+#friendsList > .user-item:last-child,
+#profileFriends > .user-item:last-child,
+.friends-sidebar-list > .user-item:last-child,
+.friends-list > .user-item:last-child { border-bottom: 0 !important; }
 
-body[data-theme="dark"] .hero {
-    background: linear-gradient(135deg, #202936, #303b49) !important;
-    color: #a7edbd !important;
-    border: 1px solid #465568 !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+#postFriends.friends-list .user-avatar,
+#postFriends.friends-list .user-avatar-placeholder,
+#friendsList .user-avatar,
+#friendsList .user-avatar-placeholder,
+#profileFriends .user-avatar,
+#profileFriends .user-avatar-placeholder,
+.friends-sidebar-list .user-avatar,
+.friends-sidebar-list .user-avatar-placeholder {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    border: 1px solid #8eb783 !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    object-fit: cover !important;
+    background: linear-gradient(135deg, #e5f5df, #b6dca9) !important;
+    box-shadow: inset 0 0 0 2px #fff !important;
+    font-size: 17px !important;
+}
+#postFriends.friends-list .user-avatar,
+#friendsList .user-avatar,
+#profileFriends .user-avatar,
+.friends-sidebar-list .user-avatar { display: block !important; object-fit: cover !important; }
+
+#postFriends.friends-list .user-item-info,
+#friendsList .user-item-info,
+#profileFriends .user-item-info,
+.friends-sidebar-list .user-item-info {
+    display: block !important;
+    flex: 1 1 auto !important;
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+#postFriends.friends-list .user-item-info a,
+#friendsList .user-item-info a,
+#profileFriends .user-item-info a,
+.friends-sidebar-list .user-item-info a {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #287c2c !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    line-height: 1.35 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-decoration: none !important;
+}
+#postFriends.friends-list .user-item-info a:hover,
+#friendsList .user-item-info a:hover,
+#profileFriends .user-item-info a:hover,
+.friends-sidebar-list .user-item-info a:hover {
+    color: #176b18 !important;
+    text-decoration: underline !important;
+}
+#postFriends.friends-list .user-item-info p,
+#friendsList .user-item-info p,
+#profileFriends .user-item-info p,
+.friends-sidebar-list .user-item-info p { display: none !important; }
+
+#postFriends.friends-list > .user-item:hover,
+#friendsList > .user-item:hover,
+#profileFriends > .user-item:hover,
+.friends-sidebar-list > .user-item:hover { background: #edf9e9 !important; }
+
+/* Dark: verde claro somente nos links deste tema. */
+body[data-theme="dark"] #postFriends.friends-list > .user-item,
+body[data-theme="dark"] #friendsList > .user-item,
+body[data-theme="dark"] #profileFriends > .user-item,
+body[data-theme="dark"] .friends-sidebar-list > .user-item {
+    background: #252b35 !important;
+    border-bottom-color: #414a57 !important;
+    color: #e4e8ef !important;
+}
+body[data-theme="dark"] #postFriends.friends-list > .user-item:hover,
+body[data-theme="dark"] #friendsList > .user-item:hover,
+body[data-theme="dark"] #profileFriends > .user-item:hover,
+body[data-theme="dark"] .friends-sidebar-list > .user-item:hover { background: #303946 !important; }
+
+body[data-theme="dark"] #postFriends.friends-list .user-avatar,
+body[data-theme="dark"] #postFriends.friends-list .user-avatar-placeholder,
+body[data-theme="dark"] #friendsList .user-avatar,
+body[data-theme="dark"] #friendsList .user-avatar-placeholder,
+body[data-theme="dark"] #profileFriends .user-avatar,
+body[data-theme="dark"] #profileFriends .user-avatar-placeholder,
+body[data-theme="dark"] .friends-sidebar-list .user-avatar,
+body[data-theme="dark"] .friends-sidebar-list .user-avatar-placeholder {
+    background: linear-gradient(135deg, #303b35, #1c2822) !important;
+    border-color: #647a69 !important;
+    box-shadow: inset 0 0 0 2px #252b35 !important;
+    color: #e4e8ef !important;
+}
+body[data-theme="dark"] #postFriends.friends-list .user-item-info a,
+body[data-theme="dark"] #friendsList .user-item-info a,
+body[data-theme="dark"] #profileFriends .user-item-info a,
+body[data-theme="dark"] .friends-sidebar-list .user-item-info a { color: #a5e9b4 !important; }
+body[data-theme="dark"] #postFriends.friends-list .user-item-info a:hover,
+body[data-theme="dark"] #friendsList .user-item-info a:hover,
+body[data-theme="dark"] #profileFriends .user-item-info a:hover,
+body[data-theme="dark"] .friends-sidebar-list .user-item-info a:hover { color: #d0ffda !important; }
+
+/* Frutiger Aero: mantém as molduras, com acabamento translúcido. */
+body[data-theme="frutiger-aero"] #postFriends.friends-list .user-avatar,
+body[data-theme="frutiger-aero"] #postFriends.friends-list .user-avatar-placeholder,
+body[data-theme="frutiger-aero"] #friendsList .user-avatar,
+body[data-theme="frutiger-aero"] #friendsList .user-avatar-placeholder,
+body[data-theme="frutiger-aero"] #profileFriends .user-avatar,
+body[data-theme="frutiger-aero"] #profileFriends .user-avatar-placeholder,
+body[data-theme="frutiger-aero"] .friends-sidebar-list .user-avatar,
+body[data-theme="frutiger-aero"] .friends-sidebar-list .user-avatar-placeholder {
+    background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(107,226,224,.78) 48%, rgba(100,214,156,.9)) !important;
+    border-color: #63bdc4 !important;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.8), 0 1px 4px rgba(0,116,145,.18) !important;
+}
+/* Rainbow: molduras coloridas, sem transformar os amigos em cartões. */
+body[data-theme="rainbow"] #postFriends.friends-list .user-avatar,
+body[data-theme="rainbow"] #postFriends.friends-list .user-avatar-placeholder,
+body[data-theme="rainbow"] #friendsList .user-avatar,
+body[data-theme="rainbow"] #friendsList .user-avatar-placeholder,
+body[data-theme="rainbow"] #profileFriends .user-avatar,
+body[data-theme="rainbow"] #profileFriends .user-avatar-placeholder,
+body[data-theme="rainbow"] .friends-sidebar-list .user-avatar,
+body[data-theme="rainbow"] .friends-sidebar-list .user-avatar-placeholder {
+    background: linear-gradient(135deg, #ffe0ec, #fff0bf 30%, #d9f8df 55%, #d9edff 78%, #eedcff) !important;
+    border-color: #b98ad9 !important;
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.9), 0 1px 4px rgba(132,76,168,.18) !important;
 }
 
-body[data-theme="dark"] .hero h1,
-body[data-theme="dark"] .hero h2,
-body[data-theme="dark"] .hero p {
-    color: #e8edf4 !important;
+
+/* Nostal™ — Lista vertical de amigos no perfil */
+.profile-friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
 }
 
-body[data-theme="dark"] .signup-agreement {
-    background: #303b49 !important;
-    color: #e8edf4 !important;
-    border: 1px solid #465568 !important;
+.profile-friends-list .profile-friend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-body[data-theme="dark"] .signup-agreement label,
-body[data-theme="dark"] .signup-agreement span,
-body[data-theme="dark"] .signup-agreement p {
-    color: #e8edf4 !important;
+.profile-friends-list .user-avatar,
+.profile-friends-list .user-avatar-placeholder {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    box-sizing: border-box;
+    object-fit: cover;
+    flex-shrink: 0;
 }
 
-body[data-theme="dark"] .signup-agreement a {
-    color: #75d6a0 !important;
+.profile-friends-list .user-item-info {
+    min-width: 0;
+    flex: 1;
 }
 
-body[data-theme="dark"] .signup-agreement a:hover {
-    color: #a4f2c2 !important;
-    text-decoration: underline;
+.profile-friends-list .user-item-info a {
+    overflow-wrap: anywhere;
 }
 
-body[data-theme="dark"] .signup-agreement input[type="checkbox"] {
-    accent-color: #42b875;
+
+/* Nostal™ — Correção do espaçamento entre amigos */
+.profile-friends-list {
+    gap: 0 !important;
+    row-gap: 0 !important;
+}
+
+.profile-friends-list .profile-friend-item {
+    margin: 0 !important;
+    min-height: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
