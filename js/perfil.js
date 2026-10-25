@@ -1,3 +1,4 @@
+
 /* =========================================================
    NOSTAL™ — PERFIL
    ========================================================= */
@@ -14,7 +15,6 @@ const supabaseClient =
         SUPABASE_KEY
     );
 
-
 let currentUser = null;
 let profileUserId = null;
 
@@ -24,14 +24,12 @@ let profileUserId = null;
    ========================================================= */
 
 function escapeHTML(value) {
-
     return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
-
 }
 
 
@@ -40,67 +38,41 @@ function escapeHTML(value) {
    ========================================================= */
 
 async function initProfile() {
-
-    const {
-        data,
-        error
-    } =
+    const { data, error } =
         await supabaseClient.auth.getUser();
 
-
-    if (
-        error ||
-        !data.user
-    ) {
-
-        const goLogin =
-            confirm(
-                "Você não está logado. Clique em OK para voltar a página inicial e fazer login ou clique em CANCELAR para continuar offline."
-            );
-
+    if (error || !data.user) {
+        const goLogin = confirm(
+            "Você não está logado. Clique em OK para voltar a página inicial e fazer login ou clique em CANCELAR para continuar offline."
+        );
 
         if (goLogin) {
-
-            window.location.href =
-                "index.html";
-
+            window.location.href = "index.html";
         }
 
-
         return;
-
     }
 
-
-    currentUser =
-        data.user;
-
+    currentUser = data.user;
 
     /*
-     * O padrão oficial do Nostal™ é:
-     *
+     * Padrão oficial:
      * perfil.html?id=UUID
      *
      * ?user=UUID continua funcionando
      * para compatibilidade com links antigos.
      */
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
+    const params = new URLSearchParams(
+        window.location.search
+    );
 
     profileUserId =
         params.get("id") ||
         params.get("user") ||
         currentUser.id;
 
-
-    await loadProfile(
-        profileUserId
-    );
-
+    await loadProfile(profileUserId);
 }
 
 
@@ -108,76 +80,41 @@ async function initProfile() {
    PERFIL
    ========================================================= */
 
-async function loadProfile(
-    userId
-) {
-
-    const {
-        data: profile,
-        error
-    } =
+async function loadProfile(userId) {
+    const { data: profile, error } =
         await supabaseClient
             .from("profiles")
             .select("*")
-            .eq(
-                "id",
-                userId
-            )
+            .eq("id", userId)
             .single();
 
-
     if (error) {
-
         console.error(
             "Erro ao carregar perfil:",
             error
         );
 
-
-        alert(
-            "Perfil não encontrado."
-        );
-
-
+        alert("Perfil não encontrado.");
         return;
-
     }
 
-
     const name =
-        document.getElementById(
-            "profileName"
-        );
-
+        document.getElementById("profileName");
 
     const username =
-        document.getElementById(
-            "profileUsername"
-        );
-
+        document.getElementById("profileUsername");
 
     const bio =
-        document.getElementById(
-            "profileBio"
-        );
-
+        document.getElementById("profileBio");
 
     const status =
-        document.getElementById(
-            "profileStatus"
-        );
-
+        document.getElementById("profileStatus");
 
     const avatar =
-        document.getElementById(
-            "profileAvatar"
-        );
-
+        document.getElementById("profileAvatar");
 
     const cover =
-        document.getElementById(
-            "profileCover"
-        );
+        document.getElementById("profileCover");
 
 
     /* =====================================================
@@ -185,12 +122,10 @@ async function loadProfile(
        ===================================================== */
 
     if (name) {
-
         name.textContent =
             profile.display_name ||
             profile.username ||
             "Usuário";
-
     }
 
 
@@ -199,12 +134,10 @@ async function loadProfile(
        ===================================================== */
 
     if (username) {
-
         username.textContent =
             profile.username
                 ? "@" + profile.username
                 : "";
-
     }
 
 
@@ -213,11 +146,9 @@ async function loadProfile(
        ===================================================== */
 
     if (bio) {
-
         bio.textContent =
             profile.bio ||
             "Este usuário ainda não escreveu uma biografia.";
-
     }
 
 
@@ -226,15 +157,11 @@ async function loadProfile(
        ===================================================== */
 
     if (status) {
-
         status.textContent =
             profile.status ||
             "Nenhum status definido.";
 
-        status.classList.remove(
-            "loading"
-        );
-
+        status.classList.remove("loading");
     }
 
 
@@ -243,18 +170,14 @@ async function loadProfile(
        ===================================================== */
 
     if (avatar) {
-
         avatar.innerHTML =
             profile.avatar_url
                 ? `
                     <img
-                        src="${escapeHTML(
-                            profile.avatar_url
-                        )}"
+                        src="${escapeHTML(profile.avatar_url)}"
                         alt="Foto de perfil">
                   `
                 : "👤";
-
     }
 
 
@@ -263,29 +186,19 @@ async function loadProfile(
        ===================================================== */
 
     if (cover) {
-
         const placeholder =
             document.getElementById(
                 "profileCoverPlaceholder"
             );
 
-
         if (profile.cover_url) {
-
             cover.style.backgroundImage =
-                `url("${escapeHTML(
-                    profile.cover_url
-                )}")`;
-
+                `url("${escapeHTML(profile.cover_url)}")`;
         }
-
 
         if (placeholder) {
-
             placeholder.remove();
-
         }
-
     }
 
 
@@ -294,37 +207,20 @@ async function loadProfile(
        ===================================================== */
 
     const settings =
-        document.getElementById(
-            "profileSettings"
-        );
-
+        document.getElementById("profileSettings");
 
     if (settings) {
-
         settings.hidden =
-            profileUserId !==
-            currentUser.id;
-
+            profileUserId !== currentUser.id;
     }
 
 
     /* =====================================================
-       POSTS
+       POSTS E AMIGOS
        ===================================================== */
 
-    await loadProfilePosts(
-        userId
-    );
-
-
-    /* =====================================================
-       AMIGOS
-       ===================================================== */
-
-    await loadFriends(
-        userId
-    );
-
+    await loadProfilePosts(userId);
+    await loadFriends(userId);
 }
 
 
@@ -332,135 +228,66 @@ async function loadProfile(
    AMIGOS
    ========================================================= */
 
-async function loadFriends(
-    userId
-) {
-
+async function loadFriends(userId) {
     const container =
-        document.getElementById(
-            "profileFriends"
-        );
+        document.getElementById("profileFriends");
 
-
-    if (!container) {
-        return;
-    }
-
+    if (!container) return;
 
     container.innerHTML = `
-
         <div class="online-loading">
             👥 Carregando amigos...
         </div>
-
     `;
-
-
-    /*
-     * Procuramos amizades aceitas onde o usuário
-     * esteja em qualquer um dos dois lados.
-     */
 
     const {
         data: friendships,
         error: friendsError
-    } =
-        await supabaseClient
-            .from("friends")
-            .select(`
-                id,
-                requester_id,
-                receiver_id,
-                status,
-                created_at
-            `)
-            .eq(
-                "status",
-                "accepted"
-            )
-            .or(
-                `requester_id.eq.${userId},receiver_id.eq.${userId}`
-            );
-
+    } = await supabaseClient
+        .from("friends")
+        .select(
+            "id, requester_id, receiver_id, status, created_at"
+        )
+        .eq("status", "accepted")
+        .or(
+            `requester_id.eq.${userId},receiver_id.eq.${userId}`
+        );
 
     if (friendsError) {
-
         console.error(
             "Erro ao carregar amizades:",
             friendsError
         );
 
-
-        container.innerHTML = `
-            <p>
-                ❌ Não foi possível carregar os amigos.
-            </p>
-        `;
-
+        container.innerHTML =
+            "<p>❌ Não foi possível carregar os amigos.</p>";
 
         return;
-
     }
 
-
-    if (
-        !friendships ||
-        !friendships.length
-    ) {
-
-        container.innerHTML = `
-            <p>
-                👥 Este usuário ainda não possui amigos.
-            </p>
-        `;
-
+    if (!friendships || !friendships.length) {
+        container.innerHTML =
+            "<p>👥 Este usuário ainda não possui amigos.</p>";
 
         return;
-
     }
 
-
-    /*
-     * Descobrir quem é o outro usuário em cada amizade.
-     */
-
-    const friendIds =
-        friendships
-            .map(
-                friendship => {
-
-                    if (
-                        friendship.requester_id ===
-                        userId
-                    ) {
-
-                        return friendship.receiver_id;
-
-                    }
-
-
-                    return friendship.requester_id;
-
-                }
-            )
-            .filter(Boolean);
-
+    const friendIds = friendships
+        .map(friendship =>
+            friendship.requester_id === userId
+                ? friendship.receiver_id
+                : friendship.requester_id
+        )
+        .filter(Boolean);
 
     const uniqueFriendIds =
         [...new Set(friendIds)];
 
-
     if (!uniqueFriendIds.length) {
-
-        container.innerHTML = `
-            <p>
-                👥 Este usuário ainda não possui amigos.
-            </p>
-        `;
-
+        container.innerHTML =
+            "<p>👥 Este usuário ainda não possui amigos.</p>";
 
         return;
-
     }
 
 
@@ -471,190 +298,98 @@ async function loadFriends(
     const {
         data: profiles,
         error: profilesError
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select(`
-                id,
-                username,
-                display_name,
-                avatar_url,
-                status
-            `)
-            .in(
-                "id",
-                uniqueFriendIds
-            );
-
+    } = await supabaseClient
+        .from("profiles")
+        .select(
+            "id, username, display_name, avatar_url"
+        )
+        .in("id", uniqueFriendIds);
 
     if (profilesError) {
-
         console.error(
             "Erro ao carregar perfis dos amigos:",
             profilesError
         );
 
-
-        container.innerHTML = `
-            <p>
-                ❌ Não foi possível carregar os amigos.
-            </p>
-        `;
-
+        container.innerHTML =
+            "<p>❌ Não foi possível carregar os amigos.</p>";
 
         return;
-
     }
 
-
-    if (
-        !profiles ||
-        !profiles.length
-    ) {
-
-        container.innerHTML = `
-            <p>
-                👥 Este usuário ainda não possui amigos.
-            </p>
-        `;
-
+    if (!profiles || !profiles.length) {
+        container.innerHTML =
+            "<p>👥 Este usuário ainda não possui amigos.</p>";
 
         return;
-
     }
 
+    // Ordem alfabética pelo nome de exibição.
+    profiles.sort((a, b) => {
+        const nameA =
+            (a.display_name || a.username || "")
+                .toLowerCase();
+
+        const nameB =
+            (b.display_name || b.username || "")
+                .toLowerCase();
+
+        return nameA.localeCompare(nameB);
+    });
 
     /*
-     * Ordenar alfabeticamente.
+     * Lista vertical.
+     * Não usar "users-list", pois essa classe
+     * pode transformar os amigos em uma grade.
      */
 
-    profiles.sort(
-        function(a, b) {
-
-            const nameA =
-                (
-                    a.display_name ||
-                    a.username ||
-                    ""
-                ).toLowerCase();
-
-
-            const nameB =
-                (
-                    b.display_name ||
-                    b.username ||
-                    ""
-                ).toLowerCase();
-
-
-            return nameA.localeCompare(
-                nameB
-            );
-
-        }
-    );
-
-
-    container.innerHTML =
-        `<div class="users-list profile-friends-list"></div>`;
-
+    container.innerHTML = `
+        <div class="profile-friends-list"></div>
+    `;
 
     const list =
         container.querySelector(
             ".profile-friends-list"
         );
 
+    profiles.forEach(profile => {
+        const item =
+            document.createElement("div");
 
-    profiles.forEach(
-        function(profile) {
+        item.className =
+            "user-item profile-friend-item";
 
-            const item =
-                document.createElement(
-                    "div"
-                );
+        const displayName =
+            profile.display_name ||
+            profile.username ||
+            "Usuário";
 
-
-            item.className =
-                "user-item";
-
-
-            const displayName =
-                profile.display_name ||
-                profile.username ||
-                "Usuário";
-
-
-            const username =
-                profile.username
-                    ? "@" +
-                      profile.username
-                    : "";
-
-
-            const avatar =
-                profile.avatar_url
-                    ? `
-                        <img
-                            src="${escapeHTML(
-                                profile.avatar_url
-                            )}"
-                            alt="${escapeHTML(
-                                displayName
-                            )}"
-                            class="user-avatar">
-                      `
-                    : `
-                        <div
-                            class="user-avatar-placeholder">
-
-                            👤
-
-                        </div>
-                      `;
-
-
-            item.innerHTML = `
-
-                ${avatar}
-
-                <div class="user-item-info">
-
-                    <a
-                        href="perfil.html?id=${encodeURIComponent(
-                            profile.id
-                        )}">
-
-                        ${escapeHTML(
-                            displayName
-                        )}
-
-                    </a>
-
-
-                    ${
-                        username
-                            ? `
-                                <p>
-                                    ${escapeHTML(
-                                        username
-                                    )}
-                                </p>
-                              `
-                            : ""
-                    }
-
+        const avatar = profile.avatar_url
+            ? `
+                <img
+                    src="${escapeHTML(profile.avatar_url)}"
+                    alt="${escapeHTML(displayName)}"
+                    class="user-avatar"
+                >
+              `
+            : `
+                <div class="user-avatar-placeholder">
+                    👤
                 </div>
+              `;
 
-            `;
+        item.innerHTML = `
+            ${avatar}
 
+            <div class="user-item-info">
+                <a href="perfil.html?id=${encodeURIComponent(profile.id)}">
+                    ${escapeHTML(displayName)}
+                </a>
+            </div>
+        `;
 
-            list.appendChild(
-                item
-            );
-
-        }
-    );
-
+        list.appendChild(item);
+    });
 }
 
 
@@ -662,130 +397,80 @@ async function loadFriends(
    POSTS DO PERFIL
    ========================================================= */
 
-async function loadProfilePosts(
-    userId
-) {
-
+async function loadProfilePosts(userId) {
     const container =
-        document.getElementById(
-            "profilePosts"
-        );
+        document.getElementById("profilePosts");
 
+    if (!container) return;
 
-    if (!container) {
-        return;
-    }
-
-
-    const {
-        data: posts,
-        error
-    } =
+    const { data: posts, error } =
         await supabaseClient
             .from("posts")
             .select("*")
-            .eq(
-                "user_id",
-                userId
-            )
-            .eq(
-                "hidden",
-                false
-            )
-            .order(
-                "created_at",
-                {
-                    ascending: false
-                }
-            );
-
+            .eq("user_id", userId)
+            .eq("hidden", false)
+            .order("created_at", {
+                ascending: false
+            });
 
     if (error) {
-
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         container.innerHTML =
             "<p>Não foi possível carregar as publicações.</p>";
 
-
         return;
-
     }
 
-
-    if (
-        !posts ||
-        !posts.length
-    ) {
-
+    if (!posts || !posts.length) {
         container.innerHTML =
             "<p>Este usuário ainda não publicou nada.</p>";
 
-
         return;
-
     }
 
+    container.innerHTML = posts
+        .map(post => `
+            <article class="post">
 
-    container.innerHTML =
-        posts
-            .map(
-                post => `
+                ${
+                    post.content
+                        ? `
+                            <p>
+                                ${escapeHTML(post.content)
+                                    .replaceAll("\n", "<br>")}
+                            </p>
+                          `
+                        : ""
+                }
 
-                    <article class="post">
+                ${
+                    post.image_url
+                        ? `
+                            <img
+                                class="post-image"
+                                src="${escapeHTML(post.image_url)}"
+                                alt=""
+                            >
+                          `
+                        : ""
+                }
 
-                        ${
-                            post.content
-                                ? `
-                                    <p>
-                                        ${escapeHTML(
-                                            post.content
-                                        ).replaceAll(
-                                            "\n",
-                                            "<br>"
-                                        )}
-                                    </p>
-                                  `
-                                : ""
-                        }
+                ${
+                    post.gif_url
+                        ? `
+                            <img
+                                class="post-image"
+                                src="${escapeHTML(post.gif_url)}"
+                                alt=""
+                            >
+                          `
+                        : ""
+                }
 
-
-                        ${
-                            post.image_url
-                                ? `
-                                    <img
-                                        class="post-image"
-                                        src="${escapeHTML(
-                                            post.image_url
-                                        )}"
-                                        alt="">
-                                  `
-                                : ""
-                        }
-
-
-                        ${
-                            post.gif_url
-                                ? `
-                                    <img
-                                        class="post-image"
-                                        src="${escapeHTML(
-                                            post.gif_url
-                                        )}"
-                                        alt="">
-                                  `
-                                : ""
-                        }
-
-                    </article>
-
-                `
-            )
-            .join("");
-
+            </article>
+        `)
+        .join("");
 }
 
 
@@ -794,18 +479,11 @@ async function loadProfilePosts(
    ========================================================= */
 
 document
-    .getElementById(
-        "profileSettings"
-    )
-    ?.addEventListener(
-        "click",
-        function() {
-
-            window.location.href =
-                "configuracoes.html";
-
-        }
-    );
+    .getElementById("profileSettings")
+    ?.addEventListener("click", function() {
+        window.location.href =
+            "configuracoes.html";
+    });
 
 
 /* =========================================================
@@ -816,3 +494,6 @@ document.addEventListener(
     "DOMContentLoaded",
     initProfile
 );
+
+
+
