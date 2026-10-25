@@ -3383,3 +3383,13 @@ body[data-theme="rainbow"] .friends-sidebar-list .user-avatar-placeholder {
     padding-top: 6px;
     padding-bottom: 6px;
 }
+
+
+/* Caixa de atualizações scrollable */
+.updates-list {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
