@@ -419,114 +419,60 @@ async function isCurrentUserMember() {
    ========================================================= */
 
 async function renderCommunityActions() {
+    if (!communityActions || !currentCommunity) return;
 
-    if (
-        !communityActions ||
-        !currentCommunity
-    ) {
-        return;
+    const isMember = await isCurrentUserMember();
+    const isCreator = !!currentUser &&
+        currentCommunity.creator_id === currentUser.id;
+
+    let isAdmin = false;
+    if (currentUser && !isCreator && isMember) {
+        const { data: membership, error } = await supabaseClient
+            .from("community_members")
+            .select("role")
+            .eq("community_id", currentCommunity.id)
+            .eq("user_id", currentUser.id)
+            .maybeSingle();
+
+        if (error) console.error("Erro ao verificar cargo:", error);
+        isAdmin = membership?.role === "admin";
     }
 
-
-    const isMember =
-        await isCurrentUserMember();
-
-
-    const isCreator =
-        currentUser &&
-        currentCommunity.creator_id ===
-            currentUser.id;
-
+    const canEdit = isCreator || isAdmin;
+    const editButton = canEdit
+        ? `<a class="community-edit-button" href="editarcomunidade.html?id=${encodeURIComponent(currentCommunity.id)}">⚙️ EDITAR COMUNIDADE</a>`
+        : "";
 
     if (isCreator) {
-
         communityActions.innerHTML = `
-
-            <p>
-                👑 Você criou esta comunidade.
-            </p>
-
-            <button
-                type="button"
-                class="community-leave-button"
-                disabled>
-
-                👑 Criador
-
-            </button>
-
-        `;
-
-
+            <p>👑 Você criou esta comunidade.</p>
+            <div class="community-action-buttons">
+                ${editButton}
+                <button type="button" class="community-leave-button" disabled>👑 Criador</button>
+            </div>`;
         return;
-
     }
-
 
     if (isMember) {
-
         communityActions.innerHTML = `
+            <p>${isAdmin ? "🛡️ Você é administrador desta comunidade." : "✅ Você faz parte desta comunidade."}</p>
+            <div class="community-action-buttons">
+                ${editButton}
+                <button type="button" id="leaveCommunityButton" class="community-leave-button">❌ Sair da comunidade</button>
+            </div>`;
 
-            <p>
-                ✅ Você faz parte desta comunidade.
-            </p>
-
-            <button
-                type="button"
-                id="leaveCommunityButton"
-                class="community-leave-button">
-
-                ❌ Sair da comunidade
-
-            </button>
-
-        `;
-
-
-        document
-            .getElementById(
-                "leaveCommunityButton"
-            )
-            ?.addEventListener(
-                "click",
-                leaveCommunity
-            );
-
-
+        document.getElementById("leaveCommunityButton")
+            ?.addEventListener("click", leaveCommunity);
         return;
-
     }
 
-
     communityActions.innerHTML = `
+        <p>Você ainda não faz parte desta comunidade.</p>
+        <button type="button" id="joinCommunityButton" class="community-join-button">➕ Entrar na comunidade</button>`;
 
-        <p>
-            Você ainda não faz parte desta comunidade.
-        </p>
-
-        <button
-            type="button"
-            id="joinCommunityButton"
-            class="community-join-button">
-
-            ➕ Entrar na comunidade
-
-        </button>
-
-    `;
-
-
-    document
-        .getElementById(
-            "joinCommunityButton"
-        )
-        ?.addEventListener(
-            "click",
-            joinCommunity
-        );
-
+    document.getElementById("joinCommunityButton")
+        ?.addEventListener("click", joinCommunity);
 }
-
 
 /* =========================================================
    ENTRAR
@@ -729,7 +675,8 @@ async function renderCommunityMembers() {
             .select(`
                 id,
                 user_id,
-                joined_at
+                joined_at,
+                role
             `)
             .eq(
                 "community_id",
@@ -932,14 +879,11 @@ async function renderCommunityMembers() {
 
 
                     ${
-                        member.user_id ===
-                        currentCommunity.creator_id
-                            ? `
-                                <p class="community-owner">
-                                    👑 Criador
-                                </p>
-                              `
-                            : ""
+                        member.user_id === currentCommunity.creator_id
+                            ? `<span class="community-role-badge community-creator-badge">👑 Criador</span>`
+                            : member.role === "admin"
+                                ? `<span class="community-role-badge community-admin-badge">🛡️ Administrador</span>`
+                                : ""
                     }
 
                 </div>
@@ -1398,44 +1342,6 @@ function setupCommunityPostComposer() {
 
                     communityGifMenu.hidden =
                         !willOpen;
-
-                }
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "communityImageCancelButton"
-        )
-        ?.addEventListener(
-            "click",
-            function() {
-
-                if (communityImageMenu) {
-
-                    communityImageMenu.hidden =
-                        true;
-
-                }
-
-            }
-        );
-
-
-    document
-        .getElementById(
-            "communityGifCancelButton"
-        )
-        ?.addEventListener(
-            "click",
-            function() {
-
-                if (communityGifMenu) {
-
-                    communityGifMenu.hidden =
-                        true;
 
                 }
 
@@ -1996,6 +1902,24 @@ async function loadCommunityPosts() {
         );
 
 
+    // Cargos dos autores dentro desta comunidade.
+    const {
+        data: communityRoleRows,
+        error: communityRolesError
+    } = await supabaseClient
+        .from("community_members")
+        .select("user_id, role")
+        .eq("community_id", currentCommunity.id);
+
+    if (communityRolesError) {
+        console.error("Erro ao carregar cargos dos membros:", communityRolesError);
+    }
+
+    const communityRolesMap = new Map(
+        (communityRoleRows || []).map(member => [member.user_id, member.role])
+    );
+
+
     const postIds =
         visiblePosts.map(
             post =>
@@ -2229,6 +2153,14 @@ async function loadCommunityPosts() {
                                     </span>
                                   `
                                 : ""
+                        }
+
+                        ${
+                            post.user_id === currentCommunity.creator_id
+                                ? `<span class="community-role-badge community-creator-badge">👑 Criador</span>`
+                                : communityRolesMap.get(post.user_id) === "admin"
+                                    ? `<span class="community-role-badge community-admin-badge">🛡️ Administrador</span>`
+                                    : ""
                         }
 
                     </div>
