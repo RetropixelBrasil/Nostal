@@ -1,10 +1,17 @@
-
 /* =========================================================
    NOSTAL™ — EDITAR COMUNIDADE
    ========================================================= */
 
-const SUPABASE_URL = "https://ckevzcryjtivbrbsnhyq.supabase.co";
-const SUPABASE_KEY = "sb_publishable_seTOWKCN-oD-aMw4FkNuuQ_6k5JVsnT";
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+const SUPABASE_URL =
+    "https://ckevzcryjtivbrbsnhyq.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_seTOWKCN-oD-aMw4FkNuuQ_6k5JVsnT";
+
 const STORAGE_BUCKET = "nostal-media";
 
 const supabaseClient = window.supabase.createClient(
@@ -16,6 +23,10 @@ let currentUser = null;
 let currentCommunity = null;
 let currentRole = null;
 
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
+
 const editLoading = document.getElementById("editLoading");
 const editError = document.getElementById("editError");
 const communityEditor = document.getElementById("communityEditor");
@@ -24,6 +35,10 @@ const settingsForm = document.getElementById("communitySettingsForm");
 const adminManagementBox = document.getElementById("adminManagementBox");
 const communityAdmins = document.getElementById("communityAdmins");
 const adminMessage = document.getElementById("adminMessage");
+
+/* =========================================================
+   UTILITÁRIOS
+   ========================================================= */
 
 function escapeHTML(value) {
     return String(value ?? "")
@@ -39,17 +54,26 @@ function getCommunityId() {
 }
 
 function showError(message) {
-    editLoading.hidden = true;
-    communityEditor.hidden = true;
-    adminManagementBox.hidden = true;
-    editError.hidden = false;
-    editError.textContent = message;
+    if (editLoading) editLoading.hidden = true;
+    if (communityEditor) communityEditor.hidden = true;
+    if (adminManagementBox) adminManagementBox.hidden = true;
+
+    if (editError) {
+        editError.hidden = false;
+        editError.textContent = message;
+    }
 }
 
 function setAdminMessage(message, isError = false) {
+    if (!adminMessage) return;
+
     adminMessage.textContent = message;
     adminMessage.style.color = isError ? "#b00020" : "#167a25";
 }
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 async function checkLogin() {
     const { data, error } = await supabaseClient.auth.getUser();
@@ -64,14 +88,16 @@ async function checkLogin() {
 }
 
 /* =========================================================
-   CARREGAR COMUNIDADE E VERIFICAR PERMISSÕES
+   CARREGAR COMUNIDADE E PERMISSÕES
    ========================================================= */
 
 async function loadEditor() {
     const communityId = getCommunityId();
 
     if (!communityId) {
-        showError("Comunidade não especificada. Abra a página com ?id=ID.");
+        showError(
+            "Comunidade não especificada. Abra a página com ?id=ID."
+        );
         return;
     }
 
@@ -93,16 +119,22 @@ async function loadEditor() {
     let isAdmin = false;
 
     if (!isCreator) {
-        const { data: membership, error: membershipError } =
-            await supabaseClient
-                .from("community_members")
-                .select("role")
-                .eq("community_id", community.id)
-                .eq("user_id", currentUser.id)
-                .maybeSingle();
+        const {
+            data: membership,
+            error: membershipError
+        } = await supabaseClient
+            .from("community_members")
+            .select("role")
+            .eq("community_id", community.id)
+            .eq("user_id", currentUser.id)
+            .maybeSingle();
 
         if (membershipError) {
-            console.error("Erro ao verificar cargo:", membershipError);
+            console.error(
+                "Erro ao verificar permissões:",
+                membershipError
+            );
+
             showError("Não foi possível verificar suas permissões.");
             return;
         }
@@ -111,7 +143,10 @@ async function loadEditor() {
     }
 
     if (!isCreator && !isAdmin) {
-        showError("Acesso negado. Somente o criador e os administradores podem editar esta comunidade.");
+        showError(
+            "Acesso negado. Somente o criador e os administradores " +
+            "podem editar esta comunidade."
+        );
         return;
     }
 
@@ -120,7 +155,10 @@ async function loadEditor() {
     editLoading.hidden = true;
     editError.hidden = true;
     communityEditor.hidden = false;
-    adminManagementBox.hidden = !isCreator;
+
+    if (adminManagementBox) {
+        adminManagementBox.hidden = !isCreator;
+    }
 
     editorRole.textContent = isCreator
         ? "👑 Você é o criador desta comunidade."
@@ -128,9 +166,12 @@ async function loadEditor() {
 
     document.title = "Nostal™ — Editar " + community.name;
 
-    document.getElementById("communityName").value = community.name || "";
+    document.getElementById("communityName").value =
+        community.name || "";
+
     document.getElementById("communityDescriptionInput").value =
         community.description || "";
+
     document.getElementById("communityAvatarUrl").value =
         community.avatar_url || "";
 
@@ -165,10 +206,13 @@ async function uploadCommunityAvatar(file) {
     }
 
     const extension = file.name.split(".").pop().toLowerCase();
-    const path =
-        `${currentUser.id}/community-${currentCommunity.id}-${crypto.randomUUID()}.${extension}`;
 
-    const { error } = await supabaseClient.storage
+    const path =
+        `${currentUser.id}/community-${currentCommunity.id}-` +
+        `${crypto.randomUUID()}.${extension}`;
+
+    const { error } = await supabaseClient
+        .storage
         .from(STORAGE_BUCKET)
         .upload(path, file, {
             cacheControl: "3600",
@@ -178,7 +222,8 @@ async function uploadCommunityAvatar(file) {
 
     if (error) throw error;
 
-    const { data } = supabaseClient.storage
+    const { data } = supabaseClient
+        .storage
         .from(STORAGE_BUCKET)
         .getPublicUrl(path);
 
@@ -186,71 +231,83 @@ async function uploadCommunityAvatar(file) {
 }
 
 /* =========================================================
-   SALVAR INFORMAÇÕES
+   SALVAR INFORMAÇÕES DA COMUNIDADE
    ========================================================= */
 
-settingsForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
+if (settingsForm) {
+    settingsForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    if (!currentCommunity || !currentUser) return;
+        if (!currentCommunity || !currentUser) return;
 
-    const name = document.getElementById("communityName").value.trim();
-    const description =
-        document.getElementById("communityDescriptionInput").value.trim();
-    const avatarInput =
-        document.getElementById("communityAvatarUrl").value.trim();
-    const avatarFile =
-        document.getElementById("communityAvatarFile").files[0];
+        const name =
+            document.getElementById("communityName").value.trim();
 
-    if (name.length < 2 || name.length > 80) {
-        alert("O nome deve ter entre 2 e 80 caracteres.");
-        return;
-    }
+        const description =
+            document.getElementById(
+                "communityDescriptionInput"
+            ).value.trim();
 
-    if (description.length > 2000) {
-        alert("A descrição pode ter no máximo 2000 caracteres.");
-        return;
-    }
+        const avatarInput =
+            document.getElementById("communityAvatarUrl").value.trim();
 
-    const button = document.getElementById("saveCommunityButton");
-    button.disabled = true;
-    button.textContent = "SALVANDO...";
+        const avatarFile =
+            document.getElementById("communityAvatarFile").files[0];
 
-    try {
-        let avatarUrl = avatarInput || null;
-
-        if (avatarFile) {
-            avatarUrl = await uploadCommunityAvatar(avatarFile);
+        if (name.length < 2 || name.length > 80) {
+            alert("O nome deve ter entre 2 e 80 caracteres.");
+            return;
         }
 
-        const { error } = await supabaseClient.rpc(
-            "update_community_settings",
-            {
-                p_community_id: currentCommunity.id,
-                p_name: name,
-                p_description: description,
-                p_avatar_url: avatarUrl
+        if (description.length > 2000) {
+            alert("A descrição pode ter no máximo 2000 caracteres.");
+            return;
+        }
+
+        const button =
+            document.getElementById("saveCommunityButton");
+
+        button.disabled = true;
+        button.textContent = "SALVANDO...";
+
+        try {
+            let avatarUrl = avatarInput || null;
+
+            if (avatarFile) {
+                avatarUrl = await uploadCommunityAvatar(avatarFile);
             }
-        );
 
-        if (error) throw error;
+            const { error } = await supabaseClient.rpc(
+                "update_community_settings",
+                {
+                    p_community_id: currentCommunity.id,
+                    p_name: name,
+                    p_description: description,
+                    p_avatar_url: avatarUrl
+                }
+            );
 
-        currentCommunity.name = name;
-        currentCommunity.description = description;
-        currentCommunity.avatar_url = avatarUrl;
+            if (error) throw error;
 
-        alert("Comunidade atualizada com sucesso!");
-        window.location.href =
-            "comunidade.html?id=" + encodeURIComponent(currentCommunity.id);
+            alert("Comunidade atualizada com sucesso!");
 
-    } catch (error) {
-        console.error("Erro ao salvar comunidade:", error);
-        alert("Não foi possível salvar as alterações: " + error.message);
-    } finally {
-        button.disabled = false;
-        button.textContent = "SALVAR ALTERAÇÕES";
-    }
-});
+            window.location.href =
+                "comunidade.html?id=" +
+                encodeURIComponent(currentCommunity.id);
+
+        } catch (error) {
+            console.error("Erro ao salvar comunidade:", error);
+
+            alert(
+                "Não foi possível salvar as alterações:\n" +
+                error.message
+            );
+        } finally {
+            button.disabled = false;
+            button.textContent = "SALVAR ALTERAÇÕES";
+        }
+    });
+}
 
 /* =========================================================
    CARREGAR ADMINISTRADORES
@@ -260,7 +317,8 @@ async function loadAdmins() {
     if (!currentCommunity || currentRole !== "creator") return;
 
     communityAdmins.innerHTML =
-        '<div class="posts-loading">Carregando administradores...</div>';
+        '<div class="posts-loading">' +
+        'Carregando administradores...</div>';
 
     const { data: memberships, error } = await supabaseClient
         .from("community_members")
@@ -270,25 +328,38 @@ async function loadAdmins() {
 
     if (error) {
         console.error("Erro ao carregar administradores:", error);
-        communityAdmins.textContent = "Não foi possível carregar os administradores.";
+
+        communityAdmins.textContent =
+            "Não foi possível carregar os administradores.";
+
         return;
     }
 
     if (!memberships?.length) {
-        communityAdmins.textContent = "Ainda não há administradores.";
+        communityAdmins.innerHTML =
+            '<div class="user-empty">' +
+            'Esta comunidade ainda não possui administradores.' +
+            '</div>';
+
         return;
     }
 
-    const userIds = memberships.map(item => item.user_id);
+    const userIds = memberships.map(member => member.user_id);
 
-    const { data: profiles, error: profilesError } = await supabaseClient
+    const {
+        data: profiles,
+        error: profilesError
+    } = await supabaseClient
         .from("profiles")
-        .select("id, username, display_name")
+        .select("id, username, display_name, avatar_url, status")
         .in("id", userIds);
 
     if (profilesError) {
         console.error("Erro ao carregar perfis:", profilesError);
-        communityAdmins.textContent = "Não foi possível carregar os perfis.";
+
+        communityAdmins.textContent =
+            "Não foi possível carregar os perfis.";
+
         return;
     }
 
@@ -298,47 +369,83 @@ async function loadAdmins() {
 
     communityAdmins.replaceChildren();
 
-    memberships.forEach(membership => {
-        const profile = profileMap.get(membership.user_id);
+    communityAdmins.classList.add(
+        "users-list",
+        "community-admins-list"
+    );
+
+    memberships.forEach(member => {
+        const profile = profileMap.get(member.user_id);
         if (!profile) return;
 
+        const displayName = profile.display_name || profile.username || "Usuário";
         const item = document.createElement("div");
-        item.className = "user-item";
+        item.className = "user-item community-admin-item";
+
+        let avatar;
+        if (profile.avatar_url) {
+            avatar = document.createElement("img");
+            avatar.src = profile.avatar_url;
+            avatar.alt = displayName;
+            avatar.className = "user-avatar";
+        } else {
+            avatar = document.createElement("div");
+            avatar.className = "user-avatar-placeholder";
+            avatar.textContent = "👤";
+        }
 
         const info = document.createElement("div");
         info.className = "user-item-info";
 
-        const name = document.createElement("strong");
-        name.textContent = profile.display_name || profile.username || "Usuário";
+        const nameLink = document.createElement("a");
+        nameLink.href = "perfil.html?id=" + encodeURIComponent(profile.id);
+        nameLink.textContent = displayName;
 
         const username = document.createElement("p");
-        username.textContent = "@" + profile.username;
+        username.textContent = "@" + (profile.username || "desconhecido");
+        info.append(nameLink, username);
+
+        if (profile.status) {
+            const status = document.createElement("p");
+            status.textContent = profile.status;
+            info.appendChild(status);
+        }
+
+        const roleBadge = document.createElement("span");
+        roleBadge.className = "community-role-badge community-admin-badge";
+        roleBadge.textContent = "🛡️ Administrador";
+        info.appendChild(roleBadge);
 
         const demoteButton = document.createElement("button");
         demoteButton.type = "button";
-        demoteButton.className = "community-cancel-button";
+        demoteButton.className = "community-demote-button";
         demoteButton.textContent = "REMOVER ADMIN";
         demoteButton.addEventListener("click", () => {
             changeAdminRole(profile.username, "demote", demoteButton);
         });
 
-        info.append(name, username, demoteButton);
-        item.appendChild(info);
+        item.append(avatar, info, demoteButton);
         communityAdmins.appendChild(item);
     });
 }
 
 /* =========================================================
-   PROMOVER OU REBAIXAR — SOMENTE CRIADOR
+   PROMOVER MEMBRO
    ========================================================= */
 
-document.getElementById("promoteAdminForm").addEventListener(
-    "submit",
-    async function (event) {
+const promoteAdminForm =
+    document.getElementById("promoteAdminForm");
+
+if (promoteAdminForm) {
+    promoteAdminForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         if (currentRole !== "creator" || !currentCommunity) {
-            setAdminMessage("Somente o criador pode promover membros.", true);
+            setAdminMessage(
+                "Somente o criador pode promover membros.",
+                true
+            );
+
             return;
         }
 
@@ -346,45 +453,68 @@ document.getElementById("promoteAdminForm").addEventListener(
         const username = input.value.trim();
 
         if (!username) {
-            setAdminMessage("Digite o @username do membro.", true);
+            setAdminMessage(
+                "Digite o @username do membro.",
+                true
+            );
+
             return;
         }
 
-        const button = document.getElementById("promoteAdminButton");
+        const button =
+            document.getElementById("promoteAdminButton");
+
         button.disabled = true;
         button.textContent = "PROCESSANDO...";
 
         try {
-            await changeAdminRole(username, "promote");
-            input.value = "";
+            const success = await changeAdminRole(
+                username,
+                "promote"
+            );
+
+            if (success) {
+                input.value = "";
+            }
         } finally {
             button.disabled = false;
             button.textContent = "TORNAR ADMINISTRADOR(A)";
         }
-    }
-);
+    });
+}
+
+/* =========================================================
+   ALTERAR CARGO — SOMENTE CRIADOR
+   ========================================================= */
 
 async function changeAdminRole(username, action, button = null) {
     if (currentRole !== "creator" || !currentCommunity) {
-        setAdminMessage("Somente o criador pode alterar cargos.", true);
-        return;
+        setAdminMessage(
+            "Somente o criador pode alterar cargos.",
+            true
+        );
+
+        return false;
     }
 
-    if (action === "demote" &&
-        !confirm(`Deseja remover @${username} do cargo de administrador?`)) {
-        return;
+    const cleanUsername = username.replace(/^@/, "").trim();
+
+    if (action === "demote") {
+        const confirmed = confirm(
+            `Deseja remover @${cleanUsername} do cargo de administrador?`
+        );
+
+        if (!confirmed) return false;
     }
 
-    if (button) {
-        button.disabled = true;
-    }
+    if (button) button.disabled = true;
 
     try {
         const { error } = await supabaseClient.rpc(
             "manage_community_admin",
             {
                 p_community_id: currentCommunity.id,
-                p_username: username,
+                p_username: cleanUsername,
                 p_action: action
             }
         );
@@ -393,109 +523,29 @@ async function changeAdminRole(username, action, button = null) {
 
         setAdminMessage(
             action === "promote"
-                ? `@${username.replace(/^@/, "")} agora é administrador(a)!`
-                : `O cargo de @${username.replace(/^@/, "")} foi removido.`
+                ? `@${cleanUsername} agora é administrador(a)!`
+                : `O cargo de @${cleanUsername} foi removido.`
         );
 
         await loadAdmins();
 
+        return true;
+
     } catch (error) {
         console.error("Erro ao alterar cargo:", error);
-        setAdminMessage(error.message || "Não foi possível alterar o cargo.", true);
+
+        setAdminMessage(
+            error.message ||
+            "Não foi possível alterar o cargo.",
+            true
+        );
+
+        return false;
+
     } finally {
         if (button) button.disabled = false;
     }
 }
-
-
-
-async function renderCommunityActions() {
-    if (!communityActions || !currentCommunity) return;
-
-    const isCreator =
-        currentUser &&
-        currentCommunity.creator_id === currentUser.id;
-
-    let membership = null;
-
-    if (currentUser && !isCreator) {
-        const { data, error } = await supabaseClient
-            .from("community_members")
-            .select("role")
-            .eq("community_id", currentCommunity.id)
-            .eq("user_id", currentUser.id)
-            .maybeSingle();
-
-        if (error) {
-            console.error("Erro ao verificar participação:", error);
-        } else {
-            membership = data;
-        }
-    }
-
-    const isMember = !!membership;
-    const isAdmin = membership?.role === "admin";
-    const editLink = `
-        <p>
-            <a class="login-button"
-               href="editarcomunidade.html?id=${encodeURIComponent(currentCommunity.id)}">
-                ⚙️ EDITAR COMUNIDADE
-            </a>
-        </p>
-    `;
-
-    if (isCreator) {
-        communityActions.innerHTML = `
-            <p>👑 Você criou esta comunidade.</p>
-            ${editLink}
-        `;
-        return;
-    }
-
-    if (isAdmin) {
-        communityActions.innerHTML = `
-            <p>🛡️ Você é administrador desta comunidade.</p>
-            ${editLink}
-            <button type="button"
-                    id="leaveCommunityButton"
-                    class="community-leave-button">
-                ❌ Sair da comunidade
-            </button>
-        `;
-
-        document.getElementById("leaveCommunityButton")
-            ?.addEventListener("click", leaveCommunity);
-        return;
-    }
-
-    if (isMember) {
-        communityActions.innerHTML = `
-            <p>✅ Você faz parte desta comunidade.</p>
-            <button type="button"
-                    id="leaveCommunityButton"
-                    class="community-leave-button">
-                ❌ Sair da comunidade
-            </button>
-        `;
-
-        document.getElementById("leaveCommunityButton")
-            ?.addEventListener("click", leaveCommunity);
-        return;
-    }
-
-    communityActions.innerHTML = `
-        <p>Você ainda não faz parte desta comunidade.</p>
-        <button type="button"
-                id="joinCommunityButton"
-                class="community-join-button">
-            ➕ Entrar na comunidade
-        </button>
-    `;
-
-    document.getElementById("joinCommunityButton")
-        ?.addEventListener("click", joinCommunity);
-}
-
 
 /* =========================================================
    INICIALIZAÇÃO
@@ -503,6 +553,7 @@ async function renderCommunityActions() {
 
 document.addEventListener("DOMContentLoaded", async function () {
     const logged = await checkLogin();
+
     if (!logged) return;
 
     await loadEditor();
