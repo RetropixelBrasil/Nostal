@@ -3393,3 +3393,95 @@ body[data-theme="rainbow"] .friends-sidebar-list .user-avatar-placeholder {
     padding-right: 8px;
 }
 
+/* NOSTAL — cargos e ações de comunidades */
+.community-role-badge {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-top: 5px;
+    padding: 3px 7px;
+    border: 1px solid #b7c99e;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.community-creator-badge {
+    color: #704d00;
+    background: linear-gradient(#fff4bd, #ffe18a);
+    border-color: #d7b64e;
+}
+.community-admin-badge {
+    color: #205b83;
+    background: linear-gradient(#e5f4ff, #c8e5fa);
+    border-color: #9bc9e7;
+}
+.community-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.community-edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    box-sizing: border-box;
+    padding: 7px 12px;
+    border: 1px solid #397d35;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #e9ffe1, #a9dc99);
+    color: #174d18 !important;
+    font: bold 12px Arial, Helvetica, sans-serif;
+    text-decoration: none !important;
+    box-shadow: inset 0 1px rgba(255,255,255,.8), 0 1px 2px rgba(0,0,0,.15);
+}
+.community-edit-button:hover {
+    background: linear-gradient(to bottom, #f4fff0, #bce9ad);
+    filter: saturate(1.08);
+}
+.community-admin-item {
+    align-items: center;
+}
+.community-admin-item .community-demote-button {
+    flex: 0 0 auto;
+    max-width: 120px;
+    padding: 6px 8px;
+    font-size: 10px;
+}
+body[data-theme="dark"] .community-creator-badge {
+    color: #ffe59a; background: #51421c; border-color: #8b7130;
+}
+body[data-theme="dark"] .community-admin-badge {
+    color: #b8e2ff; background: #203e53; border-color: #376987;
+}
+body[data-theme="dark"] .community-edit-button {
+    color: #d8ffd0 !important; background: linear-gradient(#315b35, #24472a); border-color: #56845a;
+}
+@media (max-width: 600px) {
+    .community-admin-item { flex-wrap: wrap; }
+    .community-admin-item .community-demote-button { margin-left: 56px; }
+}
+.community-demote-button {
+    border: 1px solid #a52a2a;
+    border-radius: 3px;
+    padding: 6px 9px;
+    background: linear-gradient(#ffdddd, #e99a9a);
+    color: #721515;
+    font: bold 10px Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+.community-demote-button:hover {
+    background: linear-gradient(#ffeaea, #f2aaaa);
+}
+.community-demote-button:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+body[data-theme="dark"] .community-demote-button {
+    background: linear-gradient(#713737, #542626);
+    border-color: #a75a5a;
+    color: #ffe0e0;
+}
