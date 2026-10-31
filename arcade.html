@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nostal™ — Arcade</title>
+
+    <link rel="icon" type="image/png" href="assets/Nostal_icon.png">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="top-strip"></div>
+
+    <!-- CABEÇALHO -->
+    <header class="header">
+        <div class="header-inner">
+
+            <div>
+                <a href="index.html">
+                    <img
+                        src="assets/Nostal_horizontal.png"
+                        alt="Nostal™"
+                        class="logo-image"
+                    >
+                </a>
+
+                <div class="tagline">
+                    A sua vida. Os seus amigos. A sua nostalgia.
+                </div>
+            </div>
+
+            <nav class="header-links" aria-label="Navegação principal">
+                <a href="index.html">Início</a> |
+                <a href="posts.html">Posts</a> |
+                <a href="usuarios.html">Usuários</a> |
+                <a href="comunidades.html">Comunidades</a> |
+                <a href="arcade.html">Arcade</a> |
+                <a href="perfil.html">Meu perfil</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- BANNER -->
+    <div class="ticker">
+        <marquee
+            class="banner-marquee"
+            scrollamount="5"
+            direction="left"
+        >
+            <img
+                src="assets/icons_banner_spacehey.png"
+                alt="Ícones retrô"
+            >
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img
+                src="assets/icons_banner_spacehey.png"
+                alt=""
+            >
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img
+                src="assets/icons_banner_spacehey.png"
+                alt=""
+            >
+        </marquee>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="page">
+
+        <section class="column arcade-page">
+
+            <!-- APRESENTAÇÃO -->
+            <div class="box arcade-intro">
+
+                <div class="box-title">
+                    🕹️ Nostal™ Arcade
+                </div>
+
+                <div class="box-content">
+                    Bem-vindo ao fliperama da Nostal™!
+
+                    Escolha um jogo, divirta-se e tente entrar
+                    no ranking dos 10 melhores.
+
+                    Os jogos também funcionam em celulares.
+                </div>
+
+            </div>
+
+            <!-- ÁREA DOS JOGOS E RANKINGS -->
+            <div class="arcade-grid">
+
+                <!-- COLUNA PRINCIPAL -->
+                <div class="column">
+
+                    <!-- SELEÇÃO DE JOGOS -->
+                    <section class="box">
+
+                        <div class="box-title">
+                            🎮 Escolha seu jogo
+                        </div>
+
+                        <div class="box-content arcade-games">
+
+                            <button
+                                class="arcade-game-card active"
+                                type="button"
+                                data-game="snake"
+                            >
+                                <strong>🐍 Snake</strong>
+                                <span>Coma, cresça e não bata!</span>
+                            </button>
+
+                            <button
+                                class="arcade-game-card"
+                                type="button"
+                                data-game="pong"
+                            >
+                                <strong>🏓 Pong</strong>
+                                <span>Enfrente o computador.</span>
+                            </button>
+
+                            <div
+                                class="arcade-game-card"
+                                aria-disabled="true"
+                            >
+                                <strong>🧱 Breakout</strong>
+                                <span>Em breve</span>
+                            </div>
+
+                            <div
+                                class="arcade-game-card"
+                                aria-disabled="true"
+                            >
+                                <strong>👾 Mini Space Invaders</strong>
+                                <span>Em breve</span>
+                            </div>
+
+                            <div
+                                class="arcade-game-card"
+                                aria-disabled="true"
+                            >
+                                <strong>🎯 Acerte o Pixel™</strong>
+                                <span>Em breve</span>
+                            </div>
+
+                            <div
+                                class="arcade-game-card"
+                                aria-disabled="true"
+                            >
+                                <strong>🚀 Shooter™</strong>
+                                <span>Planejado para depois</span>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                    <!-- ÁREA DE JOGO -->
+                    <section class="box">
+
+                        <div class="box-title" id="gameTitle">
+                            🐍 Snake
+                        </div>
+
+                        <div class="box-content arcade-stage">
+
+                            <div
+                                class="arcade-stage-title"
+                                id="stageTitle"
+                            >
+                                SNAKE
+                            </div>
+
+                            <canvas
+                                id="gameCanvas"
+                                width="640"
+                                height="480"
+                                aria-label="Área de jogo"
+                            ></canvas>
+
+                            <!-- STATUS -->
+                            <div
+                                class="arcade-status"
+                                id="gameStatus"
+                                role="status"
+                            >
+                                Clique em Iniciar para jogar.
+                            </div>
+
+                            <!-- BOTÕES PRINCIPAIS -->
+                            <div class="arcade-controls">
+
+                                <button
+                                    id="startButton"
+                                    class="arcade-action"
+                                    type="button"
+                                >
+                                    ▶ Iniciar
+                                </button>
+
+                                <button
+                                    id="pauseButton"
+                                    class="arcade-action"
+                                    type="button"
+                                >
+                                    Ⅱ Pausar
+                                </button>
+
+                            </div>
+
+                            <!-- CONTROLES DO SNAKE -->
+                            <div
+                                id="snakeControls"
+                                class="arcade-dpad"
+                                aria-label="Controles do Snake"
+                            >
+
+                                <button
+                                    class="up"
+                                    type="button"
+                                    data-dir="up"
+                                    aria-label="Cima"
+                                >
+                                    ▲
+                                </button>
+
+                                <button
+                                    class="left"
+                                    type="button"
+                                    data-dir="left"
+                                    aria-label="Esquerda"
+                                >
+                                    ◀
+                                </button>
+
+                                <button
+                                    class="down"
+                                    type="button"
+                                    data-dir="down"
+                                    aria-label="Baixo"
+                                >
+                                    ▼
+                                </button>
+
+                                <button
+                                    class="right"
+                                    type="button"
+                                    data-dir="right"
+                                    aria-label="Direita"
+                                >
+                                    ▶
+                                </button>
+
+                            </div>
+
+                            <!-- CONTROLES DO PONG -->
+                            <div
+                                id="pongControls"
+                                class="arcade-controls arcade-hidden"
+                                aria-label="Controles do Pong"
+                            >
+
+                                <button
+                                    type="button"
+                                    data-paddle="up"
+                                >
+                                    ▲ Subir
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-paddle="down"
+                                >
+                                    ▼ Descer
+                                </button>
+
+                            </div>
+
+                            <!-- AJUDA -->
+                            <div
+                                class="arcade-mobile-help"
+                                id="mobileHelp"
+                            >
+                                Use as setas do teclado ou os controles na tela.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+                <!-- COLUNA LATERAL -->
+                <aside class="column">
+
+                    <!-- RANKING -->
+                    <section class="box">
+
+                        <div class="box-title">
+                            🏆 Ranking —
+                            <span id="rankingGameName">Snake</span>
+                        </div>
+
+                        <div class="box-content">
+
+                            <ol
+                                class="arcade-rank-list"
+                                id="rankingList"
+                            >
+                                <li class="arcade-empty">
+                                    Carregando ranking...
+                                </li>
+                            </ol>
+
+                            <p class="arcade-note">
+                                São exibidas as 10 maiores pontuações
+                                registradas neste jogo.
+                            </p>
+
+                        </div>
+
+                    </section>
+
+                    <!-- PONTUAÇÃO DO USUÁRIO -->
+                    <section class="box">
+
+                        <div class="box-title">
+                            ⭐ Sua pontuação
+                        </div>
+
+                        <div class="box-content">
+
+                            <p>
+                                Partida atual:
+                                <strong id="currentScore">0</strong>
+                            </p>
+
+                            <p>
+                                Seu recorde:
+                                <strong id="bestScore">—</strong>
+                            </p>
+
+                            <p
+                                class="arcade-note"
+                                id="loginHint"
+                            >
+                                Você pode jogar sem login.
+                                Entre na sua conta para salvar recordes.
+                            </p>
+
+                        </div>   
+
+                    </section>
+
+                        <div class="box">
+
+                <div class="box-title">
+                    💻 Selos
+                </div>
+
+                <div class="badges">
+
+                    <!-- Selo RetroNet NOW! -->
+                    <a target="_blank" rel="noopener noreferrer" href="https://retropixelbrasil.github.io/Retropixel/Suporte/RetroNet.html">
+                        <img src="assets\RetroNet_NOW_88x31.gif" alt="RetroNet NOW!">
+                    </a>
+
+
+                    <!-- Selo Bloco de Notas -->
+                    <a target="_blank" rel="noopener noreferrer" href="#">
+                        <img alt="Build with Microsoft Notepad" src="assets\built_with_microsoft_notepad.gif">
+                    </a>
+
+
+                    <!-- Selo GuiDev10 -->
+                    <a href="https://guilhermealbuquerque9.github.io/GuiDev10/" target="_blank" rel="noopener noreferrer">
+                        <img src="https://guilhermealbuquerque9.github.io/GuiDev10/assets/GuiDev10.gif" alt="GuiDev10">
+                    </a>
+
+                    <!-- Selo Retropixel -->
+                    <a href="http://www.retropixel.com.br" target="_blank" rel="noopener noreferrer">
+                        <img src="assets\Retropixel_88x31.gif" alt="Retropixel">
+                    </a>
+
+                    <div class="badge-text">
+                        🌐 Uma pequena viagem à Web 2.0
+                    </div>
+
+                </div>
+
+            </div>
+
+        <div class="box">
+
+            <div class="box-title">
+                📢 Um projeto Retropixel™
+            </div>
+
+            <div class="box-content retropixel-project">
+
+                <a href="http://www.retropixel.com.br">
+
+                        <img
+                            src="assets/Retropixel_logo.png"
+                            alt="Retropixel™">
+
+                    </a>
+
+                <p>
+                  Um projeto da Retropixel
+                </p>
+
+            </div>
+
+        </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+
+        <div>
+            <a href="sobre.html">Sobre a Nostal™</a> |
+            <a href="termos.html">Termos</a> |
+            <a href="privacidade.html">Privacidade</a> |
+            <a href="https://retropixelbrasil.github.io/Retropixel/Suporte/Nostal.html">
+                Ajuda
+            </a> |
+            <a href="http://www.retropixel.com.br">
+                Retropixel™
+            </a>
+        </div>
+
+        <div class="footer-secondary">
+            © Retropixel™, 2025-2026. Todos os direitos reservados.
+        </div>
+
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/arcade.js"></script>
+    <script src="theme.js"></script>
+
+</body>
+</html>
