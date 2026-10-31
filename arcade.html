@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
 
     <!-- CABEÇALHO -->
     <header class="header">
+
         <div class="header-inner">
 
             <div>
@@ -23,8 +25,7 @@
                     <img
                         src="assets/Nostal_horizontal.png"
                         alt="Nostal™"
-                        class="logo-image"
-                    >
+                        class="logo-image">
                 </a>
 
                 <div class="tagline">
@@ -42,35 +43,38 @@
             </nav>
 
         </div>
+
     </header>
+
 
     <!-- BANNER -->
     <div class="ticker">
+
         <marquee
             class="banner-marquee"
             scrollamount="5"
-            direction="left"
-        >
+            direction="left">
+
             <img
                 src="assets/icons_banner_spacehey.png"
-                alt="Ícones retrô"
-            >
+                alt="Ícones retrô">
 
             &nbsp;&nbsp;&nbsp;&nbsp;
 
             <img
                 src="assets/icons_banner_spacehey.png"
-                alt=""
-            >
+                alt="">
 
             &nbsp;&nbsp;&nbsp;&nbsp;
 
             <img
                 src="assets/icons_banner_spacehey.png"
-                alt=""
-            >
+                alt="">
+
         </marquee>
+
     </div>
+
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="page">
@@ -95,6 +99,7 @@
 
             </div>
 
+
             <!-- ÁREA DOS JOGOS E RANKINGS -->
             <div class="arcade-grid">
 
@@ -113,56 +118,70 @@
                             <button
                                 class="arcade-game-card active"
                                 type="button"
-                                data-game="snake"
-                            >
+                                data-game="snake">
+
                                 <strong>🐍 Snake</strong>
                                 <span>Coma, cresça e não bata!</span>
+
                             </button>
+
 
                             <button
                                 class="arcade-game-card"
                                 type="button"
-                                data-game="pong"
-                            >
+                                data-game="pong">
+
                                 <strong>🏓 Pong</strong>
                                 <span>Enfrente o computador.</span>
+
                             </button>
 
-                            <div
+
+                            <button
                                 class="arcade-game-card"
-                                aria-disabled="true"
-                            >
+                                type="button"
+                                data-game="breakout">
+
                                 <strong>🧱 Breakout</strong>
-                                <span>Em breve</span>
-                            </div>
+                                <span>Destrua todos os blocos!</span>
 
-                            <div
+                            </button>
+
+
+                            <button
                                 class="arcade-game-card"
-                                aria-disabled="true"
-                            >
+                                type="button"
+                                data-game="space_invaders">
+
                                 <strong>👾 Mini Space Invaders</strong>
-                                <span>Em breve</span>
-                            </div>
+                                <span>Defenda a Terra dos invasores!</span>
+
+                            </button>
+
 
                             <div
                                 class="arcade-game-card"
-                                aria-disabled="true"
-                            >
+                                aria-disabled="true">
+
                                 <strong>🎯 Acerte o Pixel™</strong>
                                 <span>Em breve</span>
+
                             </div>
+
 
                             <div
                                 class="arcade-game-card"
-                                aria-disabled="true"
-                            >
+                                aria-disabled="true">
+
                                 <strong>🚀 Shooter™</strong>
                                 <span>Planejado para depois</span>
+
                             </div>
 
                         </div>
 
                     </section>
+
 
                     <!-- ÁREA DE JOGO -->
                     <section class="box">
@@ -175,26 +194,33 @@
 
                             <div
                                 class="arcade-stage-title"
-                                id="stageTitle"
-                            >
+                                id="stageTitle">
+
                                 SNAKE
+
                             </div>
 
+
+                            <!-- CANVAS -->
                             <canvas
                                 id="gameCanvas"
                                 width="640"
                                 height="480"
-                                aria-label="Área de jogo"
-                            ></canvas>
+                                aria-label="Área de jogo">
+
+                            </canvas>
+
 
                             <!-- STATUS -->
                             <div
                                 class="arcade-status"
                                 id="gameStatus"
-                                role="status"
-                            >
+                                role="status">
+
                                 Clique em Iniciar para jogar.
+
                             </div>
+
 
                             <!-- BOTÕES PRINCIPAIS -->
                             <div class="arcade-controls">
@@ -202,95 +228,163 @@
                                 <button
                                     id="startButton"
                                     class="arcade-action"
-                                    type="button"
-                                >
+                                    type="button">
+
                                     ▶ Iniciar
+
                                 </button>
 
                                 <button
                                     id="pauseButton"
                                     class="arcade-action"
-                                    type="button"
-                                >
+                                    type="button">
+
                                     Ⅱ Pausar
+
                                 </button>
 
                             </div>
+
 
                             <!-- CONTROLES DO SNAKE -->
                             <div
                                 id="snakeControls"
                                 class="arcade-dpad"
-                                aria-label="Controles do Snake"
-                            >
+                                aria-label="Controles do Snake">
 
                                 <button
                                     class="up"
                                     type="button"
                                     data-dir="up"
-                                    aria-label="Cima"
-                                >
+                                    aria-label="Cima">
+
                                     ▲
+
                                 </button>
 
                                 <button
                                     class="left"
                                     type="button"
                                     data-dir="left"
-                                    aria-label="Esquerda"
-                                >
+                                    aria-label="Esquerda">
+
                                     ◀
+
                                 </button>
 
                                 <button
                                     class="down"
                                     type="button"
                                     data-dir="down"
-                                    aria-label="Baixo"
-                                >
+                                    aria-label="Baixo">
+
                                     ▼
+
                                 </button>
 
                                 <button
                                     class="right"
                                     type="button"
                                     data-dir="right"
-                                    aria-label="Direita"
-                                >
+                                    aria-label="Direita">
+
                                     ▶
+
                                 </button>
 
                             </div>
+
 
                             <!-- CONTROLES DO PONG -->
                             <div
                                 id="pongControls"
                                 class="arcade-controls arcade-hidden"
-                                aria-label="Controles do Pong"
-                            >
+                                aria-label="Controles do Pong">
 
                                 <button
                                     type="button"
-                                    data-paddle="up"
-                                >
+                                    data-paddle="up">
+
                                     ▲ Subir
+
                                 </button>
 
                                 <button
                                     type="button"
-                                    data-paddle="down"
-                                >
+                                    data-paddle="down">
+
                                     ▼ Descer
+
                                 </button>
 
                             </div>
 
+
+                            <!-- CONTROLES DO BREAKOUT -->
+                            <div
+                                id="breakoutControls"
+                                class="arcade-controls arcade-hidden"
+                                aria-label="Controles do Breakout">
+
+                                <button
+                                    type="button"
+                                    data-breakout="left">
+
+                                    ◀ Esquerda
+
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-breakout="right">
+
+                                    Direita ▶
+
+                                </button>
+
+                            </div>
+
+
+                            <!-- CONTROLES DO SPACE INVADERS -->
+                            <div
+                                id="invadersControls"
+                                class="arcade-controls arcade-hidden"
+                                aria-label="Controles do Mini Space Invaders">
+
+                                <button
+                                    type="button"
+                                    data-invaders="left">
+
+                                    ◀ Esquerda
+
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-invaders="shoot">
+
+                                    ● Atirar
+
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-invaders="right">
+
+                                    Direita ▶
+
+                                </button>
+
+                            </div>
+
+
                             <!-- AJUDA -->
                             <div
                                 class="arcade-mobile-help"
-                                id="mobileHelp"
-                            >
+                                id="mobileHelp">
+
                                 Use as setas do teclado ou os controles na tela.
+
                             </div>
 
                         </div>
@@ -299,6 +393,7 @@
 
                 </div>
 
+
                 <!-- COLUNA LATERAL -->
                 <aside class="column">
 
@@ -306,19 +401,22 @@
                     <section class="box">
 
                         <div class="box-title">
+
                             🏆 Ranking —
                             <span id="rankingGameName">Snake</span>
+
                         </div>
 
                         <div class="box-content">
 
                             <ol
                                 class="arcade-rank-list"
-                                id="rankingList"
-                            >
+                                id="rankingList">
+
                                 <li class="arcade-empty">
                                     Carregando ranking...
                                 </li>
+
                             </ol>
 
                             <p class="arcade-note">
@@ -329,6 +427,7 @@
                         </div>
 
                     </section>
+
 
                     <!-- PONTUAÇÃO DO USUÁRIO -->
                     <section class="box">
@@ -351,13 +450,14 @@
 
                             <p
                                 class="arcade-note"
-                                id="loginHint"
-                            >
+                                id="loginHint">
+
                                 Você pode jogar sem login.
                                 Entre na sua conta para salvar recordes.
+
                             </p>
 
-                        </div>   
+                        </div>
 
                     </section>
 
@@ -431,19 +531,26 @@
 
     </main>
 
+
     <!-- RODAPÉ -->
     <footer class="footer">
 
         <div>
+
             <a href="sobre.html">Sobre a Nostal™</a> |
+
             <a href="termos.html">Termos</a> |
+
             <a href="privacidade.html">Privacidade</a> |
+
             <a href="https://retropixelbrasil.github.io/Retropixel/Suporte/Nostal.html">
                 Ajuda
             </a> |
+
             <a href="http://www.retropixel.com.br">
                 Retropixel™
             </a>
+
         </div>
 
         <div class="footer-secondary">
@@ -451,6 +558,7 @@
         </div>
 
     </footer>
+
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
